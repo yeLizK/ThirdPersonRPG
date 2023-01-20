@@ -16,12 +16,12 @@
                 },
                 {
                     "name": "CameraMovement",
-                    "type": "Value",
-                    "id": "7b2fd57d-4406-4f33-a7e6-d9efe6e445f4",
+                    "type": "PassThrough",
+                    "id": "23a48bda-8ae3-4750-ba8a-52f252064607",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -82,8 +82,8 @@
                 },
                 {
                     "name": "",
-                    "id": "92675f85-76d3-4353-82d2-0305fa5a7483",
-                    "path": "<Mouse>/position",
+                    "id": "18fd82b8-2205-429e-ae85-4b017bbdf6ae",
+                    "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

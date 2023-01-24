@@ -12,6 +12,7 @@ public class CinemachinePOVExtension : CinemachineExtension
     private float horizontalSpeed = 10f, verticalSpeed = 10f;
 
 
+
     protected override void Awake()
     {
         inputManager = InputManager.Instance;
@@ -24,11 +25,8 @@ public class CinemachinePOVExtension : CinemachineExtension
             if(stage == CinemachineCore.Stage.Aim)
             {
                 if (startingRotation == null) startingRotation = transform.localRotation.eulerAngles;
-                Vector2 deltaInput = inputManager.GetMouseDelta();
-                startingRotation.x += deltaInput.x * Time.deltaTime;
-                startingRotation.y += deltaInput.y * Time.deltaTime;
-                startingRotation.y = Mathf.Clamp(startingRotation.y, -clampAngle, clampAngle);
-                state.RawOrientation = Quaternion.Euler(-startingRotation.y, startingRotation.x, 0f);
+                startingRotation = CharacterMovement.Instance.gameObject.transform.rotation.eulerAngles;
+                state.RawOrientation = Quaternion.Euler(startingRotation.x, startingRotation.y, 0f);
             }
         }
     }

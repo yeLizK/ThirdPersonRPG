@@ -3,19 +3,10 @@ using Cinemachine;
 
 public class CinemachinePOVExtension : CinemachineExtension
 {
-    private InputManager inputManager;
     private Vector3 startingRotation;
-
-    [SerializeField]
-    private float clampAngle = 34f;
-    [SerializeField]
-    private float horizontalSpeed = 10f, verticalSpeed = 10f;
-
-
 
     protected override void Awake()
     {
-        inputManager = InputManager.Instance;
         base.Awake();
     }
     protected override void PostPipelineStageCallback(CinemachineVirtualCameraBase vcam, CinemachineCore.Stage stage, ref CameraState state, float deltaTime)

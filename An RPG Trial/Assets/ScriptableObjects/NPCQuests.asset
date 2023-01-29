@@ -13,9 +13,15 @@ MonoBehaviour:
   m_Name: NPCQuests
   m_EditorClassIdentifier: 
   gatheringQuest:
-  - Name: 
-    Description: 
-    Completed: 0
-    isQuestActive: 0
+  - Name: Pick Flowers
+    Description: Pick 3 Flowers
+    Completed: 1
+    isQuestActive: 1
     currentCount: 0
-    goalCount: 0
+    goalCount: 3
+  - Name: New Quest
+    Description: New Quest
+    Completed: 0
+    isQuestActive: 1
+    currentCount: 0
+    goalCount: 5

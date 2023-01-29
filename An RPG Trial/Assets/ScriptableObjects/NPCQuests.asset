@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8629dcec84c3014895d63a3613e50fc, type: 3}
   m_Name: NPCQuests
   m_EditorClassIdentifier: 
-  questName:
-  - Gather Flowers
-  description:
-  - Gather 3 flowers
+  gatheringQuest:
+  - Name: 
+    Description: 
+    Completed: 0
+    isQuestActive: 0
+    currentCount: 0
+    goalCount: 0

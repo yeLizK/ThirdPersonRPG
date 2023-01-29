@@ -18,6 +18,9 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField]
     private float clampAngle = 34f;
 
+    [SerializeField]
+    private float MouseXSpeed = 10f, MouseYSpeed = 10f;
+
     private CharacterController charController;
 
     private void Awake()
@@ -48,8 +51,8 @@ public class CharacterMovement : MonoBehaviour
         Vector2 deltaInput = InputManager.Instance.GetMouseDelta();
         startingRotation.x += deltaInput.x * Time.deltaTime;
         startingRotation.y += deltaInput.y * Time.deltaTime;
-        startingRotation.y = Mathf.Clamp(startingRotation.y, -clampAngle, clampAngle);
-        transform.rotation = Quaternion.Euler(-startingRotation.y, startingRotation.x, 0f);
+        //startingRotation.y = Mathf.Clamp(startingRotation.y, -clampAngle, clampAngle);
+        transform.rotation = Quaternion.Euler(-startingRotation.y * MouseYSpeed, startingRotation.x * MouseXSpeed, 0f);
         charController.Move(movementVector * Time.deltaTime * 2f);
 
     }

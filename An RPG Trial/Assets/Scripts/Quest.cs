@@ -1,17 +1,21 @@
+[System.Serializable]
 public class Quest
 {
-    public string name { get; set; }
-    public string Description { get; set; }
-    public bool Completed { get; set; }
-    public bool isQuestActive { get; set; }
+    public string Name;
+    public string Description;
+    public bool Completed;
+    public bool isQuestActive;
     public void SetQuestActive()
     {
         isQuestActive = true;
     }
 
-    public void EvaluateQuest()
+    public virtual bool EvaluateQuest()
     {
         //Write the condition when overriding
+        if(Completed)
+        { return true; }
+        return false;
     }
     public void Complete()
     {

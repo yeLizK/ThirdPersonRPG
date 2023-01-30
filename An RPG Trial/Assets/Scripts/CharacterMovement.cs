@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 [RequireComponent(typeof(CharacterController))]
 public class CharacterMovement : MonoBehaviour
@@ -11,7 +12,6 @@ public class CharacterMovement : MonoBehaviour
 
     private Vector2 inputVector;
     private Vector3 movementVector;
-    private Camera mainCamera;
 
     private Vector3 startingRotation;
 
@@ -37,7 +37,6 @@ public class CharacterMovement : MonoBehaviour
 
     private void Start()
     {
-        mainCamera = Camera.main;
         charController = this.gameObject.GetComponent<CharacterController>();
     }
 
@@ -45,7 +44,7 @@ public class CharacterMovement : MonoBehaviour
     {
         inputVector = InputManager.Instance.GetPlayerInputs();
         movementVector = new Vector3(inputVector.y, 0, -inputVector.x);
-        movementVector = mainCamera.transform.forward * movementVector.x + -mainCamera.transform.right * movementVector.z;
+        movementVector = transform.forward * movementVector.x + -transform.right * movementVector.z;
         movementVector.y = 0f;
 
         Vector2 deltaInput = InputManager.Instance.GetMouseDelta();

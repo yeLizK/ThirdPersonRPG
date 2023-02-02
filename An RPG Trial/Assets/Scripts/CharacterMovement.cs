@@ -16,10 +16,10 @@ public class CharacterMovement : MonoBehaviour
     private Vector3 startingRotation;
 
     [SerializeField]
-    private float clampAngle = 34f;
+    private float clampAngle = 70f;
 
     [SerializeField]
-    private float MouseXSpeed = 10f, MouseYSpeed = 10f;
+    private float MouseXSpeed , MouseYSpeed;
 
     private CharacterController charController;
 
@@ -50,8 +50,8 @@ public class CharacterMovement : MonoBehaviour
         Vector2 deltaInput = InputManager.Instance.GetMouseDelta();
         startingRotation.x += deltaInput.x * Time.deltaTime;
         startingRotation.y += deltaInput.y * Time.deltaTime;
-        //startingRotation.y = Mathf.Clamp(startingRotation.y, -clampAngle, clampAngle);
-        transform.rotation = Quaternion.Euler(-startingRotation.y * MouseYSpeed, startingRotation.x * MouseXSpeed, 0f);
+        startingRotation.y = Mathf.Clamp(startingRotation.y, -clampAngle, clampAngle);
+        transform.rotation = Quaternion.Euler(-startingRotation.y*MouseYSpeed, startingRotation.x*MouseXSpeed, 0f);
         charController.Move(movementVector * Time.deltaTime * 2f);
 
     }

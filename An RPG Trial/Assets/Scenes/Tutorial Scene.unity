@@ -893,9 +893,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 986fbd8141d34fc4aa6c227ab3ef0e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clampAngle: 34
-  MouseXSpeed: 10
-  MouseYSpeed: 10
+  clampAngle: 30
+  MouseXSpeed: 3
+  MouseYSpeed: 3
 --- !u!143 &227768566
 CharacterController:
   m_ObjectHideFlags: 0

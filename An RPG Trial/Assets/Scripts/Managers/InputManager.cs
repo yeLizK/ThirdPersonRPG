@@ -20,6 +20,9 @@ public class InputManager : MonoBehaviour
         }
         playerInputs = new PlayerInputs();
         Cursor.visible = false;
+        playerInputs.CharacterControl.Movement.performed += cnt => CheckKeyPress();
+        playerInputs.CharacterControl.CameraMovement.performed += cameraCnt => CheckMouseMovement();
+
     }
 
     private void OnEnable()
@@ -40,5 +43,47 @@ public class InputManager : MonoBehaviour
     public Vector2 GetMouseDelta()
     {
         return playerInputs.CharacterControl.CameraMovement.ReadValue<Vector2>();
+    }
+    public void CheckKeyPress()
+    {
+        if(TutorialManager.Instance.isTutorialActive())
+        {
+            if (playerInputs.CharacterControl.Movement.ReadValue<Vector2>().y > 0.0f)
+            {
+                TutorialManager.Instance.PressW();
+            }
+            if (playerInputs.CharacterControl.Movement.ReadValue<Vector2>().y < 0.0f)
+            {
+                TutorialManager.Instance.PressS();
+            }
+            if (playerInputs.CharacterControl.Movement.ReadValue<Vector2>().x > 0.0f)
+            {
+                TutorialManager.Instance.PressD();
+            }
+            if (playerInputs.CharacterControl.Movement.ReadValue<Vector2>().x < 0.0f)
+            {
+                TutorialManager.Instance.PressA();
+            }
+        }
+    }
+    public void CheckMouseMovement()
+    {
+        if (TutorialManager.Instance.isTutorialActive())
+        {
+            if (playerInputs.CharacterControl.CameraMovement.ReadValue<Vector2>().x > 50f && playerInputs.CharacterControl.CameraMovement.ReadValue<Vector2>().y>50f)
+                TutorialManager.Instance.MoveCamera();
+        }
+    }
+
+
+    public void UnboundKeyboardEvent()
+    {
+        playerInputs.CharacterControl.Movement.performed -= cnt => CheckKeyPress();
+    }
+
+    public void UnboundCameraEvent()
+    {
+        playerInputs.CharacterControl.CameraMovement.performed -= cnt => CheckMouseMovement();
+
     }
 }

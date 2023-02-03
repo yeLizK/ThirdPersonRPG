@@ -15,13 +15,20 @@ MonoBehaviour:
   gatheringQuest:
   - Name: Pick Flowers
     Description: Pick 3 Flowers
-    Completed: 1
-    isQuestActive: 1
+    Completed: 0
+    isQuestActive: 0
     currentCount: 0
     goalCount: 3
-  - Name: New Quest
+  - Name: New Quest1
     Description: New Quest
     Completed: 0
-    isQuestActive: 1
+    isQuestActive: 0
     currentCount: 0
     goalCount: 5
+  - Name: New Quest2
+    Description: New Quest
+    Completed: 0
+    isQuestActive: 0
+    currentCount: 0
+    goalCount: 5
+  actionQuest: []

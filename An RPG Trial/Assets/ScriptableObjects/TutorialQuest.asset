@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a22035ea40adf41ae6ebd0589f4101, type: 3}
+  m_Name: TutorialQuest
+  m_EditorClassIdentifier: 
+  tutorialQuests:
+  - Name: Look Around
+    Description: Use Mouse to look around
+    Completed: 0
+    isQuestActive: 0
+    key: Camera
+  - Name: Move
+    Description: Press W to move forward
+    Completed: 0
+    isQuestActive: 0
+    key: W
+  - Name: Move
+    Description: Press A to move left
+    Completed: 0
+    isQuestActive: 0
+    key: A
+  - Name: Move
+    Description: Press D to move right
+    Completed: 0
+    isQuestActive: 0
+    key: D
+  - Name: Move
+    Description: Press S to move right
+    Completed: 0
+    isQuestActive: 0
+    key: S

@@ -6,4 +6,7 @@ using UnityEngine;
 public class QuestSO : ScriptableObject
 {
     public List<GatheringQuest> gatheringQuest = new List<GatheringQuest>();
+
+    public List<ActionQuests> actionQuest = new List<ActionQuests>();
+
 }

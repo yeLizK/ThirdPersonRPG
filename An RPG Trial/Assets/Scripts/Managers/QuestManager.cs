@@ -5,28 +5,39 @@ using TMPro;
 
 public class QuestManager : MonoBehaviour
 {
+    private static QuestManager _instance;
+    public static QuestManager Instance { get { return _instance; } }
+
     [SerializeField]
     private QuestSO questList;
 
     private bool anyActiveQuest; //returns true if there is an active quest
 
-    [SerializeField]
-    private TMP_Text questName, questDescription;
+    [HideInInspector]
+    public Quest activeQuest;
 
-    private Quest activeQuest;
-
-
+    private void Awake()
+    {
+        if(_instance!=null &&_instance!=this)
+        {
+            Destroy(_instance);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
     private void Start()
     {
         anyActiveQuest = false;
         activeQuest = null;
-        if(!anyActiveQuest)
+        if(!anyActiveQuest && !TutorialManager.Instance.isTutorialActive())
         {
-            AssignQuest();
+            AssignGatheringQuest();
         }
     }
     
-    public void AssignQuest()
+    public void AssignGatheringQuest()
     {
         if (anyActiveQuest == false)
         {
@@ -36,14 +47,22 @@ public class QuestManager : MonoBehaviour
                 {
                     questList.gatheringQuest[i].isQuestActive = true;
                     activeQuest = questList.gatheringQuest[i];
-                    questName.text = activeQuest.Name;
-                    questDescription.text = activeQuest.Description;
+                    InGameUIManager.Instance.RefreshQuest();
                     return;
                 }
             }
         }
     }
 
+    public void AssignActionQuest()
+    {
+        
+    }
 
+    public void CompleteQuest()
+    {
+        activeQuest.isQuestActive = false;
+        activeQuest.Completed = true;
+    }
 
 }

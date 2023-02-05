@@ -6,7 +6,7 @@ public class CameraRaycast : MonoBehaviour
 {
     private static CameraRaycast _instance; 
     public static CameraRaycast Instance { get { return _instance; } }
-    private Transform objectHit;
+    [HideInInspector] public Transform objectHit;
 
     //[HideInInspector]
     public bool isHitCollectable, isHitNPC;
@@ -26,7 +26,6 @@ public class CameraRaycast : MonoBehaviour
     private void FixedUpdate()
     {
         RaycastHit hit;
-        Debug.DrawRay(transform.position, transform.forward, Color.green);
         isHitCollectable = false;
         isHitNPC = false;
         if (Physics.Raycast(transform.position, transform.forward, out hit, maxRayDistance))

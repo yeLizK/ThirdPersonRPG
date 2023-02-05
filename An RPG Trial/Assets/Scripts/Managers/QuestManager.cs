@@ -16,6 +16,8 @@ public class QuestManager : MonoBehaviour
     [HideInInspector]
     public Quest activeQuest;
 
+    [HideInInspector]
+
     private void Awake()
     {
         if(_instance!=null &&_instance!=this)
@@ -31,7 +33,7 @@ public class QuestManager : MonoBehaviour
     {
         anyActiveQuest = false;
         activeQuest = null;
-        if(!anyActiveQuest && !TutorialManager.Instance.isTutorialActive())
+        if(!anyActiveQuest && !TutorialManager.Instance.IsTutorialActive())
         {
             AssignGatheringQuest();
         }
@@ -61,8 +63,14 @@ public class QuestManager : MonoBehaviour
 
     public void CompleteQuest()
     {
-        activeQuest.isQuestActive = false;
-        activeQuest.Completed = true;
+        activeQuest.Complete();
+        activeQuest = null;
+        if (activeQuest == null)
+        {
+            InGameUIManager.Instance.EmptyQuestList();
+        }
+        else InGameUIManager.Instance.RefreshQuest();
+        //AssignGatheringQuest();
     }
 
 }

@@ -38,7 +38,7 @@ public class TutorialManager : MonoBehaviour
         isSPressed = false;
         isCameraMoved = false;
 
-        if(isTutorialActive()&&activeQuest==null)
+        if(IsTutorialActive()&&activeQuest==null)
         {
             AssignTutorialQuest();
         }
@@ -47,7 +47,7 @@ public class TutorialManager : MonoBehaviour
 
     private void Update()
     {
-        if(isTutorialActive())
+        if(IsTutorialActive())
         {
             if (isAPressed || isDPressed || isWPressed || isSPressed)
             {
@@ -140,7 +140,7 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    public bool isTutorialActive()
+    public bool IsTutorialActive()
     {
         if (isTutorialCompleted)
         { return false; }

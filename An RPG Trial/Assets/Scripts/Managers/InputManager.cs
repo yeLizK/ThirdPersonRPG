@@ -20,8 +20,9 @@ public class InputManager : MonoBehaviour
         }
         playerInputs = new PlayerInputs();
         Cursor.visible = false;
-        playerInputs.CharacterControl.Movement.performed += cnt => CheckKeyPress();
-        playerInputs.CharacterControl.CameraMovement.performed += cameraCnt => CheckMouseMovement();
+        playerInputs.CharacterControl.Movement.performed += ctx => CheckKeyPress();
+        playerInputs.CharacterControl.CameraMovement.performed += cameraCtx => CheckMouseMovement();
+        playerInputs.CharacterControl.Interact.performed += interactCtx => PlayerInteracted();
 
     }
 
@@ -32,6 +33,9 @@ public class InputManager : MonoBehaviour
 
     private void OnDisable()
     {
+        UnboundCameraEvent();
+        UnboundKeyboardEvent();
+        UnboundCollectEvent();
         playerInputs.Disable();
     }
 
@@ -46,7 +50,7 @@ public class InputManager : MonoBehaviour
     }
     public void CheckKeyPress()
     {
-        if(TutorialManager.Instance.isTutorialActive())
+        if(TutorialManager.Instance.IsTutorialActive())
         {
             if (playerInputs.CharacterControl.Movement.ReadValue<Vector2>().y > 0.0f)
             {
@@ -68,13 +72,12 @@ public class InputManager : MonoBehaviour
     }
     public void CheckMouseMovement()
     {
-        if (TutorialManager.Instance.isTutorialActive())
+        if (TutorialManager.Instance.IsTutorialActive())
         {
             if (playerInputs.CharacterControl.CameraMovement.ReadValue<Vector2>().x > 50f && playerInputs.CharacterControl.CameraMovement.ReadValue<Vector2>().y>50f)
                 TutorialManager.Instance.MoveCamera();
         }
     }
-
 
     public void UnboundKeyboardEvent()
     {
@@ -85,5 +88,19 @@ public class InputManager : MonoBehaviour
     {
         playerInputs.CharacterControl.CameraMovement.performed -= cnt => CheckMouseMovement();
 
+    }
+
+    private void UnboundCollectEvent()
+    {
+        playerInputs.CharacterControl.Interact.performed -= interactCtx => PlayerInteracted();
+
+    }
+
+    public void PlayerInteracted()
+    {
+        if(CameraRaycast.Instance.isHitCollectable)
+        {
+            PlayerInteraction.Instance.CollectObject();
+        }
     }
 }

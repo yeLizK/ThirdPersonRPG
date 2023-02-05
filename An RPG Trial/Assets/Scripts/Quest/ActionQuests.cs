@@ -5,29 +5,14 @@ using UnityEngine;
 [System.Serializable]
 public class ActionQuests : Quest
 {
-
-    public enum QuestType {KeyPress, TalkToNPC }
-
-    public QuestType questType;
-    public override bool EvaluateQuest()
+    public override bool EvaluateQuest(GameObject objectToEvaluate)
     {
-        if(questType == QuestType.KeyPress)
+        if(questObject.name.Equals(objectToEvaluate.name) )
         {
-            return PressKeyQuestEvaluate();
-        }
-        else if(questType == QuestType.TalkToNPC)
-        {
-            return TalkToNPCEvaluate();
+            Complete();
+            return true;
         }
         return false;
     }
 
-    private bool PressKeyQuestEvaluate()
-    {
-        return false;
-    }
-    private bool TalkToNPCEvaluate()
-    {
-        return false;
-    }
 }

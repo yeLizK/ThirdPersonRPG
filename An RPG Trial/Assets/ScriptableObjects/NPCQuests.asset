@@ -17,18 +17,24 @@ MonoBehaviour:
     Description: Pick 3 Flowers
     Completed: 0
     isQuestActive: 0
+    questType: 0
+    questObject: {fileID: 3354920777783341410, guid: 11602e501b8ee8e41a5ba7051d19e339, type: 3}
     currentCount: 0
     goalCount: 3
   - Name: New Quest1
     Description: New Quest
     Completed: 0
     isQuestActive: 0
+    questType: 1
+    questObject: {fileID: 0}
     currentCount: 0
-    goalCount: 5
+    goalCount: 0
   - Name: New Quest2
     Description: New Quest
     Completed: 0
     isQuestActive: 0
+    questType: 0
+    questObject: {fileID: 0}
     currentCount: 0
-    goalCount: 5
+    goalCount: 0
   actionQuest: []

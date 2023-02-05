@@ -5,15 +5,28 @@ using UnityEngine;
 [System.Serializable]
 public class GatheringQuest : Quest
 {
+    [Header("Gathering Quest")]
     public int currentCount;
     public int goalCount;
 
-    public override bool EvaluateQuest()
+    public override bool EvaluateQuest(GameObject objectToEvalaute)
     {
-        if(currentCount >= goalCount)
+        if(questObject.name.Equals(objectToEvalaute.name) && this.isQuestActive)
         {
-            return true;
+            IncrementQuestCount();
+            Debug.Log(currentCount);
+            if (currentCount >= goalCount)
+            {
+                Complete();
+                return true;
+            }
         }
+       
         return false;
     }
+    public void IncrementQuestCount()
+    {
+        currentCount++;
+    }
+
 }

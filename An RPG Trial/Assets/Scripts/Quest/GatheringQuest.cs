@@ -11,7 +11,7 @@ public class GatheringQuest : Quest
 
     public override bool EvaluateQuest(GameObject objectToEvalaute)
     {
-        if(questObject.name.Equals(objectToEvalaute.name) && this.isQuestActive)
+        if(questObject.tag.Equals(objectToEvalaute.tag) && this.isQuestActive)
         {
             IncrementQuestCount();
             Debug.Log(currentCount);

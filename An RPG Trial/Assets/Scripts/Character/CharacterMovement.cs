@@ -55,4 +55,11 @@ public class CharacterMovement : MonoBehaviour
         charController.Move(movementVector * Time.deltaTime * 2f);
 
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "CloseGate")
+        {
+            TutorialManager.Instance.CloseTutorialGate();
+        }
+    }
 }

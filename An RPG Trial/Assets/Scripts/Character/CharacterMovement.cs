@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using Cinemachine;
 
 [RequireComponent(typeof(CharacterController))]
-public class CharacterMovement : MonoBehaviour
+public class CharacterMovement : MonoBehaviour , IDataPersistence
 {
     private static CharacterMovement _instance;
     public static CharacterMovement Instance { get { return _instance; } }
@@ -38,6 +38,15 @@ public class CharacterMovement : MonoBehaviour
     private void Start()
     {
         charController = this.gameObject.GetComponent<CharacterController>();
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.transform.position = data.playerTransform;
+    }
+    public void SaveData(ref GameData data)
+    {
+        data.playerTransform = this.transform.position;
     }
 
     private void Update()

@@ -35,7 +35,11 @@ public class InputManager : MonoBehaviour
     {
         UnbindCameraEvent();
         UnbindKeyboardEvent();
+<<<<<<< Updated upstream
         UnbindCollectEvent();
+=======
+        UnboundCollectEvent();
+>>>>>>> Stashed changes
         playerInputs.Disable();
     }
 
@@ -79,6 +83,10 @@ public class InputManager : MonoBehaviour
         }
     }
 
+<<<<<<< Updated upstream
+=======
+    //unbind
+>>>>>>> Stashed changes
     public void UnbindKeyboardEvent()
     {
         playerInputs.CharacterControl.Movement.performed -= cnt => CheckKeyPress();

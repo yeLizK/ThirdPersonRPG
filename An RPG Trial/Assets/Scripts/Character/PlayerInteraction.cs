@@ -27,6 +27,6 @@ public class PlayerInteraction : MonoBehaviour
                 QuestManager.Instance.CompleteQuest();
             }
         }
-        //collectedObject.SetActive(false);
+        collectedObject.GetComponent<Collectable>().CollectObject();
     }
 }

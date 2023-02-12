@@ -33,9 +33,9 @@ public class InputManager : MonoBehaviour
 
     private void OnDisable()
     {
-        UnboundCameraEvent();
-        UnboundKeyboardEvent();
-        UnboundCollectEvent();
+        UnbindCameraEvent();
+        UnbindKeyboardEvent();
+        UnbindCollectEvent();
         playerInputs.Disable();
     }
 
@@ -79,19 +79,18 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    //unbind
-    public void UnboundKeyboardEvent()
+    public void UnbindKeyboardEvent()
     {
         playerInputs.CharacterControl.Movement.performed -= cnt => CheckKeyPress();
     }
 
-    public void UnboundCameraEvent()
+    public void UnbindCameraEvent()
     {
         playerInputs.CharacterControl.CameraMovement.performed -= cnt => CheckMouseMovement();
 
     }
 
-    private void UnboundCollectEvent()
+    private void UnbindCollectEvent()
     {
         playerInputs.CharacterControl.Interact.performed -= interactCtx => PlayerInteracted();
 

@@ -61,4 +61,5 @@ public class FileDataHandler
             Debug.Log("Error occured when trying to save data to file: " + fullPath + "\n" + e);
         }
     }
+
 }

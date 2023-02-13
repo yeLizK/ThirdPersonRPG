@@ -14,7 +14,7 @@ public class GameData
     public TutorialQuest activeTutorialQuest;
     public Quest activeQuest;
     public Vector3 playerTransform;
-    public Dictionary<string, bool> flowersCollected;
+    public SerializableDictionary<string, bool> flowersCollected;
 
     public GameData()
     {
@@ -26,7 +26,7 @@ public class GameData
         this.isTutorialSPressed = false;
         this.activeTutorialQuest = null;
         this.activeQuest = null;
-        this.playerTransform = Vector3.zero;
-        flowersCollected = new Dictionary<string, bool>();
+        this.playerTransform = new Vector3(-50f, 1.3f , -9f);
+        flowersCollected = new SerializableDictionary<string, bool>();
     }
 }

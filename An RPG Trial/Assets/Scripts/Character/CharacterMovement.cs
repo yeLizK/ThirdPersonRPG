@@ -20,8 +20,10 @@ public class CharacterMovement : MonoBehaviour , IDataPersistence
 
     [SerializeField]
     private float MouseXSpeed , MouseYSpeed;
+    [SerializeField] private int speedMultiplier;
 
     private CharacterController charController;
+
 
     private void Awake()
     {

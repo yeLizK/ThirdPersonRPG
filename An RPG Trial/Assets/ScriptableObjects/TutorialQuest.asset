@@ -15,26 +15,26 @@ MonoBehaviour:
   tutorialQuests:
   - Name: Look Around
     Description: Use Mouse to look around
-    Completed: 0
+    Completed: 1
     isQuestActive: 0
     key: Camera
   - Name: Move
     Description: Press W to move forward
-    Completed: 0
+    Completed: 1
     isQuestActive: 0
     key: W
   - Name: Move
     Description: Press A to move left
-    Completed: 0
+    Completed: 1
     isQuestActive: 0
     key: A
   - Name: Move
     Description: Press D to move right
-    Completed: 0
+    Completed: 1
     isQuestActive: 0
     key: D
   - Name: Move
     Description: Press S to move right
-    Completed: 0
+    Completed: 1
     isQuestActive: 0
     key: S

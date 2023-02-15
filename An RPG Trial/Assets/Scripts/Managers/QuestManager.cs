@@ -35,30 +35,26 @@ public class QuestManager : MonoBehaviour
         activeQuest = null;
         if(!anyActiveQuest && !TutorialManager.Instance.IsTutorialActive())
         {
-            AssignGatheringQuest();
+            AssignQuest();
         }
     }
     
-    public void AssignGatheringQuest()
+    public void AssignQuest()
     {
         if (anyActiveQuest == false)
         {
-            for (int i = 0; i < questList.gatheringQuest.Count; i++)
+            for(int i = 0; i <questList.quests.Count; i ++)
             {
-                if (!questList.gatheringQuest[i].Completed)
+                if (!questList.quests[i].Completed)
                 {
-                    questList.gatheringQuest[i].isQuestActive = true;
-                    activeQuest = questList.gatheringQuest[i];
+                    questList.quests[i].isQuestActive = true;
+                    activeQuest = questList.quests[i];
                     InGameUIManager.Instance.RefreshQuest();
                     return;
                 }
             }
+            
         }
-    }
-
-    public void AssignActionQuest()
-    {
-        
     }
 
     public void CompleteQuest()

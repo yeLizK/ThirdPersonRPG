@@ -5,8 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObject/QuestSO")]
 public class QuestSO : ScriptableObject
 {
-    public List<GatheringQuest> gatheringQuest = new List<GatheringQuest>();
-
-    public List<ActionQuests> actionQuest = new List<ActionQuests>();
+    public List<Quest> quests = new List<Quest>();
 
 }

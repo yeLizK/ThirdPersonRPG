@@ -108,13 +108,15 @@ public class TutorialManager : TutorialSubject , IDataPersistence
     private void EndTutorial()
     {
         isTutorialCompleted = true;
-        QuestManager.Instance.AssignGatheringQuest();
+        QuestManager.Instance.AssignQuest();
         NotifyTutorialObservers("OpenGate");
     }
 
     public void CloseTutorialGate()
     {
         NotifyTutorialObservers("CloseGate");
+        StartCoroutine(CinemachineCameraManager.Instance.EndTutorial());
+
     }
 
     public void MoveCamera()

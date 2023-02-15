@@ -9,6 +9,7 @@ public class Quest
     public string Description;
     public bool Completed;
     public bool isQuestActive;
+    public bool isQuestAvailable;
     public enum QuestType { gatherObject, talkToNPC, ClickCertainObject }
 
     public QuestType questType;

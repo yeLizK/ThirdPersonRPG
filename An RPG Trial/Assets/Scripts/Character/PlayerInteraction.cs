@@ -22,15 +22,11 @@ public class PlayerInteraction : MonoBehaviour
         GameObject collectedObject = CameraRaycast.Instance.objectHit.gameObject;
         if(QuestManager.Instance.activeQuest != null)
         {
-            if (QuestManager.Instance.activeQuest.questType == Quest.QuestType.gatherObject)
+            if (QuestManager.Instance.activeQuest.EvaluateQuest(collectedObject))
             {
-                if (QuestManager.Instance.activeQuest.EvaluateQuest(collectedObject))
-                {
-                    QuestManager.Instance.CompleteQuest();
-                }
+                QuestManager.Instance.CompleteQuest();
             }
         }
-
         collectedObject.GetComponent<Collectable>().CollectObject();
     }
 }

@@ -26,7 +26,7 @@ public class GameData
         this.isTutorialSPressed = false;
         this.activeTutorialQuest = null;
         this.activeQuest = null;
-        this.playerTransform = new Vector3(-50f, 1.3f , -9f);
+        this.playerTransform = new Vector3(-50f, 0f , -9f);
         flowersCollected = new SerializableDictionary<string, bool>();
     }
 }

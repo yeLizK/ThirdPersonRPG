@@ -44,7 +44,7 @@ public class CharacterMovement : MonoBehaviour , IDataPersistence
 
     public void LoadData(GameData data)
     {
-        this.transform.position = data.playerTransform;
+        this.transform.position = new Vector3(data.playerTransform.x,0f,data.playerTransform.z);
     }
     public void SaveData(ref GameData data)
     {
@@ -53,6 +53,8 @@ public class CharacterMovement : MonoBehaviour , IDataPersistence
 
     private void Update()
     {
+        if(DialogueManager.Instance.isDialoguePlaying)
+        { return; }
         inputVector = InputManager.Instance.GetPlayerInputs();
         movementVector = new Vector3(inputVector.y, 0, -inputVector.x);
         movementVector = transform.forward * movementVector.x + -transform.right * movementVector.z;

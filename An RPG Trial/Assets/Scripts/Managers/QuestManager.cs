@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class QuestManager : MonoBehaviour
+public class QuestManager : MonoBehaviour, IDataPersistence
 {
     private static QuestManager _instance;
     public static QuestManager Instance { get { return _instance; } }
@@ -33,12 +33,18 @@ public class QuestManager : MonoBehaviour
     {
         anyActiveQuest = false;
         activeQuest = null;
-        if(!anyActiveQuest && !TutorialManager.Instance.IsTutorialActive())
-        {
-            AssignQuest();
-        }
     }
-    
+
+    public void LoadData(GameData data)
+    {
+
+    }
+
+    public void SaveData(ref GameData data)
+    {
+    }
+
+
     public void AssignQuest()
     {
         if (anyActiveQuest == false)
@@ -55,6 +61,9 @@ public class QuestManager : MonoBehaviour
             }
             
         }
+
+        Debug.Log(anyActiveQuest);
+        Debug.Log(activeQuest);
     }
 
     public void CompleteQuest()
@@ -68,5 +77,6 @@ public class QuestManager : MonoBehaviour
         else InGameUIManager.Instance.RefreshQuest();
         //AssignGatheringQuest();
     }
+
 
 }

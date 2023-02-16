@@ -12,32 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8629dcec84c3014895d63a3613e50fc, type: 3}
   m_Name: NPC1Quests
   m_EditorClassIdentifier: 
-  gatheringQuest:
-  - Name: Pick Flowers
-    Description: Pick 3 Flowers
+  quests:
+  - Name: Healing Potion
+    Description: Picked Flower 0/3
     Completed: 0
     isQuestActive: 0
-    isQuestAvailable: 1
+    isQuestAvailable: 0
     questType: 0
     questObject: {fileID: 3354920777783341410, guid: 11602e501b8ee8e41a5ba7051d19e339, type: 3}
-    currentCount: 0
-    goalCount: 3
-  - Name: New Quest1
-    Description: New Quest
-    Completed: 0
-    isQuestActive: 0
-    isQuestAvailable: 0
-    questType: 1
-    questObject: {fileID: 0}
-    currentCount: 0
-    goalCount: 0
-  - Name: New Quest2
-    Description: New Quest
-    Completed: 0
-    isQuestActive: 0
-    isQuestAvailable: 0
-    questType: 0
-    questObject: {fileID: 0}
-    currentCount: 0
-    goalCount: 0
-  actionQuest: []

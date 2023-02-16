@@ -44,7 +44,7 @@ public class InGameUIManager : MonoBehaviour
 
     public void RefreshQuest()
     {
-        if(TutorialManager.Instance.activeQuest!=null)
+        if(TutorialManager.Instance.IsTutorialActive())
         {
             questName.text = TutorialManager.Instance.activeQuest.Name;
             questDescription.text = TutorialManager.Instance.activeQuest.Description;

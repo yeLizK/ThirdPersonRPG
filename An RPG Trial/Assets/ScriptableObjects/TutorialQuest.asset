@@ -21,7 +21,7 @@ MonoBehaviour:
   - Name: Move
     Description: Press W to move forward
     Completed: 0
-    isQuestActive: 1
+    isQuestActive: 0
     key: W
   - Name: Move
     Description: Press A to move left

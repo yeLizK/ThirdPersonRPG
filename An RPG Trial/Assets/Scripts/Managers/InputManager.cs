@@ -22,7 +22,7 @@ public class InputManager : MonoBehaviour
         Cursor.visible = false;
         playerInputs.CharacterControl.Movement.performed += ctx => CheckKeyPress();
         playerInputs.CharacterControl.CameraMovement.performed += cameraCtx => CheckMouseMovement();
-        playerInputs.CharacterControl.Interact.performed += interactCtx => PlayerInteracted();
+        playerInputs.CharacterControl.Interact.performed += interactCtx => Interact();
 
     }
 
@@ -92,15 +92,29 @@ public class InputManager : MonoBehaviour
 
     private void UnbindCollectEvent()
     {
-        playerInputs.CharacterControl.Interact.performed -= interactCtx => PlayerInteracted();
+        playerInputs.CharacterControl.Interact.performed -= interactCtx => Interact();
 
     }
 
-    public void PlayerInteracted()
+    public void Interact()
     {
-        if(CameraRaycast.Instance.isHitCollectable)
+        if (!DialogueManager.Instance.isDialoguePlaying)
         {
-            PlayerInteraction.Instance.CollectObject();
+            if (CameraRaycast.Instance.isHitCollectable)
+            {
+                PlayerInteraction.Instance.CollectObject();
+            }
+            else if (CameraRaycast.Instance.isHitNPC)
+            {
+                if (QuestManager.Instance.activeQuest == null)
+                {
+                    DialogueManager.Instance.EnterDialogueMode(CameraRaycast.Instance.objectHit.GetComponent<NPCDialog>().GetNPCDialog());
+                }
+
+            }
         }
+        else DialogueManager.Instance.ContinueStory();
+
     }
+
 }

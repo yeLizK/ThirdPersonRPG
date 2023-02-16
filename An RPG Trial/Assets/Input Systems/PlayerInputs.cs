@@ -47,9 +47,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Interact"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""45b03726-87c1-4455-9891-d510989d8156"",
-                    ""expectedControlType"": ""Key"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -134,76 +134,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
-        },
-        {
-            ""name"": ""DialogControl"",
-            ""id"": ""62d35112-5a42-444b-9c9d-f829b0450d11"",
-            ""actions"": [
-                {
-                    ""name"": ""DialogNavigation"",
-                    ""type"": ""Value"",
-                    ""id"": ""17037009-608e-4663-a86b-dd21bfa658de"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""SelectChoice"",
-                    ""type"": ""Value"",
-                    ""id"": ""44abc0f9-3fb2-4cb4-90b2-15a58205afda"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""a074b62c-d6ee-41fa-b51c-4b3b530f3d9a"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""DialogNavigation"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""94908357-9034-4a46-ae84-d455e4945c2f"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""DialogNavigation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""67d08980-3967-442c-9354-feec4c924a56"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""DialogNavigation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""74725544-642c-45f3-be76-f06fe2618f5b"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SelectChoice"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
         }
     ],
     ""controlSchemes"": []
@@ -213,10 +143,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         m_CharacterControl_Movement = m_CharacterControl.FindAction("Movement", throwIfNotFound: true);
         m_CharacterControl_CameraMovement = m_CharacterControl.FindAction("CameraMovement", throwIfNotFound: true);
         m_CharacterControl_Interact = m_CharacterControl.FindAction("Interact", throwIfNotFound: true);
-        // DialogControl
-        m_DialogControl = asset.FindActionMap("DialogControl", throwIfNotFound: true);
-        m_DialogControl_DialogNavigation = m_DialogControl.FindAction("DialogNavigation", throwIfNotFound: true);
-        m_DialogControl_SelectChoice = m_DialogControl.FindAction("SelectChoice", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -321,56 +247,10 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         }
     }
     public CharacterControlActions @CharacterControl => new CharacterControlActions(this);
-
-    // DialogControl
-    private readonly InputActionMap m_DialogControl;
-    private IDialogControlActions m_DialogControlActionsCallbackInterface;
-    private readonly InputAction m_DialogControl_DialogNavigation;
-    private readonly InputAction m_DialogControl_SelectChoice;
-    public struct DialogControlActions
-    {
-        private @PlayerInputs m_Wrapper;
-        public DialogControlActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
-        public InputAction @DialogNavigation => m_Wrapper.m_DialogControl_DialogNavigation;
-        public InputAction @SelectChoice => m_Wrapper.m_DialogControl_SelectChoice;
-        public InputActionMap Get() { return m_Wrapper.m_DialogControl; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(DialogControlActions set) { return set.Get(); }
-        public void SetCallbacks(IDialogControlActions instance)
-        {
-            if (m_Wrapper.m_DialogControlActionsCallbackInterface != null)
-            {
-                @DialogNavigation.started -= m_Wrapper.m_DialogControlActionsCallbackInterface.OnDialogNavigation;
-                @DialogNavigation.performed -= m_Wrapper.m_DialogControlActionsCallbackInterface.OnDialogNavigation;
-                @DialogNavigation.canceled -= m_Wrapper.m_DialogControlActionsCallbackInterface.OnDialogNavigation;
-                @SelectChoice.started -= m_Wrapper.m_DialogControlActionsCallbackInterface.OnSelectChoice;
-                @SelectChoice.performed -= m_Wrapper.m_DialogControlActionsCallbackInterface.OnSelectChoice;
-                @SelectChoice.canceled -= m_Wrapper.m_DialogControlActionsCallbackInterface.OnSelectChoice;
-            }
-            m_Wrapper.m_DialogControlActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @DialogNavigation.started += instance.OnDialogNavigation;
-                @DialogNavigation.performed += instance.OnDialogNavigation;
-                @DialogNavigation.canceled += instance.OnDialogNavigation;
-                @SelectChoice.started += instance.OnSelectChoice;
-                @SelectChoice.performed += instance.OnSelectChoice;
-                @SelectChoice.canceled += instance.OnSelectChoice;
-            }
-        }
-    }
-    public DialogControlActions @DialogControl => new DialogControlActions(this);
     public interface ICharacterControlActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnCameraMovement(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
-    }
-    public interface IDialogControlActions
-    {
-        void OnDialogNavigation(InputAction.CallbackContext context);
-        void OnSelectChoice(InputAction.CallbackContext context);
     }
 }

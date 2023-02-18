@@ -49,6 +49,8 @@ public class TutorialManager : TutorialSubject , IDataPersistence
         this.isDPressed = data.isTutorialDPressed;
         this.isSPressed = data.isTutorialSPressed;
         this.activeQuest = data.activeTutorialQuest;
+        InGameUIManager.Instance.RefreshQuest();
+
     }
     public void SaveData(ref GameData data)
     {
@@ -108,7 +110,6 @@ public class TutorialManager : TutorialSubject , IDataPersistence
     private void EndTutorial()
     {
         isTutorialCompleted = true;
-        QuestManager.Instance.AssignQuest();
         NotifyTutorialObservers("OpenGate");
     }
 

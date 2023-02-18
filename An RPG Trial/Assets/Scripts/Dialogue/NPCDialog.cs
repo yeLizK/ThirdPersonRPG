@@ -5,10 +5,52 @@ using UnityEngine;
 public class NPCDialog : MonoBehaviour
 {
     [Header("Ink JSON")]
-    [SerializeField] private TextAsset inkJSON;
+    public List<Dialogue> dialogueList;
+
+    [SerializeField] private bool isNPCQuestActive;
+    public Quest activeQuest;
+
+    private Dialogue currentDialogue;
+
+    private void Start()
+    {
+        isNPCQuestActive = false;
+    }
 
     public TextAsset GetNPCDialog()
     {
-        return inkJSON;
+        foreach(Dialogue dialogue in dialogueList)
+        {
+            if(!dialogue.isDialogueFinished)
+            {
+                currentDialogue = dialogue;
+                return dialogue.inkJSON;
+            }
+        }
+        return null;
+    }
+
+    public void AssignQuestToNPC(Quest quest)
+    {
+        this.activeQuest = quest;
+        isNPCQuestActive = true;
+    }
+    public void EvaluateQuest(Quest quest)
+    {
+        if (quest.Name.Equals(activeQuest.Name))
+        {
+            if(!quest.isQuestActive)
+            {
+                CompleteNPCQuest();
+            }
+        }
+    }
+
+    private void CompleteNPCQuest()
+    {
+        currentDialogue.isDialogueFinished = true;
+        activeQuest = null;
+        isNPCQuestActive = false;
+
     }
 }

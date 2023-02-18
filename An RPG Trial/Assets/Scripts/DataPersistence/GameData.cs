@@ -12,7 +12,9 @@ public class GameData
     public bool isTutorialDPressed;
     public bool isTutorialSPressed;
     public TutorialQuest activeTutorialQuest;
+    public bool isQuestCompoleted;
     public Quest activeQuest;
+    public string questOwner;
     public Vector3 playerTransform;
     public SerializableDictionary<string, bool> flowersCollected;
 
@@ -26,6 +28,8 @@ public class GameData
         this.isTutorialSPressed = false;
         this.activeTutorialQuest = null;
         this.activeQuest = null;
+        this.isQuestCompoleted = false;
+        this.questOwner = "";
         this.playerTransform = new Vector3(-50f, 0f , -9f);
         flowersCollected = new SerializableDictionary<string, bool>();
     }

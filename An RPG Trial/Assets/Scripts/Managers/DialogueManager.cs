@@ -15,6 +15,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject[] choices;
     private TextMeshProUGUI[] choicesText;
 
+    [SerializeField] private TextAsset NotAnyMoreQuest, PlayerHasActiveQuest, QuestNotCompleted;
     private Story currentStory;
 
     [HideInInspector]public bool isDialoguePlaying { get; private set; }
@@ -38,6 +39,18 @@ public class DialogueManager : MonoBehaviour
         {
             choicesText[index] = choice.GetComponentInChildren<TextMeshProUGUI>();
             index++;
+        }
+    }
+
+    public void EvaluateDialog(Transform hitObject)
+    {
+        if(hitObject.GetComponent<NPCDialog>().activeQuest == QuestManager.Instance.activeQuest)
+        {
+            EnterDialogueMode(QuestNotCompleted);
+        }
+        else if(hitObject.GetComponent<NPCDialog>().activeQuest != QuestManager.Instance.activeQuest)
+        {
+            EnterDialogueMode(PlayerHasActiveQuest);
         }
     }
 

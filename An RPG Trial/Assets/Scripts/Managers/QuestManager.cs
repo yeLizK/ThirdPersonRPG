@@ -16,7 +16,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
     [HideInInspector]
     public Quest activeQuest;
 
-    [HideInInspector]
+    private string questOwner;
 
     private void Awake()
     {
@@ -29,19 +29,25 @@ public class QuestManager : MonoBehaviour, IDataPersistence
             _instance = this;
         }
     }
-    private void Start()
-    {
-        anyActiveQuest = false;
-        activeQuest = null;
-    }
+  
 
     public void LoadData(GameData data)
     {
-
+        this.activeQuest = data.activeQuest;
+        this.questOwner = data.questOwner;
+        if (activeQuest == null) anyActiveQuest = false;
+        else anyActiveQuest = true;
+        InGameUIManager.Instance.RefreshQuest();
+        GameObject temp = GameObject.Find(questOwner);
+        temp.GetComponent<NPCDialog>().AssignQuestToNPC(activeQuest);
+        
     }
 
     public void SaveData(ref GameData data)
     {
+        data.activeQuest = this.activeQuest;
+        data.isQuestCompoleted = this.anyActiveQuest;
+        data.questOwner = this.questOwner;
     }
 
 
@@ -56,14 +62,26 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                     questList.quests[i].isQuestActive = true;
                     activeQuest = questList.quests[i];
                     InGameUIManager.Instance.RefreshQuest();
+                    CameraRaycast.Instance.objectHit.GetComponent<NPCDialog>().AssignQuestToNPC(activeQuest);
+                    questOwner = CameraRaycast.Instance.objectHit.name.ToString();
                     return;
                 }
             }
             
         }
+    }
 
-        Debug.Log(anyActiveQuest);
-        Debug.Log(activeQuest);
+    public void EvaluateQuest()
+    {
+        if(activeQuest!=null)
+        {
+            if(activeQuest.EvaluateQuest(activeQuest.questObject))
+            {
+                CompleteQuest();
+                CameraRaycast.Instance.objectHit.GetComponent<NPCDialog>().EvaluateQuest(activeQuest);
+
+            }
+        }
     }
 
     public void CompleteQuest()
@@ -75,7 +93,6 @@ public class QuestManager : MonoBehaviour, IDataPersistence
             InGameUIManager.Instance.EmptyQuestList();
         }
         else InGameUIManager.Instance.RefreshQuest();
-        //AssignGatheringQuest();
     }
 
 

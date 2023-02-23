@@ -466,6 +466,38 @@ public class FemaleKnightCustomiser : MonoBehaviour, Customiser
         HeadArmors.sharedMaterial = raceMaterial;
         Skins.sharedMaterial = raceMaterial;
     }
+    public void ChangeGenderFromFemaleToMale()
+    {
+        MaleKnightCustomiser.Instance.headIndex = this.headIndex;
+        MaleKnightCustomiser.Instance.eyebrowIndex = this.eyebrowIndex;
+        MaleKnightCustomiser.Instance.facialHairIndex = this.facialHairIndex;
+        MaleKnightCustomiser.Instance.headArmorIndex = this.headArmorIndex;
+        MaleKnightCustomiser.Instance.torsoIndex = this.torsoIndex;
+        MaleKnightCustomiser.Instance.upperArmIndex = this.upperArmIndex;
+        MaleKnightCustomiser.Instance.lowerArmIndex = this.lowerArmIndex;
+        MaleKnightCustomiser.Instance.handIndex = this.handIndex;
+        MaleKnightCustomiser.Instance.hipIndex = this.hipIndex;
+        MaleKnightCustomiser.Instance.legIndex = this.legIndex;
+        MaleKnightCustomiser.Instance.hairIndex = hairIndex;
+        MaleKnightCustomiser.Instance.RefreshSelections();
+    }
+    public void RefreshSelections()
+    {
+        Skins.sharedMesh = FemaleKnightSO.SkinMesh[headIndex];
+        HeadArmors.sharedMesh = FemaleKnightSO.HeadArmorMesh[headArmorIndex];
+        Torsos.sharedMesh = FemaleKnightSO.TorsoMesh[torsoIndex];
+        ArmUpperRights.sharedMesh = FemaleKnightSO.ArmUpperRightMesh[upperArmIndex];
+        ArmUpperLefts.sharedMesh = FemaleKnightSO.ArmUpperLeftMesh[upperArmIndex];
+        ArmLowerRights.sharedMesh = FemaleKnightSO.ArmLowerRightMesh[lowerArmIndex];
+        ArmLowerLefts.sharedMesh = FemaleKnightSO.ArmLowerLeftMesh[lowerArmIndex];
+        RightHands.sharedMesh = FemaleKnightSO.RightHandMesh[handIndex];
+        LeftHands.sharedMesh = FemaleKnightSO.LeftHandMesh[handIndex];
+        Hips.sharedMesh = FemaleKnightSO.HipsMesh[hipIndex];
+        RightLegs.sharedMesh = FemaleKnightSO.LegRightMesh[legIndex];
+        LeftLegs.sharedMesh = FemaleKnightSO.LegLeftMesh[legIndex];
+        Hair.sharedMesh = FemaleKnightSO.HairMesh[hairIndex];
+        Eyebrows.sharedMesh = FemaleKnightSO.EyebrowsMesh[eyebrowIndex];
+    }
 
     public void UpdateToDefault()
     {

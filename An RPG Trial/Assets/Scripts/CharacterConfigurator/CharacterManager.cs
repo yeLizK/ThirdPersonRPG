@@ -13,7 +13,6 @@ public class CharacterManager : MonoBehaviour
     public int gender; // 0-male, 1-female
 
     public TMP_InputField nameField;
-    public GameObject firstScreen;
 
     private void Awake()
     {
@@ -29,10 +28,6 @@ public class CharacterManager : MonoBehaviour
 
     private void Update()
     {
-        if(firstScreen.activeSelf)
-        {
-            characterName = nameField.text;
-        }
-
+        characterName = nameField.text;
     }
 }

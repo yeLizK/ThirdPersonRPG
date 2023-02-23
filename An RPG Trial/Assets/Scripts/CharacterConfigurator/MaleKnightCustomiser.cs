@@ -504,6 +504,40 @@ public class MaleKnightCustomiser : MonoBehaviour, Customiser
         Skins.sharedMaterial = raceMaterial;
     }
 
+    public void RefreshSelections()
+    {
+        Skins.sharedMesh = MaleKnightSO.SkinMesh[headIndex];
+        HeadArmors.sharedMesh = MaleKnightSO.HeadArmorMesh[headArmorIndex];
+        Torsos.sharedMesh = MaleKnightSO.TorsoMesh[torsoIndex];
+        ArmUpperRights.sharedMesh = MaleKnightSO.ArmUpperRightMesh[upperArmIndex];
+        ArmUpperLefts.sharedMesh = MaleKnightSO.ArmUpperLeftMesh[upperArmIndex];
+        ArmLowerRights.sharedMesh = MaleKnightSO.ArmLowerRightMesh[lowerArmIndex];
+        ArmLowerLefts.sharedMesh = MaleKnightSO.ArmLowerLeftMesh[lowerArmIndex];
+        RightHands.sharedMesh = MaleKnightSO.RightHandMesh[handIndex];
+        LeftHands.sharedMesh = MaleKnightSO.LeftHandMesh[handIndex];
+        Hips.sharedMesh = MaleKnightSO.HipsMesh[hipIndex];
+        RightLegs.sharedMesh = MaleKnightSO.LegRightMesh[legIndex];
+        LeftLegs.sharedMesh = MaleKnightSO.LegLeftMesh[legIndex];
+        Hair.sharedMesh = MaleKnightSO.HairMesh[hairIndex];
+        Eyebrows.sharedMesh = MaleKnightSO.EyebrowsMesh[eyebrowIndex];
+    }
+
+    public void ChangeGenderFromMaleToFemale()
+    {
+        FemaleKnightCustomiser.Instance.headIndex = this.headIndex;
+        FemaleKnightCustomiser.Instance.eyebrowIndex = this.eyebrowIndex;
+        FemaleKnightCustomiser.Instance.facialHairIndex = this.facialHairIndex;
+        FemaleKnightCustomiser.Instance.headArmorIndex = this.headArmorIndex;
+        FemaleKnightCustomiser.Instance.torsoIndex = this.torsoIndex;
+        FemaleKnightCustomiser.Instance.upperArmIndex = this.upperArmIndex;
+        FemaleKnightCustomiser.Instance.lowerArmIndex = this.lowerArmIndex;
+        FemaleKnightCustomiser.Instance.handIndex = this.handIndex;
+        FemaleKnightCustomiser.Instance.hipIndex = this.hipIndex;
+        FemaleKnightCustomiser.Instance.legIndex = this.legIndex;
+        FemaleKnightCustomiser.Instance.hairIndex = hairIndex;
+        FemaleKnightCustomiser.Instance.RefreshSelections();
+    }
+
     public void UpdateToDefault()
     {
         headIndex = 0;

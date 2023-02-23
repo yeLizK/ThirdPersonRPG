@@ -12,7 +12,7 @@ public class MenuController : MonoBehaviour
     private static MenuController _instance;
     public static MenuController Instance { get { return _instance; } }
 
-    [SerializeField] private GameObject mainMenuPanel, characterConfiguratorPanel;
+    [SerializeField] private GameObject mainMenuPanel, characterConfiguratorPanel, mainMenuConfirmationPanel;
 
     private List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
     private string fileName = "data.game";
@@ -50,10 +50,24 @@ public class MenuController : MonoBehaviour
     {
         mainMenuPanel.SetActive(false);
     }
+    public void ConfirmReturnToMainMenu()
+    {
+        mainMenuConfirmationPanel.SetActive(true);
+    }
+    public void CloseMainMenuConfirmationPanel()
+    {
+        mainMenuConfirmationPanel.SetActive(false);
+
+    }
 
     public void ReturnToMainMenu()
     {
         mainMenuPanel.SetActive(true);
+        characterConfiguratorPanel.SetActive(false);
+        mainMenuConfirmationPanel.SetActive(false);
+        MaleKnightCustomiser.Instance.UpdateToDefault();
+        FemaleKnightCustomiser.Instance.UpdateToDefault();
+       
     }
 
     public void ExitToDesktop()

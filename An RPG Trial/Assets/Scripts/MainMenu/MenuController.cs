@@ -26,6 +26,7 @@ public class MenuController : MonoBehaviour
             Destroy(_instance);
         }
         else _instance = this;
+
     }
     private void Start()
     {
@@ -40,10 +41,15 @@ public class MenuController : MonoBehaviour
 
     }
 
-    public void StartNewGame()
+    public void OpenCharacterConfigurator()
     {
         HideMainMenu();
         characterConfiguratorPanel.SetActive(true);
+    }
+
+    public void StartNewGame()
+    {
+        SceneManager.LoadScene("TutorialScene");
     }
 
     public void HideMainMenu()

@@ -121,7 +121,6 @@ public class UIManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 
     public void OnPointerDown(PointerEventData eventData)
     {
-
             mouseInitialPos = Input.mousePosition;
             isCharRotating = true;
     }
@@ -146,8 +145,6 @@ public class UIManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
     {
         FemaleKnightCustomiser.Instance.enabled = false;
         MaleKnightCustomiser.Instance.enabled = true;
-        //MaleKnightCus.UpdateToDefault();
-        //FemaleKnightCus.UpdateToDefault();
         CharacterManager.Instance.gender = 0;
         FacialHairPanel.SetActive(true);
         maleChar.SetActive(true);
@@ -159,8 +156,6 @@ public class UIManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
     {
         FemaleKnightCustomiser.Instance.enabled = true;
         MaleKnightCustomiser.Instance.enabled = false;
-        //FemaleKnightCus.UpdateToDefault();
-        //FemaleKnightCus.UpdateToDefault();
         CharacterManager.Instance.gender = 1;
         FacialHairPanel.SetActive(false);
         maleChar.SetActive(false);

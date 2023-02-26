@@ -9,10 +9,9 @@ public class CharacterManager : MonoBehaviour
     private static CharacterManager _instance;
     public static CharacterManager Instance { get { return _instance; } }
 
-    private string characterName = "";
     public int gender; // 0-male, 1-female
 
-    public TMP_InputField nameField;
+    //public int headIndex, eyebrowIndex, facialHairIndex, headArmorIndex, torsoIndex, upperArmIndex, lowerArmIndex, handIndex, hipIndex, legIndex, hairIndex;
 
     private void Awake()
     {
@@ -24,10 +23,8 @@ public class CharacterManager : MonoBehaviour
         {
             _instance = this;
         }
+        //DontDestroyOnLoad(this);
+
     }
 
-    private void Update()
-    {
-        characterName = nameField.text;
-    }
 }

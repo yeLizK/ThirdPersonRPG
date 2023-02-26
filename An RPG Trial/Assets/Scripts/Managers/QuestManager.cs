@@ -35,10 +35,12 @@ public class QuestManager : MonoBehaviour, IDataPersistence
     {
         this.activeQuest = data.activeQuest;
         this.questOwner = data.questOwner;
-        if (activeQuest == null) anyActiveQuest = false;
+        if (activeQuest.Name.Equals("")) anyActiveQuest = false;
         else anyActiveQuest = true;
         InGameUIManager.Instance.RefreshQuest();
         GameObject temp = GameObject.Find(questOwner);
+        if (temp == null)
+        { return; }
         temp.GetComponent<NPCDialog>().AssignQuestToNPC(activeQuest);
         
     }

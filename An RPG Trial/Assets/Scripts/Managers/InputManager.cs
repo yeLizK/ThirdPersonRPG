@@ -106,7 +106,7 @@ public class InputManager : MonoBehaviour
             }
             else if (CameraRaycast.Instance.isHitNPC)
             {
-                if (QuestManager.Instance.activeQuest==null)
+                if (QuestManager.Instance.activeQuest.Name.Equals(""))
                 {
                     DialogueManager.Instance.EnterDialogueMode(CameraRaycast.Instance.objectHit.GetComponent<NPCDialog>().GetNPCDialog());
                 }

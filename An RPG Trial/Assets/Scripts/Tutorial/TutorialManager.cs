@@ -8,7 +8,7 @@ public class TutorialManager : TutorialSubject , IDataPersistence
     private static TutorialManager _instance;
     public  static TutorialManager Instance { get { return _instance; } }
 
-    private bool isWPressed, isAPressed, isSPressed, isDPressed, isCameraMoved;
+    private bool isWPressed, isAPressed, isSPressed, isDPressed;
 
     private InputManager inputManager;
 
@@ -43,19 +43,18 @@ public class TutorialManager : TutorialSubject , IDataPersistence
     public void LoadData(GameData data)
     {
         this.isTutorialCompleted = data.isTutorialCompleted;
-        this.isCameraMoved = data.isTutorialCameraMoved;
         this.isWPressed = data.isTutorialWPressed;
         this.isAPressed = data.isTutorialAPressed;
         this.isDPressed = data.isTutorialDPressed;
         this.isSPressed = data.isTutorialSPressed;
         this.activeQuest = data.activeTutorialQuest;
+        if(activeQuest == null || activeQuest.Name.Equals("")) { return; }
         InGameUIManager.Instance.RefreshQuest();
 
     }
     public void SaveData(ref GameData data)
     {
         data.isTutorialCompleted = this.isTutorialCompleted;
-        data.isTutorialCameraMoved = this.isCameraMoved;
         data.isTutorialWPressed = this.isWPressed;
         data.isTutorialAPressed = this.isAPressed;
         data.isTutorialDPressed = this.isDPressed;
@@ -67,12 +66,7 @@ public class TutorialManager : TutorialSubject , IDataPersistence
     {
         if(!isTutorialCompleted)
         {
-            if (isCameraMoved)
-            {
-                inputManager.UnbindCameraEvent();
-            }
-
-            if (isAPressed && isSPressed && isWPressed && isDPressed && isCameraMoved)
+            if (isAPressed && isSPressed && isWPressed && isDPressed)
             {
                 isTutorialCompleted = true;
                 inputManager.UnbindKeyboardEvent();
@@ -120,16 +114,6 @@ public class TutorialManager : TutorialSubject , IDataPersistence
 
     }
 
-    public void MoveCamera()
-    {
-        if (activeQuest.key.Equals("Camera"))
-        {
-            isCameraMoved = true;
-            AssignTutorialQuest();
-
-        }
-
-    }
     public void PressW()
     {
         if(activeQuest.key.Equals("W"))

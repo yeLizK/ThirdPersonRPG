@@ -65,6 +65,7 @@ public class CharacterMovement : MonoBehaviour , IDataPersistence
         startingRotation.y += deltaInput.y * Time.deltaTime;
         startingRotation.y = Mathf.Clamp(startingRotation.y, -clampAngle, clampAngle);
         transform.rotation = Quaternion.Euler(-startingRotation.y*MouseYSpeed, startingRotation.x*MouseXSpeed, 0f);
+        //transform.rotation = Quaternion.Euler(0f, startingRotation.x * MouseXSpeed, 0f);
         charController.Move(movementVector * Time.deltaTime * 2f);
 
     }

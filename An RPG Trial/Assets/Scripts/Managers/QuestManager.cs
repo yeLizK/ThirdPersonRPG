@@ -33,9 +33,9 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        this.activeQuest = data.activeQuest;
+        this.activeQuest = data.mainQuest;
         this.questOwner = data.questOwner;
-        if (activeQuest.Name.Equals("")) anyActiveQuest = false;
+        if (activeQuest == null || activeQuest.Name.Equals("")) anyActiveQuest = false;
         else anyActiveQuest = true;
         InGameUIManager.Instance.RefreshQuest();
         GameObject temp = GameObject.Find(questOwner);
@@ -47,8 +47,8 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData data)
     {
-        data.activeQuest = this.activeQuest;
-        data.isQuestCompoleted = this.anyActiveQuest;
+        data.mainQuest = this.activeQuest;
+        data.isQuestCompleted = this.anyActiveQuest;
         data.questOwner = this.questOwner;
     }
 

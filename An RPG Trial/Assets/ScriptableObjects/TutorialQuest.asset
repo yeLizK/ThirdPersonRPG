@@ -13,11 +13,6 @@ MonoBehaviour:
   m_Name: TutorialQuest
   m_EditorClassIdentifier: 
   tutorialQuests:
-  - Name: Look Around
-    Description: Use Mouse to look around
-    Completed: 0
-    isQuestActive: 0
-    key: Camera
   - Name: Move
     Description: Press W to move forward
     Completed: 0

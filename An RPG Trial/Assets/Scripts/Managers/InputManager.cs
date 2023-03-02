@@ -21,7 +21,6 @@ public class InputManager : MonoBehaviour
         playerInputs = new PlayerInputs();
         Cursor.visible = false;
         playerInputs.CharacterControl.Movement.performed += ctx => CheckKeyPress();
-        playerInputs.CharacterControl.CameraMovement.performed += cameraCtx => CheckMouseMovement();
         playerInputs.CharacterControl.Interact.performed += interactCtx => Interact();
 
     }
@@ -33,7 +32,6 @@ public class InputManager : MonoBehaviour
 
     private void OnDisable()
     {
-        UnbindCameraEvent();
         UnbindKeyboardEvent();
         UnbindCollectEvent();
         playerInputs.Disable();
@@ -70,24 +68,10 @@ public class InputManager : MonoBehaviour
             }
         }
     }
-    public void CheckMouseMovement()
-    {
-        if (TutorialManager.Instance.IsTutorialActive())
-        {
-            if (playerInputs.CharacterControl.CameraMovement.ReadValue<Vector2>().x > 50f && playerInputs.CharacterControl.CameraMovement.ReadValue<Vector2>().y>50f)
-                TutorialManager.Instance.MoveCamera();
-        }
-    }
 
     public void UnbindKeyboardEvent()
     {
         playerInputs.CharacterControl.Movement.performed -= cnt => CheckKeyPress();
-    }
-
-    public void UnbindCameraEvent()
-    {
-        playerInputs.CharacterControl.CameraMovement.performed -= cnt => CheckMouseMovement();
-
     }
 
     private void UnbindCollectEvent()
@@ -106,7 +90,7 @@ public class InputManager : MonoBehaviour
             }
             else if (CameraRaycast.Instance.isHitNPC)
             {
-                if (QuestManager.Instance.activeQuest.Name.Equals(""))
+                if (QuestManager.Instance.activeQuest==null|| QuestManager.Instance.activeQuest.Name.Equals(""))
                 {
                     DialogueManager.Instance.EnterDialogueMode(CameraRaycast.Instance.objectHit.GetComponent<NPCDialog>().GetNPCDialog());
                 }

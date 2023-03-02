@@ -44,13 +44,16 @@ public class DialogueManager : MonoBehaviour
 
     public void EvaluateDialog(Transform hitObject)
     {
-        if(hitObject.GetComponent<NPCDialog>().activeQuest == QuestManager.Instance.activeQuest)
+        if(hitObject.GetComponent<NPCDialog>().activeQuest !=null)
         {
-            EnterDialogueMode(QuestNotCompleted);
-        }
-        else if(hitObject.GetComponent<NPCDialog>().activeQuest != QuestManager.Instance.activeQuest)
-        {
-            EnterDialogueMode(PlayerHasActiveQuest);
+            if (hitObject.GetComponent<NPCDialog>().activeQuest == QuestManager.Instance.activeQuest)
+            {
+                EnterDialogueMode(QuestNotCompleted);
+            }
+            else if (hitObject.GetComponent<NPCDialog>().activeQuest != QuestManager.Instance.activeQuest)
+            {
+                EnterDialogueMode(PlayerHasActiveQuest);
+            }
         }
     }
 

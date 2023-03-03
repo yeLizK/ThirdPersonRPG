@@ -5,19 +5,45 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObject/CharacterCustomiserSO")]
 public class CharacterCustomiserSO : ScriptableObject
 {
-    public Material[] BlackFemaleClothesList;
-    public Material[] BlackMaleClothesList;
+    public Material[] BlackFemaleBlackClothes;
+    public Material[] BlackFemaleBlueClothes;
+    public Material[] BlackFemaleCyanClothes;
+    public Material[] BlackFemalePurpleClothes;
+    public Material[] BlackFemaleWhiteClothes;
 
-    public Material[] BrownFemaleClothesList;
-    public Material[] BrownMaleClothesList;
+    public Material[] BrownFemaleBlackClothes;
+    public Material[] BrownFemaleBlueClothes;
+    public Material[] BrownFemaleCyanClothes;
+    public Material[] BrownFemalePurpleClothes;
+    public Material[] BrownFemaleWhiteClothes;
 
-    public Material[] WhiteFemaleClothesList;
-    public Material[] WhiteMaleClothesList;
+    public Material[] WhiteFemaleBlackClothes;
+    public Material[] WhiteFemaleBlueClothes;
+    public Material[] WhiteFemaleCyanClothes;
+    public Material[] WhiteFemalePurpleClothes;
+    public Material[] WhiteFemaleWhiteClothes;
 
-    public GameObject[] FemaleHair;
-    public GameObject[] MaleHair;
+    public Material[] BlackMaleBlackClothes;
+    public Material[] BlackMaleBlueClothes;
+    public Material[] BlackMaleCyanClothes;
+    public Material[] BlackMalePurpleClothes;
+    public Material[] BlackMaleWhiteClothes;
 
-    public GameObject[] Weapons;
+    public Material[] BrownMaleBlackClothes;
+    public Material[] BrownMaleBlueClothes;
+    public Material[] BrownMaleCyanClothes;
+    public Material[] BrownMalePurpleClothes;
+    public Material[] BrownMaleWhiteClothes;
+
+    public Material[] WhiteMaleBlackClothes;
+    public Material[] WhiteMaleBlueClothes;
+    public Material[] WhiteMaleCyanClothes;
+    public Material[] WhiteMalePurpleClothes;
+    public Material[] WhiteMaleWhiteClothes;
+
+    public GameObject[] HairList;
+    public Material[] HairColor;
+
 
 
 }

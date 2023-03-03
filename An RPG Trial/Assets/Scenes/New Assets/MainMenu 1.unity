@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 19536974}
   - component: {fileID: 19536975}
   m_Layer: 5
-  m_Name: Clothe Colour
+  m_Name: Clothe Colours
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -396,8 +396,8 @@ MonoBehaviour:
     m_Bottom: 0
   m_ChildAlignment: 3
   m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
@@ -1189,7 +1189,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 135}
+  m_SizeDelta: {x: 400, y: 200}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &213911568
 MonoBehaviour:
@@ -1364,6 +1364,72 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 220184724}
   m_CullTransparentMesh: 1
+--- !u!1 &225048878
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 225048879}
+  - component: {fileID: 225048880}
+  m_Layer: 5
+  m_Name: ColorButtons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &225048879
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225048878}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 266453498}
+  - {fileID: 1963420159}
+  - {fileID: 642302090}
+  m_Father: {fileID: 2112640223}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 700, y: 200}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &225048880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225048878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &233770922
 GameObject:
   m_ObjectHideFlags: 0
@@ -1373,7 +1439,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 233770923}
-  - component: {fileID: 233770924}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -1396,37 +1461,6 @@ Transform:
   m_Father: {fileID: 254350812}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &233770924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 233770922}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 000251b720a0acd499a2a4b82548dbb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ModularChar: {fileID: 718160909}
-  HeadSelectionPanel: {fileID: 0}
-  UpperBodySelectionPanel: {fileID: 0}
-  LowerBodySelectionPanel: {fileID: 0}
-  CameraAnim: {fileID: 0}
-  maleChar: {fileID: 1752632410079662}
-  femaleChar: {fileID: 3152251398466519731}
-  FacialHairPanel: {fileID: 0}
-  HeadText: {fileID: 627188793}
-  EyebrowText: {fileID: 0}
-  FacialHairText: {fileID: 0}
-  HeadArmorText: {fileID: 0}
-  TorsoText: {fileID: 0}
-  UpperArmText: {fileID: 0}
-  LowerArmText: {fileID: 0}
-  HandText: {fileID: 0}
-  HipText: {fileID: 0}
-  LegText: {fileID: 0}
-  HairText: {fileID: 429226087}
 --- !u!1 &233801214
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,9 +1545,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 544243069}
-        m_TargetAssemblyTypeName: CharCustomiser, Assembly-CSharp
-        m_MethodName: ChangeHairColorToYellow
+      - m_Target: {fileID: 1810942957}
+        m_TargetAssemblyTypeName: ConfiguratorUIManager, Assembly-CSharp
+        m_MethodName: ClickHairColorToYellowButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1621,15 +1655,15 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 266453497}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2047922636}
   - {fileID: 355185504}
-  m_Father: {fileID: 2112640223}
-  m_RootOrder: 1
+  m_Father: {fileID: 225048879}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1680,9 +1714,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 544243069}
-        m_TargetAssemblyTypeName: CharCustomiser, Assembly-CSharp
-        m_MethodName: ChangeSkinColorToBlack
+      - m_Target: {fileID: 1810942957}
+        m_TargetAssemblyTypeName: ConfiguratorUIManager, Assembly-CSharp
+        m_MethodName: SelectBlackSkinColorButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2033,9 +2067,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 544243069}
-        m_TargetAssemblyTypeName: CharCustomiser, Assembly-CSharp
-        m_MethodName: ChangeHairColorToBrown
+      - m_Target: {fileID: 1810942957}
+        m_TargetAssemblyTypeName: ConfiguratorUIManager, Assembly-CSharp
+        m_MethodName: ClickHairColorToBrownButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3227,7 +3261,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 135}
+  m_SizeDelta: {x: 400, y: 200}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &438319769
 MonoBehaviour:
@@ -3545,9 +3579,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 544243069}
-        m_TargetAssemblyTypeName: CharCustomiser, Assembly-CSharp
-        m_MethodName: ChangeClotheColorToBlack
+      - m_Target: {fileID: 1810942957}
+        m_TargetAssemblyTypeName: ConfiguratorUIManager, Assembly-CSharp
+        m_MethodName: ClickClotheColorBlackButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3882,9 +3916,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 544243069}
-        m_TargetAssemblyTypeName: CharCustomiser, Assembly-CSharp
-        m_MethodName: ChangeClotheColorToPurple
+      - m_Target: {fileID: 1810942957}
+        m_TargetAssemblyTypeName: ConfiguratorUIManager, Assembly-CSharp
+        m_MethodName: ClickClotheColorPurpleButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4128,6 +4162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95a5b31f3d42d69479153bffbe088239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clotheIndex: 0
+  hairIndex: 0
   CharSO: {fileID: 11400000, guid: 1ac14d4b731b08e4fb6ab017b5274f3f, type: 2}
   BaseHolder: {fileID: 8546478189093931994}
   HairHolder: {fileID: 294114208}
@@ -4355,9 +4391,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 544243069}
-        m_TargetAssemblyTypeName: CharCustomiser, Assembly-CSharp
-        m_MethodName: ChangeHairColorToRed
+      - m_Target: {fileID: 1810942957}
+        m_TargetAssemblyTypeName: ConfiguratorUIManager, Assembly-CSharp
+        m_MethodName: ClickHairColorToRedButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4564,9 +4600,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 544243069}
-        m_TargetAssemblyTypeName: CharCustomiser, Assembly-CSharp
-        m_MethodName: ChangeClothingLeftSelection
+      - m_Target: {fileID: 1810942957}
+        m_TargetAssemblyTypeName: ConfiguratorUIManager, Assembly-CSharp
+        m_MethodName: ClickLeftClotheSelectionButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4951,9 +4987,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 544243069}
-        m_TargetAssemblyTypeName: CharCustomiser, Assembly-CSharp
-        m_MethodName: ChangeClothingRightSelection
+      - m_Target: {fileID: 1810942957}
+        m_TargetAssemblyTypeName: ConfiguratorUIManager, Assembly-CSharp
+        m_MethodName: ClickRightClotheSelectionButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5027,15 +5063,15 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 642302089}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1101909442}
   - {fileID: 887793319}
-  m_Father: {fileID: 2112640223}
-  m_RootOrder: 3
+  m_Father: {fileID: 225048879}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5086,9 +5122,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 544243069}
-        m_TargetAssemblyTypeName: CharCustomiser, Assembly-CSharp
-        m_MethodName: ChangeSkinColorToWhite
+      - m_Target: {fileID: 1810942957}
+        m_TargetAssemblyTypeName: ConfiguratorUIManager, Assembly-CSharp
+        m_MethodName: SelectWhiteSkinColorButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5296,9 +5332,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 544243069}
-        m_TargetAssemblyTypeName: CharCustomiser, Assembly-CSharp
-        m_MethodName: ChangeClotheColorToWhite
+      - m_Target: {fileID: 1810942957}
+        m_TargetAssemblyTypeName: ConfiguratorUIManager, Assembly-CSharp
+        m_MethodName: ClickClotheColorWhiteButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5786,9 +5822,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 544243069}
-        m_TargetAssemblyTypeName: CharCustomiser, Assembly-CSharp
-        m_MethodName: ChangeHairColorToCyan
+      - m_Target: {fileID: 1810942957}
+        m_TargetAssemblyTypeName: ConfiguratorUIManager, Assembly-CSharp
+        m_MethodName: ClickHairColorToCyanButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6344,9 +6380,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 544243069}
-        m_TargetAssemblyTypeName: CharCustomiser, Assembly-CSharp
-        m_MethodName: ChangeHairColorToBlack
+      - m_Target: {fileID: 1810942957}
+        m_TargetAssemblyTypeName: ConfiguratorUIManager, Assembly-CSharp
+        m_MethodName: ClickHairColorToBlackButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7513,9 +7549,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 544243069}
-        m_TargetAssemblyTypeName: CharCustomiser, Assembly-CSharp
-        m_MethodName: ChangeHairColorToWhite
+      - m_Target: {fileID: 1810942957}
+        m_TargetAssemblyTypeName: ConfiguratorUIManager, Assembly-CSharp
+        m_MethodName: ClickHairColorToWhiteButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8319,8 +8355,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 923.8018, y: 998}
+  m_AnchoredPosition: {x: -4.451, y: 0}
+  m_SizeDelta: {x: 932.7038, y: 998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1052867117
 MonoBehaviour:
@@ -8444,9 +8480,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 544243069}
-        m_TargetAssemblyTypeName: CharCustomiser, Assembly-CSharp
-        m_MethodName: ChangeHairColorToPurple
+      - m_Target: {fileID: 1810942957}
+        m_TargetAssemblyTypeName: ConfiguratorUIManager, Assembly-CSharp
+        m_MethodName: ClickHairColorToPurpleButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8552,8 +8588,8 @@ MonoBehaviour:
     m_Bottom: 0
   m_ChildAlignment: 3
   m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
@@ -8823,7 +8859,7 @@ GameObject:
   - component: {fileID: 1085117295}
   - component: {fileID: 1085117296}
   m_Layer: 5
-  m_Name: Hair Colour
+  m_Name: Hair Colours
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8875,8 +8911,8 @@ MonoBehaviour:
     m_Bottom: 0
   m_ChildAlignment: 3
   m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
@@ -9112,7 +9148,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 200}
+  m_SizeDelta: {x: 200, y: 201.17}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1103318470
 MonoBehaviour:
@@ -9158,9 +9194,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 544243069}
-        m_TargetAssemblyTypeName: CharCustomiser, Assembly-CSharp
-        m_MethodName: SelectFemale
+      - m_Target: {fileID: 1810942957}
+        m_TargetAssemblyTypeName: ConfiguratorUIManager, Assembly-CSharp
+        m_MethodName: SelectFemaleButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9245,7 +9281,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 505.683, y: 201.175}
+  m_SizeDelta: {x: 500, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1104605702
 MonoBehaviour:
@@ -9260,14 +9296,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 48
+    m_Left: 0
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 3
   m_Spacing: 25
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
@@ -11183,9 +11219,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 544243069}
-        m_TargetAssemblyTypeName: CharCustomiser, Assembly-CSharp
-        m_MethodName: ChangeHairLeftSelection
+      - m_Target: {fileID: 1810942957}
+        m_TargetAssemblyTypeName: ConfiguratorUIManager, Assembly-CSharp
+        m_MethodName: ClickLeftHairSelectionButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11933,9 +11969,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 544243069}
-        m_TargetAssemblyTypeName: CharCustomiser, Assembly-CSharp
-        m_MethodName: ChangeClotheColorToCyan
+      - m_Target: {fileID: 1810942957}
+        m_TargetAssemblyTypeName: ConfiguratorUIManager, Assembly-CSharp
+        m_MethodName: ClickClotheColorCyanButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12067,9 +12103,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 544243069}
-        m_TargetAssemblyTypeName: CharCustomiser, Assembly-CSharp
-        m_MethodName: SelectMale
+      - m_Target: {fileID: 1810942957}
+        m_TargetAssemblyTypeName: ConfiguratorUIManager, Assembly-CSharp
+        m_MethodName: SelectMaleButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12652,9 +12688,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 544243069}
-        m_TargetAssemblyTypeName: CharCustomiser, Assembly-CSharp
-        m_MethodName: ChangeClotheColorToBlue
+      - m_Target: {fileID: 1810942957}
+        m_TargetAssemblyTypeName: ConfiguratorUIManager, Assembly-CSharp
+        m_MethodName: ClickClotheColorBlueButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13282,6 +13318,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ModularCharacter: {fileID: 1369668437}
+  HairText: {fileID: 627188793}
+  ClotheText: {fileID: 429226087}
 --- !u!1 &1821255101
 GameObject:
   m_ObjectHideFlags: 0
@@ -13872,9 +13910,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 544243069}
-        m_TargetAssemblyTypeName: CharCustomiser, Assembly-CSharp
-        m_MethodName: ChangeHairRightSelection
+      - m_Target: {fileID: 1810942957}
+        m_TargetAssemblyTypeName: ConfiguratorUIManager, Assembly-CSharp
+        m_MethodName: ClickRightHairSelectionButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14720,15 +14758,15 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1963420158}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1516987576}
   - {fileID: 995441390}
-  m_Father: {fileID: 2112640223}
-  m_RootOrder: 2
+  m_Father: {fileID: 225048879}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -14779,9 +14817,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 544243069}
-        m_TargetAssemblyTypeName: CharCustomiser, Assembly-CSharp
-        m_MethodName: ChangeSkinColorToBrown
+      - m_Target: {fileID: 1810942957}
+        m_TargetAssemblyTypeName: ConfiguratorUIManager, Assembly-CSharp
+        m_MethodName: SelectBrownSkinColorButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15903,9 +15941,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 213911567}
-  - {fileID: 266453498}
-  - {fileID: 1963420159}
-  - {fileID: 642302090}
+  - {fileID: 225048879}
   m_Father: {fileID: 770371736}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15933,8 +15969,8 @@ MonoBehaviour:
     m_Bottom: 0
   m_ChildAlignment: 3
   m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0

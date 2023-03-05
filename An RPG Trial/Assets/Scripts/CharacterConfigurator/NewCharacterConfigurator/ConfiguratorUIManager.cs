@@ -7,6 +7,10 @@ using TMPro;
 
 public class ConfiguratorUIManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerMoveHandler
 {
+    private static ConfiguratorUIManager _instance;
+    public static ConfiguratorUIManager Instance { get { return _instance; } }
+
+
     [SerializeField] private GameObject ModularCharacter;
 
     private bool isCharRotating;
@@ -17,6 +21,16 @@ public class ConfiguratorUIManager : MonoBehaviour, IPointerDownHandler, IPointe
 
     [SerializeField] private TMP_Text HairText, ClotheText;
 
+    private void Awake()
+    {
+        if(_instance != null && _instance != this)
+        {
+            Destroy(_instance);
+        }else
+        {
+            _instance = this;
+        }
+    }
     private void Start()
     {
         isCharRotating = false;
@@ -90,7 +104,7 @@ public class ConfiguratorUIManager : MonoBehaviour, IPointerDownHandler, IPointe
         CharCustomiser.Instance.ChangeSkinColorToWhite();
     }
 
-    private void UpdateHairText(int selectionNumber)
+    public void UpdateHairText(int selectionNumber)
     {
         HairText.text = "Hair  " + selectionNumber;
     }
@@ -109,7 +123,7 @@ public class ConfiguratorUIManager : MonoBehaviour, IPointerDownHandler, IPointe
         UpdateHairText(temp);
 
     }
-    private void UpdateClotheText(int selectionNumber)
+    public void UpdateClotheText(int selectionNumber)
     {
         ClotheText.text = "Clothe " + selectionNumber;
     }

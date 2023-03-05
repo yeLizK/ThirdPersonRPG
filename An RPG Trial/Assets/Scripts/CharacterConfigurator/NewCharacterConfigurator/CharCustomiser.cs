@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharCustomiser : MonoBehaviour
+public class CharCustomiser : MonoBehaviour, IDataPersistence
 {
     private static CharCustomiser _instance;
     public static CharCustomiser Instance { get { return _instance; } }
 
     private int gender; //0-female 0-male
-    private int skincolor; // 0-black, 1-brown, 2-white
+    private int skinColor; // 0-black, 1-brown, 2-white
 
     [HideInInspector]public int clotheIndex, hairIndex;
     private int clotheColourIndex;
@@ -37,8 +37,28 @@ public class CharCustomiser : MonoBehaviour
         hairIndex = 0;
         hairColourIndex = 0;
         weaponIndex = 0;
-        skincolor = 0;
+        skinColor = 0;
         gender = 0;
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.gender = data.gender;
+        this.skinColor = data.skinColor;
+        this.clotheIndex = data.clotheIndex;
+        this.clotheColourIndex = data.clotheColorIndex;
+        this.hairIndex = data.hairIndex;
+        this.hairColourIndex = data.hairColourIndex;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.gender = this.gender;
+        data.skinColor = this.skinColor;
+        data.clotheIndex = this.clotheIndex;
+        data.clotheColorIndex = this.clotheColourIndex;
+        data.hairIndex = this.hairIndex;
+        data.hairColourIndex = this.hairColourIndex;
     }
 
     private void ChangeBlackFemaleClothes(int colorIndex)
@@ -186,7 +206,7 @@ public class CharCustomiser : MonoBehaviour
     }
     public void SelectFemale()
     {
-        if(skincolor == 0)
+        if(skinColor == 0)
         {
             if (clotheIndex >= CharSO.BlackFemaleBlackClothes.Length)
             {
@@ -194,7 +214,7 @@ public class CharCustomiser : MonoBehaviour
             }
             ChangeBlackFemaleClothes(clotheColourIndex);
         }
-        else if(skincolor ==1)
+        else if(skinColor ==1)
         {
             if (clotheIndex >= CharSO.BrownFemaleBlackClothes.Length)
             {
@@ -202,7 +222,7 @@ public class CharCustomiser : MonoBehaviour
             }
             ChangeBrownFemaleClothes(clotheColourIndex);
         }
-        else if(skincolor ==2)
+        else if(skinColor ==2)
         {
             if (clotheIndex >= CharSO.WhiteFemaleBlackClothes.Length)
             {
@@ -215,7 +235,7 @@ public class CharCustomiser : MonoBehaviour
 
     public void SelectMale()
     {
-        if (skincolor == 0)
+        if (skinColor == 0)
         {
             if (clotheIndex >= CharSO.BlackMaleBlackClothes.Length)
             {
@@ -223,7 +243,7 @@ public class CharCustomiser : MonoBehaviour
             }
             ChangeBlackMaleClothes(clotheColourIndex);
         }
-        else if (skincolor == 1)
+        else if (skinColor == 1)
         {
             if (clotheIndex >= CharSO.BrownMaleBlackClothes.Length)
             {
@@ -231,7 +251,7 @@ public class CharCustomiser : MonoBehaviour
             }
             ChangeBrownMaleClothes(clotheColourIndex);
         }
-        else if (skincolor == 2)
+        else if (skinColor == 2)
         {
             if (clotheIndex >= CharSO.WhiteFemaleBlackClothes.Length)
             {
@@ -252,7 +272,7 @@ public class CharCustomiser : MonoBehaviour
         {
             ChangeBlackMaleClothes(clotheColourIndex);
         }
-        skincolor = 0;
+        skinColor = 0;
     }
 
     public void ChangeSkinColorToBrown()
@@ -265,7 +285,7 @@ public class CharCustomiser : MonoBehaviour
         {
             ChangeBrownMaleClothes(clotheColourIndex);
         }
-        skincolor = 1;
+        skinColor = 1;
     }    
 
     public void ChangeSkinColorToWhite()
@@ -278,7 +298,7 @@ public class CharCustomiser : MonoBehaviour
         {
             ChangeWhiteMaleClothes(clotheColourIndex);
         }
-        skincolor = 2;
+        skinColor = 2;
     }
 
     public void ChangeClothingRightSelection()
@@ -286,7 +306,7 @@ public class CharCustomiser : MonoBehaviour
         clotheIndex++;
         if(gender==0)
         {
-            if(skincolor==0)
+            if(skinColor==0)
             {
                 if (clotheIndex >= CharSO.BlackFemaleBlackClothes.Length)
                 {
@@ -294,7 +314,7 @@ public class CharCustomiser : MonoBehaviour
                 }
                 ChangeBlackFemaleClothes(clotheColourIndex);
 
-            }else if(skincolor==1)
+            }else if(skinColor==1)
             {
                 if (clotheIndex >= CharSO.BrownFemaleBlackClothes.Length)
                 {
@@ -302,7 +322,7 @@ public class CharCustomiser : MonoBehaviour
                 }
                 ChangeBlackFemaleClothes(clotheColourIndex);
             }
-            else if (skincolor == 2)
+            else if (skinColor == 2)
             {
                 if (clotheIndex >= CharSO.WhiteFemaleBlackClothes.Length)
                 {
@@ -314,7 +334,7 @@ public class CharCustomiser : MonoBehaviour
         }
         else if (gender == 1)
         {
-            if (skincolor == 0)
+            if (skinColor == 0)
             {
                 if (clotheIndex >= CharSO.BlackMaleBlackClothes.Length)
                 {
@@ -323,7 +343,7 @@ public class CharCustomiser : MonoBehaviour
                 ChangeBlackMaleClothes(clotheColourIndex);
 
             }
-            else if (skincolor == 1)
+            else if (skinColor == 1)
             {
                 if (clotheIndex >= CharSO.BrownMaleBlackClothes.Length)
                 {
@@ -331,7 +351,7 @@ public class CharCustomiser : MonoBehaviour
                 }
                 ChangeBlackMaleClothes(clotheColourIndex);
             }
-            else if (skincolor == 2)
+            else if (skinColor == 2)
             {
                 if (clotheIndex >= CharSO.WhiteMaleBlackClothes.Length)
                 {
@@ -347,7 +367,7 @@ public class CharCustomiser : MonoBehaviour
         clotheIndex--;
         if (gender == 0)
         {
-            if (skincolor == 0)
+            if (skinColor == 0)
             {
                 if (clotheIndex <0)
                 {
@@ -355,7 +375,7 @@ public class CharCustomiser : MonoBehaviour
                 }
                 ChangeBlackFemaleClothes(clotheColourIndex);
             }
-            else if (skincolor == 1)
+            else if (skinColor == 1)
             {
                 if (clotheIndex < 0)
                 {
@@ -363,7 +383,7 @@ public class CharCustomiser : MonoBehaviour
                 }
                 ChangeBrownFemaleClothes(clotheColourIndex);
             }
-            else if (skincolor == 2)
+            else if (skinColor == 2)
             {
                 if (clotheIndex < 0)
                 {
@@ -374,7 +394,7 @@ public class CharCustomiser : MonoBehaviour
         }
         else if (gender == 1)
         {
-            if (skincolor == 0)
+            if (skinColor == 0)
             {
                 if (clotheIndex < 0)
                 {
@@ -382,7 +402,7 @@ public class CharCustomiser : MonoBehaviour
                 }
                 ChangeBlackMaleClothes(clotheColourIndex);
             }
-            else if (skincolor == 1)
+            else if (skinColor == 1)
             {
                 if (clotheIndex < 0)
                 {
@@ -390,7 +410,7 @@ public class CharCustomiser : MonoBehaviour
                 }
                 ChangeBrownMaleClothes(clotheColourIndex);
             }
-            else if (skincolor == 2)
+            else if (skinColor == 2)
             {
                 if (clotheIndex < 0)
                 {
@@ -435,72 +455,34 @@ public class CharCustomiser : MonoBehaviour
         tempHair.transform.parent = HairHolder.transform;
     }
 
-    public void RestoreToDefault()
-    {
-        if(gender == 0)
-        {
-            if (skincolor ==0)
-            {
-                BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BlackFemaleBlackClothes[0];       
-            }
-            else if (skincolor == 1)
-            {
-                BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BrownFemaleBlackClothes[0];
-
-            }
-            else if (skincolor == 2)
-            {
-                BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.WhiteFemaleBlackClothes[0];
-
-            }
-            InstantiateHair(0);
-
-        }
-        else if(gender == 1)
-        {
-            if(skincolor == 0)
-            {
-                BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BlackMaleBlackClothes[0];
-            }
-            else if(skincolor == 1)
-            {
-                BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BrownMaleBlackClothes[0];
-
-            }
-            else if(skincolor ==2)
-            {
-                BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.WhiteMaleBlackClothes[0];
-            }
-            InstantiateHair(0);
-        }
-    }
+    
 
     public void ChangeClotheColorToBlack()
     {
         if(gender == 0)
         {
-            if(skincolor==0)
+            if(skinColor==0)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BlackFemaleBlackClothes[clotheIndex];
-            }else if(skincolor==1)
+            }else if(skinColor==1)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BrownFemaleBlackClothes[clotheIndex];
             }
-            else if (skincolor == 2)
+            else if (skinColor == 2)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.WhiteFemaleBlackClothes[clotheIndex];
             }
         }else if(gender == 1)
         {
-            if (skincolor == 0)
+            if (skinColor == 0)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BlackMaleBlackClothes[clotheIndex];
             }
-            else if (skincolor == 1)
+            else if (skinColor == 1)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BrownMaleBlackClothes[clotheIndex];
             }
-            else if (skincolor == 2)
+            else if (skinColor == 2)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.WhiteMaleBlackClothes[clotheIndex];
             }
@@ -512,30 +494,30 @@ public class CharCustomiser : MonoBehaviour
     {
         if (gender == 0)
         {
-            if (skincolor == 0)
+            if (skinColor == 0)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BlackFemaleBlueClothes[clotheIndex];
             }
-            else if (skincolor == 1)
+            else if (skinColor == 1)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BrownFemaleBlueClothes[clotheIndex];
             }
-            else if (skincolor == 2)
+            else if (skinColor == 2)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.WhiteFemaleBlueClothes[clotheIndex];
             }
         }
         else if (gender == 1)
         {
-            if (skincolor == 0)
+            if (skinColor == 0)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BlackMaleBlueClothes[clotheIndex];
             }
-            else if (skincolor == 1)
+            else if (skinColor == 1)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BrownMaleBlueClothes[clotheIndex];
             }
-            else if (skincolor == 2)
+            else if (skinColor == 2)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.WhiteMaleBlueClothes[clotheIndex];
             }
@@ -548,30 +530,30 @@ public class CharCustomiser : MonoBehaviour
     {
         if (gender == 0)
         {
-            if (skincolor == 0)
+            if (skinColor == 0)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BlackFemaleCyanClothes[clotheIndex];
             }
-            else if (skincolor == 1)
+            else if (skinColor == 1)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BrownFemaleCyanClothes[clotheIndex];
             }
-            else if (skincolor == 2)
+            else if (skinColor == 2)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.WhiteFemaleCyanClothes[clotheIndex];
             }
         }
         else if (gender == 1)
         {
-            if (skincolor == 0)
+            if (skinColor == 0)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BlackMaleCyanClothes[clotheIndex];
             }
-            else if (skincolor == 1)
+            else if (skinColor == 1)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BrownMaleCyanClothes[clotheIndex];
             }
-            else if (skincolor == 2)
+            else if (skinColor == 2)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.WhiteMaleCyanClothes[clotheIndex];
             }
@@ -584,30 +566,30 @@ public class CharCustomiser : MonoBehaviour
     {
         if (gender == 0)
         {
-            if (skincolor == 0)
+            if (skinColor == 0)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BlackFemalePurpleClothes[clotheIndex];
             }
-            else if (skincolor == 1)
+            else if (skinColor == 1)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BrownFemalePurpleClothes[clotheIndex];
             }
-            else if (skincolor == 2)
+            else if (skinColor == 2)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.WhiteFemalePurpleClothes[clotheIndex];
             }
         }
         else if (gender == 1)
         {
-            if (skincolor == 0)
+            if (skinColor == 0)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BlackMalePurpleClothes[clotheIndex];
             }
-            else if (skincolor == 1)
+            else if (skinColor == 1)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BrownMalePurpleClothes[clotheIndex];
             }
-            else if (skincolor == 2)
+            else if (skinColor == 2)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.WhiteMalePurpleClothes[clotheIndex];
             }
@@ -620,30 +602,30 @@ public class CharCustomiser : MonoBehaviour
     {
         if (gender == 0)
         {
-            if (skincolor == 0)
+            if (skinColor == 0)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BlackFemaleWhiteClothes[clotheIndex];
             }
-            else if (skincolor == 1)
+            else if (skinColor == 1)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BrownFemaleWhiteClothes[clotheIndex];
             }
-            else if (skincolor == 2)
+            else if (skinColor == 2)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.WhiteFemaleWhiteClothes[clotheIndex];
             }
         }
         else if (gender == 1)
         {
-            if (skincolor == 0)
+            if (skinColor == 0)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BlackMaleWhiteClothes[clotheIndex];
             }
-            else if (skincolor == 1)
+            else if (skinColor == 1)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BrownMaleWhiteClothes[clotheIndex];
             }
-            else if (skincolor == 2)
+            else if (skinColor == 2)
             {
                 BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.WhiteMaleWhiteClothes[clotheIndex];
             }
@@ -654,42 +636,60 @@ public class CharCustomiser : MonoBehaviour
 
     public void ChangeHairColorToBlack()
     {
-        hairColourIndex = 0;
-        ChangeHairColour(hairColourIndex);
+        if(HairHolder.transform.childCount > 0)
+        {
+            hairColourIndex = 0;
+            ChangeHairColour(hairColourIndex);
+        }
     }
 
     public void ChangeHairColorToYellow()
     {
-        hairColourIndex = 1;
-        ChangeHairColour(hairColourIndex);
-
+        if (HairHolder.transform.childCount > 0)
+        {
+            hairColourIndex = 1;
+            ChangeHairColour(hairColourIndex);
+        }
     }
     public void ChangeHairColorToBrown()
     {
-        hairColourIndex = 2;
-        ChangeHairColour(hairColourIndex);
-
+        if (HairHolder.transform.childCount > 0)
+        {
+            hairColourIndex = 2;
+            ChangeHairColour(hairColourIndex);
+        }
     }
     public void ChangeHairColorToCyan()
     {
-        hairColourIndex = 3;
-        ChangeHairColour(hairColourIndex);
-
+        if (HairHolder.transform.childCount > 0)
+        {
+            hairColourIndex = 3;
+            ChangeHairColour(hairColourIndex);
+        }
     }
     public void ChangeHairColorToPurple()
     {
-        hairColourIndex = 4;
-        ChangeHairColour(hairColourIndex);
+        if (HairHolder.transform.childCount > 0)
+        {
+            hairColourIndex = 4;
+            ChangeHairColour(hairColourIndex);
+        }
     }
     public void ChangeHairColorToRed()
     {
-        hairColourIndex = 5;
-        ChangeHairColour(hairColourIndex);
+        if (HairHolder.transform.childCount > 0)
+        {
+            hairColourIndex = 5;
+            ChangeHairColour(hairColourIndex);
+        }
     }
     public void ChangeHairColorToWhite()
     {
-        hairColourIndex = 6;
-        ChangeHairColour(hairColourIndex);
+        if (HairHolder.transform.childCount > 0)
+        {
+            hairColourIndex = 6;
+            ChangeHairColour(hairColourIndex);
+        }
     }
 
     private void ChangeHairColour(int colorIndex)
@@ -704,4 +704,25 @@ public class CharCustomiser : MonoBehaviour
 
         }
     }
+    public void RestoreToDefault()
+    {
+        clotheIndex = 0;
+        clotheColourIndex = 0;
+        hairIndex = 0;
+        hairColourIndex = 0;
+        weaponIndex = 0;
+        skinColor = 0;
+        gender = 0;
+
+        BaseHolder.GetComponent<SkinnedMeshRenderer>().material = CharSO.BlackMaleBlackClothes[0];
+        if (HairHolder.transform.childCount>0)
+        {
+            Destroy(HairHolder.transform.GetChild(0).gameObject);
+        }
+
+        ConfiguratorUIManager.Instance.UpdateClotheText(clotheIndex+1);
+        ConfiguratorUIManager.Instance.UpdateHairText(hairIndex+1);
+
+    }
+
 }

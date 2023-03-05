@@ -45,6 +45,7 @@ public class MenuController : MonoBehaviour
     {
         HideMainMenu();
         characterConfiguratorPanel.SetActive(true);
+        CharCustomiser.Instance.RestoreToDefault();
     }
 
     public void StartNewGame()
@@ -71,8 +72,8 @@ public class MenuController : MonoBehaviour
         mainMenuPanel.SetActive(true);
         characterConfiguratorPanel.SetActive(false);
         mainMenuConfirmationPanel.SetActive(false);
-        MaleKnightCustomiser.Instance.UpdateToDefault();
-        FemaleKnightCustomiser.Instance.UpdateToDefault();
+        //MaleKnightCustomiser.Instance.UpdateToDefault();
+        //FemaleKnightCustomiser.Instance.UpdateToDefault();
        
     }
 

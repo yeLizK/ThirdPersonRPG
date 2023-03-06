@@ -32,5 +32,13 @@ public class GameData
         this.questOwner = "";
         this.playerTransform = new Vector3(-50f, 0f , -9f);
         flowersCollected = new SerializableDictionary<string, bool>();
+
+        gender = 0;
+        skinColor = 0;
+        clotheIndex = 0;
+        clotheColorIndex = 0;
+        hairIndex = 0;
+        hairColourIndex=0;
+
     }
 }

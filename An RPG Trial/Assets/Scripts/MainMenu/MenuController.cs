@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using System.IO;
 
 [System.Serializable]
-public class MenuController : MonoBehaviour
+public class MenuController : MonoBehaviour, IDataPersistence 
 {
     private static MenuController _instance;
     public static MenuController Instance { get { return _instance; } }
@@ -40,6 +40,15 @@ public class MenuController : MonoBehaviour
         characterConfiguratorPanel.SetActive(false);
 
     }
+    public void LoadData(GameData data)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        throw new System.NotImplementedException();
+    }
 
     public void OpenCharacterConfigurator()
     {
@@ -50,7 +59,8 @@ public class MenuController : MonoBehaviour
 
     public void StartNewGame()
     {
-        SceneManager.LoadScene("TutorialScene");
+        SceneManager.LoadScene("TutorialScene 1");
+        
     }
 
     public void HideMainMenu()
@@ -72,13 +82,11 @@ public class MenuController : MonoBehaviour
         mainMenuPanel.SetActive(true);
         characterConfiguratorPanel.SetActive(false);
         mainMenuConfirmationPanel.SetActive(false);
-        //MaleKnightCustomiser.Instance.UpdateToDefault();
-        //FemaleKnightCustomiser.Instance.UpdateToDefault();
-       
     }
 
     public void ExitToDesktop()
     {
         Application.Quit();
     }
+
 }

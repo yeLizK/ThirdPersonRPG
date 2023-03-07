@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using System.IO;
 
 [System.Serializable]
-public class MenuController : MonoBehaviour, IDataPersistence 
+public class MenuController : MonoBehaviour 
 {
     private static MenuController _instance;
     public static MenuController Instance { get { return _instance; } }
@@ -40,15 +40,6 @@ public class MenuController : MonoBehaviour, IDataPersistence
         characterConfiguratorPanel.SetActive(false);
 
     }
-    public void LoadData(GameData data)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void SaveData(ref GameData data)
-    {
-        throw new System.NotImplementedException();
-    }
 
     public void OpenCharacterConfigurator()
     {
@@ -59,8 +50,8 @@ public class MenuController : MonoBehaviour, IDataPersistence
 
     public void StartNewGame()
     {
+        DataPersistenceManager.Instance.SaveGame();
         SceneManager.LoadScene("TutorialScene 1");
-        
     }
 
     public void HideMainMenu()

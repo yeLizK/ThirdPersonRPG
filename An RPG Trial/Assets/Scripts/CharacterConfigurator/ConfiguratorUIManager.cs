@@ -145,23 +145,28 @@ public class ConfiguratorUIManager : MonoBehaviour, IPointerDownHandler, IPointe
     //UI Elements Functionality - Clothe Colour Selection
     public void ClickClotheColorBlackButton()
     {
-        CharCustomiser.Instance.ChangeClotheColorToBlack();
+        CharCustomiser.Instance.clotheColourIndex = 0;
+        CharCustomiser.Instance.UpdateCharacterAppereance();
     }
     public void ClickClotheColorBlueButton()
     {
-        CharCustomiser.Instance.ChangeClotheColorToBlue();
+        CharCustomiser.Instance.clotheColourIndex = 1;
+        CharCustomiser.Instance.UpdateCharacterAppereance();
     }
     public void ClickClotheColorCyanButton()
     {
-        CharCustomiser.Instance.ChangeClotheColorToCyan();
+        CharCustomiser.Instance.clotheColourIndex = 2;
+        CharCustomiser.Instance.UpdateCharacterAppereance();
     }
     public void ClickClotheColorPurpleButton()
     {
-        CharCustomiser.Instance.ChangeClotheColorToBlack();
+        CharCustomiser.Instance.clotheColourIndex = 3;
+        CharCustomiser.Instance.UpdateCharacterAppereance();
     }
     public void ClickClotheColorWhiteButton()
     {
-        CharCustomiser.Instance.ChangeClotheColorToWhite();
+        CharCustomiser.Instance.clotheColourIndex = 4;
+        CharCustomiser.Instance.UpdateCharacterAppereance();
     }
     //UI Elements Functionality - Hair Colour Selection
     public void ClickHairColorToBlackButton()

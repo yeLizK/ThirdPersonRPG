@@ -6,7 +6,6 @@ using TMPro;
 using UnityEngine.UI;
 using System.IO;
 
-[System.Serializable]
 public class MenuController : MonoBehaviour 
 {
     private static MenuController _instance;
@@ -19,6 +18,9 @@ public class MenuController : MonoBehaviour
 
     [SerializeField] private Button newGame, loadGame, settings, exit;
 
+    private CharCustomiser charCustomiser;
+
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -30,6 +32,8 @@ public class MenuController : MonoBehaviour
     }
     private void Start()
     {
+        charCustomiser = FindObjectOfType<CharCustomiser>();
+
         string fullPath = Path.Combine(Application.persistentDataPath, fileName);
         if (!File.Exists(fullPath))
         {
@@ -45,12 +49,19 @@ public class MenuController : MonoBehaviour
     {
         HideMainMenu();
         characterConfiguratorPanel.SetActive(true);
-        CharCustomiser.Instance.RestoreToDefault();
+        charCustomiser.RestoreToDefault();
     }
 
     public void StartNewGame()
     {
+        GameSpecifics.Instance.isNewGame = true;
         DataPersistenceManager.Instance.SaveGame();
+        SceneManager.LoadScene("TutorialScene 1");
+    }
+
+    public void LoadGame()
+    {
+        GameSpecifics.Instance.isNewGame = false;
         SceneManager.LoadScene("TutorialScene 1");
     }
 

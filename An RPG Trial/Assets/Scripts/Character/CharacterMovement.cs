@@ -20,9 +20,13 @@ public class CharacterMovement : MonoBehaviour , IDataPersistence
 
     [SerializeField]
     private float MouseXSpeed , MouseYSpeed;
-    [SerializeField] private int speedMultiplier;
+    [SerializeField] private float speedMultiplier;
 
     private CharacterController charController;
+
+    [HideInInspector] public bool isCharWalking;
+
+    [SerializeField] public Animator charAnim;
 
 
     private void Awake()
@@ -40,6 +44,7 @@ public class CharacterMovement : MonoBehaviour , IDataPersistence
     private void Start()
     {
         charController = this.gameObject.GetComponent<CharacterController>();
+        speedMultiplier = 4f;
     }
 
     public void LoadData(GameData data)
@@ -59,21 +64,32 @@ public class CharacterMovement : MonoBehaviour , IDataPersistence
         movementVector = new Vector3(inputVector.y, 0, -inputVector.x);
         movementVector = transform.forward * movementVector.x + -transform.right * movementVector.z;
         movementVector.y = 0f;
+        if (movementVector.magnitude > 0)
+        {
+            isCharWalking = true;
+            charAnim.SetBool("isCharIdle", false);
+            charAnim.SetBool("isRunning", true);
+        }
+        else
+        {
+            isCharWalking = false;
+            charAnim.SetBool("isCharIdle", true);
+            charAnim.SetBool("isRunning", false);
+
+        }
 
         Vector2 deltaInput = InputManager.Instance.GetMouseDelta();
         startingRotation.x += deltaInput.x * Time.deltaTime;
         startingRotation.y += deltaInput.y * Time.deltaTime;
         startingRotation.y = Mathf.Clamp(startingRotation.y, -clampAngle, clampAngle);
-        transform.rotation = Quaternion.Euler(-startingRotation.y*MouseYSpeed, startingRotation.x*MouseXSpeed, 0f);
-        //transform.rotation = Quaternion.Euler(0f, startingRotation.x * MouseXSpeed, 0f);
-        charController.Move(movementVector * Time.deltaTime * 2f);
+        transform.rotation = Quaternion.Euler(0f, startingRotation.x*MouseXSpeed, 0f);
+        charController.Move(movementVector * Time.deltaTime * speedMultiplier);
 
     }
-    private void OnTriggerEnter(Collider other)
+
+    public void ReassingPlayerTransform()
     {
-        if(other.gameObject.tag == "CloseGate")
-        {
-            TutorialManager.Instance.CloseTutorialGate();
-        }
+        transform.position = new Vector3(0, 0, 0);
     }
+
 }

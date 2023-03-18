@@ -36,4 +36,16 @@ public class CinemachineCameraManager : MonoBehaviour
         NPCFocusCam.gameObject.SetActive(false);
 
     }
+
+    public void EnterDialogueMode()
+    {
+        mainFPCamera.gameObject.SetActive(false);
+        NPCFocusCam.gameObject.SetActive(true);
+    }
+
+    public void ExitDialogueMode()
+    {
+        mainFPCamera.gameObject.SetActive(true);
+        NPCFocusCam.gameObject.SetActive(false);
+    }
 }

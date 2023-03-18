@@ -22,7 +22,6 @@ public class InputManager : MonoBehaviour
         Cursor.visible = false;
         playerInputs.CharacterControl.Movement.performed += ctx => CheckKeyPress();
         playerInputs.CharacterControl.Interact.performed += interactCtx => Interact();
-
     }
 
     private void OnEnable()
@@ -84,24 +83,31 @@ public class InputManager : MonoBehaviour
     {
         if (!DialogueManager.Instance.isDialoguePlaying)
         {
-            if (CameraRaycast.Instance.isHitCollectable)
+            CinemachineCameraManager.Instance.ExitDialogueMode();
+            if (PlayerInteraction.Instance.isCharInCollectableRange)
             {
                 PlayerInteraction.Instance.CollectObject();
             }
-            else if (CameraRaycast.Instance.isHitNPC)
+            else if (PlayerInteraction.Instance.isCharInNPCRange)
             {
-                if (QuestManager.Instance.activeQuest==null|| QuestManager.Instance.activeQuest.Name.Equals(""))
+                if (QuestManager.Instance.activeQuest == null || QuestManager.Instance.activeQuest.Name.Equals(""))
                 {
-                    DialogueManager.Instance.EnterDialogueMode(CameraRaycast.Instance.objectHit.GetComponent<NPCDialog>().GetNPCDialog());
+                    DialogueManager.Instance.EnterDialogueMode(PlayerInteraction.Instance.interactedObject.GetComponent<NPCDialog>().GetNPCDialog());
+                    CinemachineCameraManager.Instance.EnterDialogueMode();
                 }
                 else
                 {
-                    DialogueManager.Instance.EvaluateDialog(CameraRaycast.Instance.objectHit.transform);
+                    DialogueManager.Instance.EvaluateDialog(PlayerInteraction.Instance.interactedObject.transform);
+                    CinemachineCameraManager.Instance.EnterDialogueMode();
                 }
 
             }
         }
-        else DialogueManager.Instance.ContinueStory();
+        else
+        {
+            DialogueManager.Instance.ContinueStory();
+            CinemachineCameraManager.Instance.EnterDialogueMode();
+        }
 
     }
 

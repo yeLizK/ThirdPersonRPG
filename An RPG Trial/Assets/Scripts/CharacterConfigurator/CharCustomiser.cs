@@ -6,7 +6,7 @@ public class CharCustomiser : MonoBehaviour, IDataPersistence
 {
     private static CharCustomiser _instance;
     public static CharCustomiser Instance { get { return _instance; } }
-
+    
     private int gender; //0-female 0-male
     private int skinColor; // 0-black, 1-brown, 2-white
 
@@ -18,7 +18,7 @@ public class CharCustomiser : MonoBehaviour, IDataPersistence
 
     [SerializeField] private GameObject BaseHolder, HairHolder, RightArmHolder;
 
-
+    
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -27,7 +27,7 @@ public class CharCustomiser : MonoBehaviour, IDataPersistence
         }
         else _instance = this;
     }
-
+    
     public void LoadData(GameData data)
     {
         this.gender = data.gender;
@@ -386,7 +386,7 @@ public class CharCustomiser : MonoBehaviour, IDataPersistence
         InstantiateHair(hairIndex);
     }
 
-    private void InstantiateHair(int hairIndex)
+    public void InstantiateHair(int hairIndex)
     {
         GameObject tempHair;
         if (HairHolder.transform.childCount > 0)
@@ -398,6 +398,7 @@ public class CharCustomiser : MonoBehaviour, IDataPersistence
         }
         tempHair = Instantiate(CharSO.HairList[hairIndex], HairHolder.transform);
         tempHair.transform.parent = HairHolder.transform;
+        tempHair.GetComponent<MeshRenderer>().material = CharSO.HairColor[hairColourIndex];
     }
 
     public void ChangeHairColorToBlack()
@@ -458,7 +459,7 @@ public class CharCustomiser : MonoBehaviour, IDataPersistence
         }
     }
 
-    private void ChangeHairColour(int colorIndex)
+    public void ChangeHairColour(int colorIndex)
     {
         if(HairHolder.GetComponentInChildren<MeshRenderer>()!=null)
         {
@@ -500,6 +501,7 @@ public class CharCustomiser : MonoBehaviour, IDataPersistence
         this.hairIndex = hairIndex;
         this.hairColourIndex = hairColourIndex;
         UpdateCharacterAppereance();
+
         if (HairHolder.transform.childCount > 0)
         {
             Destroy(HairHolder.transform.GetChild(0).gameObject);

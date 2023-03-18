@@ -9,10 +9,10 @@ public class InGameUIManager : MonoBehaviour
     private static InGameUIManager _instance;
     public static InGameUIManager Instance { get { return _instance; } }
     [SerializeField]
-    private TMP_Text interactionText;
+    private TMP_Text interactionText,questName, questDescription;
 
     [SerializeField]
-    private TMP_Text questName, questDescription;
+    private GameObject questHolder;
 
     private void Awake()
     {
@@ -25,21 +25,9 @@ public class InGameUIManager : MonoBehaviour
             _instance = this;
         }
     }
-    private void Update()
+    private void Start()
     {
-        if(CameraRaycast.Instance.isHitCollectable)
-        {
-            interactionText.text = "[E] Click to Collect";
-        }
-        else if(CameraRaycast.Instance.isHitNPC)
-        {
-            interactionText.text = "[E] Click to Talk";
-        }
-        else
-        {
-            interactionText.text = "";
-        }
-
+        CloseInteractionText();
     }
 
     public void RefreshQuest()
@@ -49,17 +37,36 @@ public class InGameUIManager : MonoBehaviour
         {
             questName.text = TutorialManager.Instance.activeQuest.Name;
             questDescription.text = TutorialManager.Instance.activeQuest.Description;
+            questHolder.GetComponent<Image>().enabled = true;
         }
         else
         {
             questName.text = QuestManager.Instance.activeQuest.Name;
             questDescription.text = QuestManager.Instance.activeQuest.Description;
+            questHolder.GetComponent<Image>().enabled = true;
         }
     }
 
     public void EmptyQuestList()
     {
+        questHolder.GetComponent<Image>().enabled = false;
         questName.text = "";
         questDescription.text = "";
+    }
+
+    public void OpenClickToTalkText()
+    {
+        interactionText.text = "[E] Click to Talk";
+    }
+
+    public void OpenClicktoCollectText()
+    {
+        interactionText.text = "[E] Click to Collect";
+
+    }
+
+    public void CloseInteractionText()
+    {
+        interactionText.text = "";
     }
 }

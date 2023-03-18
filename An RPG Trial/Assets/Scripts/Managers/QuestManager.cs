@@ -64,8 +64,8 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                     questList.quests[i].isQuestActive = true;
                     activeQuest = questList.quests[i];
                     InGameUIManager.Instance.RefreshQuest();
-                    CameraRaycast.Instance.objectHit.GetComponent<NPCDialog>().AssignQuestToNPC(activeQuest);
-                    questOwner = CameraRaycast.Instance.objectHit.name.ToString();
+                    PlayerInteraction.Instance.interactedObject.GetComponent<NPCDialog>().AssignQuestToNPC(activeQuest);
+                    questOwner = PlayerInteraction.Instance.interactedObject.name.ToString();
                     return;
                 }
             }
@@ -80,7 +80,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
             if(activeQuest.EvaluateQuest(activeQuest.questObject))
             {
                 CompleteQuest();
-                CameraRaycast.Instance.objectHit.GetComponent<NPCDialog>().EvaluateQuest(activeQuest);
+                PlayerInteraction.Instance.interactedObject.GetComponent<NPCDialog>().EvaluateQuest(activeQuest);
 
             }
         }

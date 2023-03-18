@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collectable : MonoBehaviour , IDataPersistence
+public class Collectable : MonoBehaviour, IDataPersistence
 {
+
     [SerializeField] private string id;
 
     private bool isCollected;
+
+    [SerializeField] private GameObject objectBeforeCollection, objectAfterCollection;
+
 
     [ContextMenu("Generate guid for id")]
     private void GenerateGuid()
@@ -35,7 +39,10 @@ public class Collectable : MonoBehaviour , IDataPersistence
     public void CollectObject()
     {
         isCollected = true;
-        gameObject.SetActive(false);
-
+        Destroy(gameObject.GetComponent<BoxCollider>());
+        objectBeforeCollection.SetActive(false);
+        objectAfterCollection.SetActive(true);
+        PlayerInteraction.Instance.isCharInCollectableRange = false;
+        InGameUIManager.Instance.CloseInteractionText();
     }
 }

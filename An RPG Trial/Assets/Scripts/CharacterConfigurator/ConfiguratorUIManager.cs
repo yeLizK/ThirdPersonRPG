@@ -21,6 +21,8 @@ public class ConfiguratorUIManager : MonoBehaviour, IPointerDownHandler, IPointe
 
     [SerializeField] private TMP_Text HairText, ClotheText;
 
+    private CharCustomiser charCustomiser;
+
     private void Awake()
     {
         if(_instance != null && _instance != this)
@@ -33,8 +35,10 @@ public class ConfiguratorUIManager : MonoBehaviour, IPointerDownHandler, IPointe
     }
     private void Start()
     {
+        charCustomiser = CharCustomiser.Instance;
         isCharRotating = false;
         mouseDragSensitivity = 0.4f;
+        
     }
 
     private void Update()
@@ -80,28 +84,28 @@ public class ConfiguratorUIManager : MonoBehaviour, IPointerDownHandler, IPointe
     //UI Elements Functionality - Gender Selection
     public void SelectMaleButton()
     {
-        CharCustomiser.Instance.SelectMale();
+        charCustomiser.SelectMale();
     }
 
     public void SelectFemaleButton()
     {
-        CharCustomiser.Instance.SelectFemale();
+        charCustomiser.SelectFemale();
     }
 
     //UI Elements Functionality - Skin Colour Selection
     public void SelectBlackSkinColorButton()
     {
-        CharCustomiser.Instance.ChangeSkinColorToBlack();
+        charCustomiser.ChangeSkinColorToBlack();
     }
 
     public void SelectBrownSkinColorButton()
     {
-        CharCustomiser.Instance.ChangeSkinColorToBrown();
+        charCustomiser.ChangeSkinColorToBrown();
     }
 
     public void SelectWhiteSkinColorButton()
     {
-        CharCustomiser.Instance.ChangeSkinColorToWhite();
+        charCustomiser.ChangeSkinColorToWhite();
     }
 
     public void UpdateHairText(int selectionNumber)
@@ -111,15 +115,15 @@ public class ConfiguratorUIManager : MonoBehaviour, IPointerDownHandler, IPointe
     //UI Elements Functionality - Hair Selection
     public void ClickRightHairSelectionButton()
     {
-        CharCustomiser.Instance.ChangeHairRightSelection();
-        int temp = CharCustomiser.Instance.hairIndex+1;
+        charCustomiser.ChangeHairRightSelection();
+        int temp = charCustomiser.hairIndex+1;
         UpdateHairText(temp);
     }
 
     public void ClickLeftHairSelectionButton()
     {
-        CharCustomiser.Instance.ChangeHairLeftSelection();
-        int temp = CharCustomiser.Instance.hairIndex + 1;
+        charCustomiser.ChangeHairLeftSelection();
+        int temp = charCustomiser.hairIndex + 1;
         UpdateHairText(temp);
 
     }
@@ -129,15 +133,15 @@ public class ConfiguratorUIManager : MonoBehaviour, IPointerDownHandler, IPointe
     }
     public void ClickRightClotheSelectionButton()
     {
-        CharCustomiser.Instance.ChangeClothingRightSelection();
-        int temp = CharCustomiser.Instance.clotheIndex + 1;
+        charCustomiser.ChangeClothingRightSelection();
+        int temp = charCustomiser.clotheIndex + 1;
         UpdateClotheText(temp);
 
     }
     public void ClickLeftClotheSelectionButton()
     {
-        CharCustomiser.Instance.ChangeClothingLeftSelection();
-        int temp = CharCustomiser.Instance.clotheIndex + 1;
+        charCustomiser.ChangeClothingLeftSelection();
+        int temp = charCustomiser.clotheIndex + 1;
         UpdateClotheText(temp);
     }
 
@@ -145,56 +149,56 @@ public class ConfiguratorUIManager : MonoBehaviour, IPointerDownHandler, IPointe
     //UI Elements Functionality - Clothe Colour Selection
     public void ClickClotheColorBlackButton()
     {
-        CharCustomiser.Instance.clotheColourIndex = 0;
-        CharCustomiser.Instance.UpdateCharacterAppereance();
+        charCustomiser.clotheColourIndex = 0;
+        charCustomiser.UpdateCharacterAppereance();
     }
     public void ClickClotheColorBlueButton()
     {
-        CharCustomiser.Instance.clotheColourIndex = 1;
-        CharCustomiser.Instance.UpdateCharacterAppereance();
+        charCustomiser.clotheColourIndex = 1;
+        charCustomiser.UpdateCharacterAppereance();
     }
     public void ClickClotheColorCyanButton()
     {
-        CharCustomiser.Instance.clotheColourIndex = 2;
-        CharCustomiser.Instance.UpdateCharacterAppereance();
+        charCustomiser.clotheColourIndex = 2;
+        charCustomiser.UpdateCharacterAppereance();
     }
     public void ClickClotheColorPurpleButton()
     {
-        CharCustomiser.Instance.clotheColourIndex = 3;
-        CharCustomiser.Instance.UpdateCharacterAppereance();
+        charCustomiser.clotheColourIndex = 3;
+        charCustomiser.UpdateCharacterAppereance();
     }
     public void ClickClotheColorWhiteButton()
     {
-        CharCustomiser.Instance.clotheColourIndex = 4;
-        CharCustomiser.Instance.UpdateCharacterAppereance();
+        charCustomiser.clotheColourIndex = 4;
+        charCustomiser.UpdateCharacterAppereance();
     }
     //UI Elements Functionality - Hair Colour Selection
     public void ClickHairColorToBlackButton()
     {
-        CharCustomiser.Instance.ChangeHairColorToBlack();
+        charCustomiser.ChangeHairColorToBlack();
     }
     public void ClickHairColorToYellowButton()
     {
-        CharCustomiser.Instance.ChangeHairColorToYellow();
+        charCustomiser.ChangeHairColorToYellow();
     }
     public void ClickHairColorToBrownButton()
     {
-        CharCustomiser.Instance.ChangeHairColorToBrown();
+        charCustomiser.ChangeHairColorToBrown();
     }
     public void ClickHairColorToCyanButton()
     {
-        CharCustomiser.Instance.ChangeHairColorToCyan();
+        charCustomiser.ChangeHairColorToCyan();
     }
     public void ClickHairColorToPurpleButton()
     {
-        CharCustomiser.Instance.ChangeHairColorToPurple();
+        charCustomiser.ChangeHairColorToPurple();
     }
     public void ClickHairColorToRedButton()
     {
-        CharCustomiser.Instance.ChangeHairColorToRed();
+        charCustomiser.ChangeHairColorToRed();
     }
     public void ClickHairColorToWhiteButton()
     {
-        CharCustomiser.Instance.ChangeHairColorToWhite();
+        charCustomiser.ChangeHairColorToWhite();
     }
 }

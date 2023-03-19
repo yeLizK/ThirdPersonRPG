@@ -11,7 +11,7 @@ public class GatheringQuest : Quest
 
     public override bool EvaluateQuest(GameObject objectToEvalaute)
     {
-        if(questObject.GetComponent<Collectable>().itemType == itemType && this.isQuestActive)
+        if(objectToEvalaute.GetComponent<Collectable>().itemType == itemType && this.isQuestActive)
         {
             if (Inventory.Instance.ReturnItemAmount(itemType) >= goalCount)
             {
@@ -19,7 +19,6 @@ public class GatheringQuest : Quest
                 return true;
             }
         }
-       
         return false;
     }
 

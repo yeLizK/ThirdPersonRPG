@@ -42,6 +42,9 @@ public class UI_Inventory : MonoBehaviour
                 itemSlot.GetComponentInChildren<TMP_Text>().text = item.amount.ToString();
             }
         }
-
+        foreach (Item item in Inventory.Instance.GetItemList())
+        {
+            Debug.Log(item.itemType.ToString() +"," +item.amount.ToString());
+        }
     }
 }

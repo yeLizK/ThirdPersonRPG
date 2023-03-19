@@ -16,7 +16,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
     [HideInInspector]
     public Quest activeQuest;
 
-    private string questOwner;
+    private GameObject questOwner;
 
     private void Awake()
     {
@@ -34,13 +34,13 @@ public class QuestManager : MonoBehaviour, IDataPersistence
     public void LoadData(GameData data)
     {
         this.activeQuest = data.mainQuest;
-        this.questOwner = data.questOwner;
         if (activeQuest == null || activeQuest.Name.Equals("")) anyActiveQuest = false;
         else anyActiveQuest = true;
         InGameUIManager.Instance.RefreshQuest();
-        GameObject temp = GameObject.Find(questOwner);
+        GameObject temp = GameObject.Find(data.questOwner);
         if (temp == null)
         { return; }
+        this.questOwner = temp;
         temp.GetComponent<NPCDialog>().AssignQuestToNPC(activeQuest);
         
     }
@@ -49,7 +49,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
     {
         data.mainQuest = this.activeQuest;
         data.isQuestCompleted = this.anyActiveQuest;
-        data.questOwner = this.questOwner;
+        data.questOwner = this.questOwner.name;
     }
 
 
@@ -65,7 +65,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                     activeQuest = questList.quests[i];
                     InGameUIManager.Instance.RefreshQuest();
                     PlayerInteraction.Instance.interactedObject.GetComponent<NPCDialog>().AssignQuestToNPC(activeQuest);
-                    questOwner = PlayerInteraction.Instance.interactedObject.name.ToString();
+                    questOwner = PlayerInteraction.Instance.interactedObject;
                     return;
                 }
             }
@@ -80,7 +80,6 @@ public class QuestManager : MonoBehaviour, IDataPersistence
             if(activeQuest.EvaluateQuest(activeQuest.questObject))
             {
                 CompleteQuest();
-                PlayerInteraction.Instance.interactedObject.GetComponent<NPCDialog>().EvaluateQuest(activeQuest);
             }
         }
     }
@@ -88,6 +87,8 @@ public class QuestManager : MonoBehaviour, IDataPersistence
     public void CompleteQuest()
     {
         activeQuest.Complete();
+        questOwner.GetComponent<NPCDialog>().EvaluateQuest(activeQuest);
+
         activeQuest = null;
         if (activeQuest == null)
         {

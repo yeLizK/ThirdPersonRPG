@@ -15,8 +15,19 @@ MonoBehaviour:
   quests:
   - Name: Healing Potion
     Description: Pick 3 Red Flowers
-    Completed: 0
-    isQuestActive: 1
+    Completed: 1
+    isQuestActive: 0
     isQuestAvailable: 0
     questType: 0
     questObject: {fileID: 6328813435736325868, guid: 8b11f0d8ce171b5409d57fc70b963a56, type: 3}
+    goalCount: 3
+    itemType: 0
+  - Name: Iron Sword
+    Description: Pick 4 Iron
+    Completed: 0
+    isQuestActive: 0
+    isQuestAvailable: 0
+    questType: 0
+    questObject: {fileID: 193158049541861147, guid: 6d6518d08e04aa242b9852bdf2cc1b20, type: 3}
+    goalCount: 4
+    itemType: 3

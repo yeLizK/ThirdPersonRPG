@@ -81,7 +81,6 @@ public class QuestManager : MonoBehaviour, IDataPersistence
             {
                 CompleteQuest();
                 PlayerInteraction.Instance.interactedObject.GetComponent<NPCDialog>().EvaluateQuest(activeQuest);
-
             }
         }
     }

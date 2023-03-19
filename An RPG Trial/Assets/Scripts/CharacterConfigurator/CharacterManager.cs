@@ -10,7 +10,11 @@ public class CharacterManager : MonoBehaviour, IDataPersistence
     public static CharacterManager Instance { get { return _instance; } }
 
     [HideInInspector]public int gender, skinColor, clotheIndex, clotheColourIndex, hairIndex, hairColourIndex;
-    [SerializeField]private CharCustomiser charCustomiser;
+    [SerializeField] private CharCustomiser charCustomiser;
+    [SerializeField] private UI_Inventory uiInventory;
+
+    private Inventory inventory;
+
 
     private void Awake()
     {
@@ -26,6 +30,8 @@ public class CharacterManager : MonoBehaviour, IDataPersistence
     }
     private void Start()
     {
+        inventory = new Inventory();
+        uiInventory.RefreshInventoryItems();
         DataPersistenceManager.Instance.dataPersistenceObjects = DataPersistenceManager.Instance.FindAllDataPersistenceObjects();
         DataPersistenceManager.Instance.LoadGame();
     }

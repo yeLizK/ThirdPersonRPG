@@ -23,14 +23,15 @@ public class PlayerInteraction : MonoBehaviour
     }
     public void CollectObject()
     {
-        if(QuestManager.Instance.activeQuest != null)
+        interactedObject.GetComponent<Collectable>().CollectObject();
+
+        if (QuestManager.Instance.activeQuest != null)
         {
             if (QuestManager.Instance.activeQuest.EvaluateQuest(interactedObject))
             {
                 QuestManager.Instance.CompleteQuest();
             }
         }
-        interactedObject.GetComponent<Collectable>().CollectObject();
     }
 
     private void OnTriggerEnter(Collider other)

@@ -31,6 +31,4 @@ public class Quest
         isQuestActive = false;
         Completed = true;
     }
-
-
 }

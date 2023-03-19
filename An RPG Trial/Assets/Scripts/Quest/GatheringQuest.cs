@@ -6,16 +6,14 @@ using UnityEngine;
 public class GatheringQuest : Quest
 {
     [Header("Gathering Quest")]
-    public int currentCount;
     public int goalCount;
+    public Item.ItemType itemType;
 
     public override bool EvaluateQuest(GameObject objectToEvalaute)
     {
-        if(questObject.tag.Equals(objectToEvalaute.tag) && this.isQuestActive)
+        if(questObject.GetComponent<Collectable>().itemType == itemType && this.isQuestActive)
         {
-            IncrementQuestCount();
-            Debug.Log(currentCount);
-            if (currentCount >= goalCount)
+            if (Inventory.Instance.ReturnItemAmount(itemType) >= goalCount)
             {
                 Complete();
                 return true;
@@ -23,10 +21,6 @@ public class GatheringQuest : Quest
         }
        
         return false;
-    }
-    public void IncrementQuestCount()
-    {
-        currentCount++;
     }
 
 }

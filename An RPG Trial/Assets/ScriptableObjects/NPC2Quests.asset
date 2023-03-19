@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8629dcec84c3014895d63a3613e50fc, type: 3}
-  m_Name: NPC1Quests
+  m_Name: NPC2Quests
   m_EditorClassIdentifier: 
   quests:
-  - Name: Healing Potion
-    Description: Pick 3 Red Flowers
+  - Name: Iron Sword
+    Description: Pick 4 iron ore
     Completed: 0
-    isQuestActive: 1
+    isQuestActive: 0
     isQuestAvailable: 0
     questType: 0
-    questObject: {fileID: 6328813435736325868, guid: 8b11f0d8ce171b5409d57fc70b963a56, type: 3}
+    questObject: {fileID: 193158049541861147, guid: 6d6518d08e04aa242b9852bdf2cc1b20, type: 3}

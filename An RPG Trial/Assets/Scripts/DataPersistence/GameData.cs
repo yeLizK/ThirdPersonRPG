@@ -15,7 +15,7 @@ public class GameData
     public Quest mainQuest;
     public string questOwner;
     public Vector3 playerTransform;
-    public SerializableDictionary<string, bool> flowersCollected;
+    public SerializableDictionary<string, int> inventory;
 
     //Character Config
     public int gender, skinColor, clotheIndex, clotheColorIndex, hairIndex, hairColourIndex; 
@@ -31,7 +31,7 @@ public class GameData
         this.isQuestCompleted = false;
         this.questOwner = "";
         this.playerTransform = new Vector3(-50f, 0f , -9f);
-        flowersCollected = new SerializableDictionary<string, bool>();
+        inventory = new SerializableDictionary<string, int>();
 
         gender = 0;
         skinColor = 0;

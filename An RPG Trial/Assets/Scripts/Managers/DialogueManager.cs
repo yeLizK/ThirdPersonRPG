@@ -121,7 +121,6 @@ public class DialogueManager : MonoBehaviour
     public void MakeChoice(int choiceIndex)
     {
         currentStory.ChooseChoiceIndex(choiceIndex);
-        Debug.Log(currentStory.canContinue);
         ContinueStory();
     }
 }

@@ -55,6 +55,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     public void AssignQuest()
     {
+        questList = PlayerInteraction.Instance.interactedObject.GetComponent<NPCDialog>().questList;
         if (anyActiveQuest == false)
         {
             for(int i = 0; i <questList.quests.Count; i ++)
@@ -88,7 +89,6 @@ public class QuestManager : MonoBehaviour, IDataPersistence
     {
         activeQuest.Complete();
         questOwner.GetComponent<NPCDialog>().EvaluateQuest(activeQuest);
-
         activeQuest = null;
         if (activeQuest == null)
         {

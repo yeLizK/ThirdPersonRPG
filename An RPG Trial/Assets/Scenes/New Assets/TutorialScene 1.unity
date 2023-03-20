@@ -8985,7 +8985,7 @@ MonoBehaviour:
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
-    m_Time: 1
+    m_Time: 0.3
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -10334,6 +10334,9 @@ MonoBehaviour:
     isQuestAvailable: 0
     questType: 0
     questObject: {fileID: 0}
+    reward:
+      itemType: 0
+      amount: 0
 --- !u!4 &1170570261
 Transform:
   m_ObjectHideFlags: 0
@@ -20292,6 +20295,7 @@ MonoBehaviour:
   dialogueList:
   - isDialogueFinished: 0
     inkJSON: {fileID: 4900000, guid: e763f4f11f03f094a984d11db118fa1d, type: 3}
+  questList: {fileID: 11400000, guid: c9d4175079d563346be32edf7a7c07ff, type: 2}
   isNPCQuestActive: 0
   activeQuest:
     Name: 
@@ -20301,6 +20305,9 @@ MonoBehaviour:
     isQuestAvailable: 0
     questType: 0
     questObject: {fileID: 0}
+    reward:
+      itemType: 0
+      amount: 0
 --- !u!1 &5866119619686422364
 GameObject:
   m_ObjectHideFlags: 0
@@ -23860,7 +23867,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueList:
   - isDialogueFinished: 0
-    inkJSON: {fileID: 4900000, guid: e763f4f11f03f094a984d11db118fa1d, type: 3}
+    inkJSON: {fileID: 4900000, guid: 7c5db0cf74d0a834db760a2036bfa530, type: 3}
+  questList: {fileID: 11400000, guid: fd04c6d38692adc4d992e00e2ec59dc1, type: 2}
   isNPCQuestActive: 0
   activeQuest:
     Name: 
@@ -23870,6 +23878,9 @@ MonoBehaviour:
     isQuestAvailable: 0
     questType: 0
     questObject: {fileID: 0}
+    reward:
+      itemType: 0
+      amount: 0
 --- !u!137 &9178775377851172128
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0

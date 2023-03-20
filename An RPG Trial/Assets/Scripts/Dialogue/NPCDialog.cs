@@ -6,11 +6,14 @@ public class NPCDialog : MonoBehaviour
 {
     [Header("Ink JSON")]
     public List<Dialogue> dialogueList;
+    private Dialogue currentDialogue;
 
+
+    [Header("Quest")]
+    public QuestSO questList;
     [SerializeField] private bool isNPCQuestActive;
     public Quest activeQuest;
 
-    private Dialogue currentDialogue;
 
     private void Start()
     {

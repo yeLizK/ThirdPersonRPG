@@ -14,6 +14,7 @@ public class Quest
 
     public QuestType questType;
     public GameObject questObject;
+    public Item reward;
 
     public void SetQuestActive()
     {

@@ -20,3 +20,8 @@ MonoBehaviour:
     isQuestAvailable: 0
     questType: 0
     questObject: {fileID: 193158049541861147, guid: 6d6518d08e04aa242b9852bdf2cc1b20, type: 3}
+    reward:
+      itemType: 2
+      amount: 1
+    goalCount: 4
+    itemType: 3

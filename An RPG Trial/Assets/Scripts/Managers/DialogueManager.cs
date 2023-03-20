@@ -15,7 +15,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject[] choices;
     private TextMeshProUGUI[] choicesText;
 
-    [SerializeField] private TextAsset NotAnyMoreQuest, PlayerHasActiveQuest, QuestNotCompleted;
+    [SerializeField] private TextAsset NotAnyMoreQuest, PlayerHasActiveQuest, QuestNotCompleted, GivingReward;
     private Story currentStory;
 
     [HideInInspector]public bool isDialoguePlaying { get; private set; }
@@ -44,13 +44,19 @@ public class DialogueManager : MonoBehaviour
 
     public void EvaluateDialog(Transform hitObject)
     {
-        if(hitObject.GetComponent<NPCDialog>().activeQuest !=null)
+        if(hitObject.GetComponent<NPCQuest>().activeQuest !=null)
         {
-            if (hitObject.GetComponent<NPCDialog>().activeQuest == QuestManager.Instance.activeQuest)
+            if(hitObject.GetComponent<NPCQuest>().activeQuest.Completed && !hitObject.GetComponent<NPCQuest>().activeQuest.isRewardTaken)
+            {
+                EnterDialogueMode(GivingReward);
+                hitObject.GetComponent<NPCQuest>().CompleteNPCQuest(hitObject.GetComponent<NPCQuest>().activeQuest);
+                QuestManager.Instance.EvaluateQuest();
+            }
+            else if (hitObject.GetComponent<NPCQuest>().activeQuest == QuestManager.Instance.activeQuest)
             {
                 EnterDialogueMode(QuestNotCompleted);
             }
-            else if (hitObject.GetComponent<NPCDialog>().activeQuest != QuestManager.Instance.activeQuest)
+            else if (hitObject.GetComponent<NPCQuest>().activeQuest != QuestManager.Instance.activeQuest)
             {
                 EnterDialogueMode(PlayerHasActiveQuest);
             }

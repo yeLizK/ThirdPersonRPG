@@ -35,6 +35,7 @@ public class Inventory //: IDataPersistence
             }
         }
         itemList.Add(item);
+        UI_Inventory.Instance.RefreshInventoryItems();
     }
 
     public bool RemoveItem(Item.ItemType removedItemType, int removeAmount)
@@ -48,6 +49,10 @@ public class Inventory //: IDataPersistence
                 else
                 {
                     listItem.amount -= removeAmount;
+                    if(listItem.amount==0)
+                    {
+                        itemList.Remove(listItem);
+                    }
                     return true;
                 }
             }

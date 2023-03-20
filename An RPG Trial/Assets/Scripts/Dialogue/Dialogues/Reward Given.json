@@ -1,0 +1,1 @@
+﻿{"inkVersion":20,"root":[[{"->":"GiveReward"},["done",{"#f":5,"#n":"g-0"}],null],"done",{"GiveReward":["^Thank you for helping! Here is your reward!","\n",{"->":"end"},{"#f":1}],"end":["end",{"#f":1}],"#f":1}],"listDefs":{}}

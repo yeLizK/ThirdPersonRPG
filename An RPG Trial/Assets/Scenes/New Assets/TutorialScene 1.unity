@@ -1795,7 +1795,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!1 &244900765
 GameObject:
@@ -8184,6 +8184,7 @@ MonoBehaviour:
   NotAnyMoreQuest: {fileID: 4900000, guid: bdd7709998576d740b1a2db540317aea, type: 3}
   PlayerHasActiveQuest: {fileID: 4900000, guid: 0034a919db5135949a694a36e706839b, type: 3}
   QuestNotCompleted: {fileID: 4900000, guid: 1195e2f1e955f3446ac59724e8303706, type: 3}
+  GivingReward: {fileID: 4900000, guid: 4c6bcaf40edf8c94c9250b9a591a046b, type: 3}
 --- !u!1 &897646387
 GameObject:
   m_ObjectHideFlags: 0
@@ -10337,6 +10338,7 @@ MonoBehaviour:
     reward:
       itemType: 0
       amount: 0
+    isRewardTaken: 0
 --- !u!4 &1170570261
 Transform:
   m_ObjectHideFlags: 0
@@ -20259,7 +20261,7 @@ GameObject:
   - component: {fileID: 5864411881489682628}
   - component: {fileID: 5782408460604397776}
   - component: {fileID: 5866109970563776013}
-  - component: {fileID: 5866109970563776014}
+  - component: {fileID: 5866109970563776015}
   m_Layer: 0
   m_Name: HealerNPC
   m_TagString: NPC
@@ -20280,7 +20282,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.9990659, y: 2.0965056, z: 3.6913428}
   m_Center: {x: -0.22507882, y: 0.9296584, z: 0.13400823}
---- !u!114 &5866109970563776014
+--- !u!114 &5866109970563776015
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20289,7 +20291,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5866109970563776012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcbdba991eb082949be8a8b92e59d08a, type: 3}
+  m_Script: {fileID: 11500000, guid: 6910cc7bfb44a534388dbd10b9a6c84e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueList:
@@ -20308,6 +20310,7 @@ MonoBehaviour:
     reward:
       itemType: 0
       amount: 0
+    isRewardTaken: 0
 --- !u!1 &5866119619686422364
 GameObject:
   m_ObjectHideFlags: 0
@@ -22787,7 +22790,7 @@ GameObject:
   - component: {fileID: 9178775377839765888}
   - component: {fileID: 9178775377846939404}
   - component: {fileID: 9178775377846939405}
-  - component: {fileID: 9178775377846939406}
+  - component: {fileID: 9178775377846939407}
   m_Layer: 0
   m_Name: BlacksmithNPC
   m_TagString: NPC
@@ -23853,7 +23856,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.690735, y: 2.0047824, z: 4.721348}
   m_Center: {x: -0.3156817, y: 0.9755201, z: 0.3606739}
---- !u!114 &9178775377846939406
+--- !u!114 &9178775377846939407
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -23862,7 +23865,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9178775377839415314}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcbdba991eb082949be8a8b92e59d08a, type: 3}
+  m_Script: {fileID: 11500000, guid: 6910cc7bfb44a534388dbd10b9a6c84e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueList:
@@ -23881,6 +23884,7 @@ MonoBehaviour:
     reward:
       itemType: 0
       amount: 0
+    isRewardTaken: 0
 --- !u!137 &9178775377851172128
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0

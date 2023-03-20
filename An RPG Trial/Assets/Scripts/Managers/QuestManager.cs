@@ -20,7 +20,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     private void Awake()
     {
-        if(_instance!=null &&_instance!=this)
+        if(_instance!=null && _instance!=this)
         {
             Destroy(_instance);
         }
@@ -41,7 +41,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
         if (temp == null)
         { return; }
         this.questOwner = temp;
-        temp.GetComponent<NPCDialog>().AssignQuestToNPC(activeQuest);
+        temp.GetComponent<NPCQuest>().AssignQuestToNPC(activeQuest);
         
     }
 
@@ -55,7 +55,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     public void AssignQuest()
     {
-        questList = PlayerInteraction.Instance.interactedObject.GetComponent<NPCDialog>().questList;
+        questList = PlayerInteraction.Instance.interactedObject.GetComponent<NPCQuest>().questList;
         if (anyActiveQuest == false)
         {
             for(int i = 0; i <questList.quests.Count; i ++)
@@ -65,7 +65,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                     questList.quests[i].isQuestActive = true;
                     activeQuest = questList.quests[i];
                     InGameUIManager.Instance.RefreshQuest();
-                    PlayerInteraction.Instance.interactedObject.GetComponent<NPCDialog>().AssignQuestToNPC(activeQuest);
+                    PlayerInteraction.Instance.interactedObject.GetComponent<NPCQuest>().AssignQuestToNPC(activeQuest);
                     questOwner = PlayerInteraction.Instance.interactedObject;
                     return;
                 }
@@ -80,15 +80,13 @@ public class QuestManager : MonoBehaviour, IDataPersistence
         {
             if(activeQuest.EvaluateQuest(activeQuest.questObject))
             {
-                CompleteQuest();
+                activeQuest.Complete();
             }
         }
     }
 
     public void CompleteQuest()
     {
-        activeQuest.Complete();
-        questOwner.GetComponent<NPCDialog>().EvaluateQuest(activeQuest);
         activeQuest = null;
         if (activeQuest == null)
         {

@@ -92,7 +92,7 @@ public class InputManager : MonoBehaviour
             {
                 if (QuestManager.Instance.activeQuest == null || QuestManager.Instance.activeQuest.Name.Equals(""))
                 {
-                    DialogueManager.Instance.EnterDialogueMode(PlayerInteraction.Instance.interactedObject.GetComponent<NPCDialog>().GetNPCDialog());
+                    DialogueManager.Instance.EnterDialogueMode(PlayerInteraction.Instance.interactedObject.GetComponent<NPCQuest>().GetNPCDialog());
                     CinemachineCameraManager.Instance.EnterDialogueMode();
                 }
                 else

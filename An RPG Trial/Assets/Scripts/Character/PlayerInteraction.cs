@@ -24,13 +24,10 @@ public class PlayerInteraction : MonoBehaviour
     public void CollectObject()
     {
         interactedObject.GetComponent<Collectable>().CollectObject();
-
+        
         if (QuestManager.Instance.activeQuest != null)
         {
-            if (QuestManager.Instance.activeQuest.EvaluateQuest(interactedObject))
-            {
-                QuestManager.Instance.CompleteQuest();
-            }
+            QuestManager.Instance.activeQuest.EvaluateQuest(interactedObject);
         }
     }
 

@@ -23,5 +23,6 @@ MonoBehaviour:
     reward:
       itemType: 2
       amount: 1
+    isRewardTaken: 0
     goalCount: 4
     itemType: 3

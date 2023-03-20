@@ -15,6 +15,11 @@ public class Quest
     public QuestType questType;
     public GameObject questObject;
     public Item reward;
+    public bool isRewardTaken;
+
+    [Header("Gathering Quest")]
+    public int goalCount;
+    public Item.ItemType itemType;
 
     public void SetQuestActive()
     {
@@ -23,10 +28,17 @@ public class Quest
 
     public virtual bool EvaluateQuest(GameObject objectToEvaluate)
     {
-        if (Completed)
-        { return true; }
+        if (objectToEvaluate.GetComponent<Collectable>().itemType == itemType && this.isQuestActive)
+        {
+            if (Inventory.Instance.ReturnItemAmount(itemType) >= goalCount)
+            {
+                Complete();
+                return true;
+            }
+        }
         return false;
     }
+
     public void Complete()
     {
         isQuestActive = false;

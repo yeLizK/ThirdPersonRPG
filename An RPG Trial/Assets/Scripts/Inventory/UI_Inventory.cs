@@ -6,8 +6,18 @@ using TMPro;
 
 public class UI_Inventory : MonoBehaviour
 {
-    [SerializeField] private List<Transform> itemSlots;
+    private static UI_Inventory _instance;
+    public static UI_Inventory Instance { get { return _instance; } }
 
+    private void Awake()
+    {
+        if(_instance !=null && _instance !=this)
+        {
+            Destroy(_instance);
+        }
+        else { _instance = this; }
+    }
+    [SerializeField] private List<Transform> itemSlots;
 
     private GameObject ReturnEmptyItemSlot()
     {
@@ -42,9 +52,6 @@ public class UI_Inventory : MonoBehaviour
                 itemSlot.GetComponentInChildren<TMP_Text>().text = item.amount.ToString();
             }
         }
-        foreach (Item item in Inventory.Instance.GetItemList())
-        {
-            Debug.Log(item.itemType.ToString() +"," +item.amount.ToString());
-        }
+
     }
 }

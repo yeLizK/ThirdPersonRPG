@@ -28,7 +28,6 @@ public class Collectable : MonoBehaviour
         uiInventory.RefreshInventoryItems();
         objectBeforeCollection.SetActive(false);
         objectAfterCollection.SetActive(true);
-        QuestManager.Instance.EvaluateQuest();
         PlayerInteraction.Instance.isCharInCollectableRange = false;
         InGameUIManager.Instance.CloseInteractionText();
     }

@@ -55,25 +55,19 @@ public class ConfiguratorUIManager : MonoBehaviour, IPointerDownHandler, IPointe
     //Character Rotation
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("OnPointerDown");
         mouseInitialPos = Input.mousePosition;
         isCharRotating = true;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Debug.Log("OnPointerUp");
-
         isCharRotating = false;
     }
 
     public void OnPointerMove(PointerEventData eventData)
     {
-        Debug.Log("OnPointerMove !isCharRotating");
-
         if (isCharRotating)
         {
-            Debug.Log("OnPointerMove isCharRotating");
             mouseOffset = (Input.mousePosition - mouseInitialPos);
             charRotation.y = (mouseOffset.x + mouseOffset.y) * -mouseDragSensitivity;
             ModularCharacter.transform.Rotate(charRotation);

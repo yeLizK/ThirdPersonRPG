@@ -20,28 +20,17 @@ public class GameSpecifics : MonoBehaviour
         {
             _instance = this;
         }
-    }
 
-    private void Start()
-    {
-        DontDestroyOnLoad(this);
-    }
-
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (scene.name.Equals("Tutorial 1"))
+        if (SceneManager.GetActiveScene().name.Equals("TutorialScene 1"))
         {
-            CharacterMovement.Instance.ReassingPlayerTransform();
+            if (isNewGame == true)
+            {
+                CharacterMovement.Instance.ReassingPlayerTransform();
+            }
+            else
+            {
+                DataPersistenceManager.Instance.LoadGame();
+            }
         }
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

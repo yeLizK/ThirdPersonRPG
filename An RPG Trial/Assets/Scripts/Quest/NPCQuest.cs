@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class NPCQuest : MonoBehaviour
 {
-    [Header("Ink JSON")]
-    public List<Dialogue> dialogueList;
-    private Dialogue currentDialogue;
-
-
     [Header("Quest")]
     public QuestSO questList;
     [SerializeField] private bool isNPCQuestActive;
@@ -22,12 +17,11 @@ public class NPCQuest : MonoBehaviour
 
     public TextAsset GetNPCDialog()
     {
-        foreach (Dialogue dialogue in dialogueList)
+        if(!activeQuest.questDialogue.isDialogueFinished)
         {
-            if (!dialogue.isDialogueFinished)
+            if (!activeQuest.questDialogue.isDialogueFinished)
             {
-                currentDialogue = dialogue;
-                return dialogue.inkJSON;
+                return activeQuest.questDialogue.inkJSON;
             }
         }
         return null;
@@ -36,6 +30,7 @@ public class NPCQuest : MonoBehaviour
     public void AssignQuestToNPC(Quest quest)
     {
         this.activeQuest = quest;
+        quest.isQuestActive = true;
         isNPCQuestActive = true;
     }
     public void CompleteNPCQuest(Quest quest)
@@ -45,7 +40,7 @@ public class NPCQuest : MonoBehaviour
             Inventory.Instance.RemoveItem(activeQuest.itemType, activeQuest.goalCount);
             Inventory.Instance.AddItem(activeQuest.reward);
             activeQuest.isRewardTaken = true;
-            currentDialogue.isDialogueFinished = true;
+            activeQuest.questDialogue.isDialogueFinished = true;
             activeQuest = null;
             isNPCQuestActive = false;
             QuestManager.Instance.CompleteQuest();

@@ -20,9 +20,12 @@ public class InputManager : MonoBehaviour
         }
         playerInputs = new PlayerInputs();
         Cursor.visible = false;
-        playerInputs.CharacterControl.Movement.performed += ctx => CheckKeyPress();
+        playerInputs.CharacterControl.Movement.performed += MovementCtx => CheckKeyPress();
         playerInputs.CharacterControl.Interact.performed += interactCtx => Interact();
         playerInputs.CharacterControl.Jump.performed += jumpCtx => CheckIfPlayerJumped();
+        playerInputs.CharacterControl.Attack.performed += AttackCtx => ClickLeftMouse();
+        playerInputs.CharacterControl.Attack.performed += ShieldCtx => ClickRightMouse();
+
     }
 
     private void OnEnable()
@@ -72,12 +75,23 @@ public class InputManager : MonoBehaviour
     public void CheckIfPlayerJumped()
     {
         CharacterMovement.Instance.isCharJumping = true;
-    }    
+    }
+
+    public void ClickLeftMouse()
+    {
+        CharacterMovement.Instance.isCharAttacking =true;
+    }
+    public void ClickRightMouse()
+    {
+        CharacterMovement.Instance.isCharHoldingShield = true;
+    }
 
     public void UnbindKeyboardEvent()
     {
         playerInputs.CharacterControl.Movement.performed -= cnt => CheckKeyPress();
         playerInputs.CharacterControl.Jump.performed -= jumpCtx => CheckIfPlayerJumped();
+        playerInputs.CharacterControl.Attack.performed -= AttackCtx => ClickLeftMouse();
+        playerInputs.CharacterControl.Attack.performed -= ShieldCtx => ClickRightMouse();
     }
 
     private void UnbindCollectEvent()
@@ -97,15 +111,16 @@ public class InputManager : MonoBehaviour
             }
             else if (PlayerInteraction.Instance.isCharInNPCRange)
             {
-                if (QuestManager.Instance.activeQuest == null || QuestManager.Instance.activeQuest.Name.Equals(""))
+                if(PlayerInteraction.Instance.interactedObject.GetComponent<NPCQuest>().activeQuest !=null && !PlayerInteraction.Instance.interactedObject.GetComponent<NPCQuest>().activeQuest.Name.Equals(""))
                 {
-                    DialogueManager.Instance.EnterDialogueMode(PlayerInteraction.Instance.interactedObject.GetComponent<NPCQuest>().GetNPCDialog());
-                    CinemachineCameraManager.Instance.EnterDialogueMode();
-                }
-                else
-                {
-                    DialogueManager.Instance.EvaluateDialog(PlayerInteraction.Instance.interactedObject.transform);
-                    CinemachineCameraManager.Instance.EnterDialogueMode();
+                    if (QuestManager.Instance.activeQuest == null || QuestManager.Instance.activeQuest.Name.Equals(""))
+                    {
+                        DialogueManager.Instance.EnterDialogueMode(PlayerInteraction.Instance.interactedObject.GetComponent<NPCQuest>().GetNPCDialog());
+                    }
+                    else
+                    {
+                        DialogueManager.Instance.EvaluateDialog(PlayerInteraction.Instance.interactedObject.transform);
+                    }
                 }
 
             }

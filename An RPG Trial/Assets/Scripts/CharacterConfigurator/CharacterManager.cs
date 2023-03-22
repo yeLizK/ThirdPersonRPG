@@ -9,11 +9,13 @@ public class CharacterManager : MonoBehaviour, IDataPersistence
     private static CharacterManager _instance;
     public static CharacterManager Instance { get { return _instance; } }
 
-    [HideInInspector]public int gender, skinColor, clotheIndex, clotheColourIndex, hairIndex, hairColourIndex;
-    [SerializeField] private CharCustomiser charCustomiser;
+    [HideInInspector]public int gender, skinColor, clotheIndex, clotheColourIndex, hairIndex, hairColourIndex,weaponIndex;
+    [HideInInspector] public CharCustomiser charCustomiser;
     [SerializeField] private UI_Inventory uiInventory;
 
     private Inventory inventory;
+
+    [HideInInspector] public bool isCharHoldingSword;
 
 
     private void Awake()
@@ -32,6 +34,7 @@ public class CharacterManager : MonoBehaviour, IDataPersistence
     {
         inventory = new Inventory();
         uiInventory.RefreshInventoryItems();
+        charCustomiser = GetComponent<CharCustomiser>();
         DataPersistenceManager.Instance.dataPersistenceObjects = DataPersistenceManager.Instance.FindAllDataPersistenceObjects();
         DataPersistenceManager.Instance.LoadGame();
     }
@@ -43,7 +46,13 @@ public class CharacterManager : MonoBehaviour, IDataPersistence
         this.clotheColourIndex = data.clotheColorIndex;
         this.hairIndex = data.hairIndex;
         this.hairColourIndex = data.hairColourIndex;
+        this.weaponIndex = data.weaponIndex;
+        this.isCharHoldingSword = data.isCharHoldingSword;
         UpdateCharacterAppereance();
+        if(isCharHoldingSword)
+        {
+            charCustomiser.EquipSword();
+        }
 
     }
 
@@ -55,6 +64,8 @@ public class CharacterManager : MonoBehaviour, IDataPersistence
         data.clotheColorIndex = this.clotheColourIndex;
         data.hairIndex = this.hairIndex;
         data.hairColourIndex = this.hairColourIndex;
+        data.weaponIndex = this.weaponIndex;
+        data.isCharHoldingSword = this.isCharHoldingSword;
     }
 
 

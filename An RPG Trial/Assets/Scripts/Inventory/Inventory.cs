@@ -45,6 +45,12 @@ public class Inventory : IDataPersistence
     }
     public void AddItem(Item item)
     {
+        if(item.itemType==Item.ItemType.Sword)
+        {
+            CharacterManager.Instance.isCharHoldingSword = true;
+            CharacterManager.Instance.charCustomiser.EquipSword();
+            return;
+        }
         foreach(Item listItem in itemList)
         {
             if (listItem.itemType == item.itemType)
@@ -57,26 +63,26 @@ public class Inventory : IDataPersistence
         UI_Inventory.Instance.RefreshInventoryItems();
     }
 
-    public bool RemoveItem(Item.ItemType removedItemType, int removeAmount)
+    public void RemoveItem(Item.ItemType removedItemType, int removeAmount)
     {
-        foreach(Item listItem in itemList)
+        for(int i=0; i< itemList.Count; i++)
         {
-            if (listItem.itemType == removedItemType)
+            if (itemList[i].itemType == removedItemType)
             {
-                if(listItem.amount<removeAmount)
-                { return false; }
+                if (itemList[i].amount < removeAmount)
+                { return; }
                 else
                 {
-                    listItem.amount -= removeAmount;
-                    if(listItem.amount==0)
+                    itemList[i].amount -= removeAmount;
+                    if (itemList[i].amount == 0)
                     {
-                        itemList.Remove(listItem);
+                        itemList.Remove(itemList[i]);
                     }
-                    return true;
+
                 }
             }
         }
-        return false;
+        UI_Inventory.Instance.RefreshInventoryItems();
     }
 
     public List<Item> GetItemList()

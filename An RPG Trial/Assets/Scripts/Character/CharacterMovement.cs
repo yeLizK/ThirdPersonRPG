@@ -27,10 +27,9 @@ public class CharacterMovement : MonoBehaviour , IDataPersistence
 
     private CharacterController charController;
 
-    [HideInInspector] public bool isCharWalking, isCharJumping;
+    [HideInInspector] public bool isCharWalking, isCharJumping, isCharAttacking, isCharHoldingShield;
 
     [SerializeField] public Animator charAnim;
-
 
     private void Awake()
     {
@@ -64,11 +63,18 @@ public class CharacterMovement : MonoBehaviour , IDataPersistence
         if(DialogueManager.Instance.isDialoguePlaying)
         { return; }
         isPlayerGrounded = charController.isGrounded;
-        Debug.Log(isPlayerGrounded +","+ isCharJumping);
         inputVector = InputManager.Instance.GetPlayerInputs();
         movementVector = new Vector3(inputVector.y, 0, -inputVector.x);
         movementVector = transform.forward * movementVector.x + -transform.right * movementVector.z;
         movementVector.y = 0f;
+
+        if (isCharAttacking && isPlayerGrounded)
+        {
+            charAnim.SetBool("isCharIdle", false);
+            charAnim.SetBool("isCharJumping", false);
+            charAnim.SetBool("isRunning", false);
+            charAnim.SetBool("isCharAttacking", true);
+        }
 
         if (isCharJumping && isPlayerGrounded)
         {
@@ -76,15 +82,27 @@ public class CharacterMovement : MonoBehaviour , IDataPersistence
             charAnim.SetBool("isCharJumping", true);
             charAnim.SetBool("isCharIdle", false);
             charAnim.SetBool("isRunning", false);
+            charAnim.SetBool("isCharAttacking", false);
 
+
+        }
+        if (isCharAttacking && isPlayerGrounded)
+        {
+            charAnim.SetBool("isCharIdle", false);
+            charAnim.SetBool("isCharJumping", false);
+            charAnim.SetBool("isRunning", false);
+            charAnim.SetBool("isCharAttacking", true);
         }
         else if (movementVector.magnitude > 0 && isPlayerGrounded)
         {
             isCharWalking = true;
             isCharJumping = false;
+
             charAnim.SetBool("isCharIdle", false);
             charAnim.SetBool("isRunning", true);
             charAnim.SetBool("isCharJumping", false);
+            charAnim.SetBool("isCharAttacking", false);
+
 
         }
 
@@ -95,10 +113,13 @@ public class CharacterMovement : MonoBehaviour , IDataPersistence
             charAnim.SetBool("isCharIdle", true);
             charAnim.SetBool("isRunning", false);
             charAnim.SetBool("isCharJumping", false);
+            charAnim.SetBool("isCharAttacking", false);
+
 
         }
 
         isCharJumping = false;
+        isCharAttacking = false;
 
         movementVector.y += gravityValue * Time.deltaTime;
         Vector2 deltaInput = InputManager.Instance.GetMouseDelta();
@@ -114,4 +135,8 @@ public class CharacterMovement : MonoBehaviour , IDataPersistence
         transform.position = new Vector3(0, 0, 0);
     }
 
+    public void ChangeAnimToHoldingSword()
+    {
+        charAnim.runtimeAnimatorController = (RuntimeAnimatorController)Resources.Load("CharacterSwordAC");
+    }
 }

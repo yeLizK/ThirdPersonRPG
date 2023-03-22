@@ -48,6 +48,7 @@ public class MenuController : MonoBehaviour, IDataPersistence
 
     public void OpenCharacterConfigurator()
     {
+        DataPersistenceManager.Instance.NewGame();
         HideMainMenu();
         characterConfiguratorPanel.SetActive(true);
         charCustomiser.RestoreToDefault();
@@ -55,6 +56,7 @@ public class MenuController : MonoBehaviour, IDataPersistence
 
     public void StartNewGame()
     {
+        DataPersistenceManager.Instance.NewGame();
         isNewGame = true;
         DataPersistenceManager.Instance.SaveGame();
         SceneManager.LoadScene("TutorialScene 1");

@@ -13,10 +13,11 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     private bool anyActiveQuest; //returns true if there is an active quest
 
-    [HideInInspector]
     public Quest activeQuest;
 
     private GameObject questOwner;
+
+    public List<NPCQuest> NPCList;
 
     private void Awake()
     {
@@ -29,7 +30,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
             _instance = this;
         }
     }
-  
+    
 
     public void LoadData(GameData data)
     {
@@ -52,25 +53,18 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     }
 
-
-    public void AssignQuest()
+    private void Start()
     {
-        questList = PlayerInteraction.Instance.interactedObject.GetComponent<NPCQuest>().questList;
+        AssignQuestToNPCs();
+    }
+    public void AssignQuest()
+     {
         if (anyActiveQuest == false)
         {
-            for(int i = 0; i <questList.quests.Count; i ++)
-            {
-                if (!questList.quests[i].Completed)
-                {
-                    questList.quests[i].isQuestActive = true;
-                    activeQuest = questList.quests[i];
-                    InGameUIManager.Instance.RefreshQuest();
-                    PlayerInteraction.Instance.interactedObject.GetComponent<NPCQuest>().AssignQuestToNPC(activeQuest);
-                    questOwner = PlayerInteraction.Instance.interactedObject;
-                    return;
-                }
-            }
-            
+            activeQuest = PlayerInteraction.Instance.interactedObject.GetComponent<NPCQuest>().activeQuest;
+            PlayerInteraction.Instance.interactedObject.GetComponent<NPCQuest>().AssignQuestToNPC(activeQuest);
+            questOwner = PlayerInteraction.Instance.interactedObject;
+            InGameUIManager.Instance.RefreshQuest();
         }
     }
 
@@ -100,5 +94,21 @@ public class QuestManager : MonoBehaviour, IDataPersistence
         else InGameUIManager.Instance.RefreshQuest();
     }
 
+    public void AssignQuestToNPCs()
+    {
+        foreach (NPCQuest NPC in NPCList)
+        {
+            if(NPC.activeQuest==null || NPC.activeQuest.Name.Equals(""))
+            {
+                foreach (Quest NPCQuest in NPC.questList.quests)
+                {
+                    if (!NPCQuest.Completed || !NPCQuest.isRewardTaken)
+                    {
+                        NPC.activeQuest = NPCQuest;
+                    }
+                }
+            }
 
+        }
+    }
 }

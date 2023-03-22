@@ -62,6 +62,24 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Value"",
+                    ""id"": ""13c1a095-84ed-4c41-9504-b72ec86e8e0c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""HoldShield"",
+                    ""type"": ""Value"",
+                    ""id"": ""4e2f7d0a-5f11-4be8-9e5d-e6c0982d13a4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -152,6 +170,28 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c1adf4d4-7d7a-40c7-a7c6-4707c76b8587"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4ffaadbb-3110-46ce-b3dd-6aeb0145c3b1"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HoldShield"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +204,8 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         m_CharacterControl_CameraMovement = m_CharacterControl.FindAction("CameraMovement", throwIfNotFound: true);
         m_CharacterControl_Interact = m_CharacterControl.FindAction("Interact", throwIfNotFound: true);
         m_CharacterControl_Jump = m_CharacterControl.FindAction("Jump", throwIfNotFound: true);
+        m_CharacterControl_Attack = m_CharacterControl.FindAction("Attack", throwIfNotFound: true);
+        m_CharacterControl_HoldShield = m_CharacterControl.FindAction("HoldShield", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -227,6 +269,8 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControl_CameraMovement;
     private readonly InputAction m_CharacterControl_Interact;
     private readonly InputAction m_CharacterControl_Jump;
+    private readonly InputAction m_CharacterControl_Attack;
+    private readonly InputAction m_CharacterControl_HoldShield;
     public struct CharacterControlActions
     {
         private @PlayerInputs m_Wrapper;
@@ -235,6 +279,8 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         public InputAction @CameraMovement => m_Wrapper.m_CharacterControl_CameraMovement;
         public InputAction @Interact => m_Wrapper.m_CharacterControl_Interact;
         public InputAction @Jump => m_Wrapper.m_CharacterControl_Jump;
+        public InputAction @Attack => m_Wrapper.m_CharacterControl_Attack;
+        public InputAction @HoldShield => m_Wrapper.m_CharacterControl_HoldShield;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -256,6 +302,12 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_CharacterControlActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_CharacterControlActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_CharacterControlActionsCallbackInterface.OnJump;
+                @Attack.started -= m_Wrapper.m_CharacterControlActionsCallbackInterface.OnAttack;
+                @Attack.performed -= m_Wrapper.m_CharacterControlActionsCallbackInterface.OnAttack;
+                @Attack.canceled -= m_Wrapper.m_CharacterControlActionsCallbackInterface.OnAttack;
+                @HoldShield.started -= m_Wrapper.m_CharacterControlActionsCallbackInterface.OnHoldShield;
+                @HoldShield.performed -= m_Wrapper.m_CharacterControlActionsCallbackInterface.OnHoldShield;
+                @HoldShield.canceled -= m_Wrapper.m_CharacterControlActionsCallbackInterface.OnHoldShield;
             }
             m_Wrapper.m_CharacterControlActionsCallbackInterface = instance;
             if (instance != null)
@@ -272,6 +324,12 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Attack.started += instance.OnAttack;
+                @Attack.performed += instance.OnAttack;
+                @Attack.canceled += instance.OnAttack;
+                @HoldShield.started += instance.OnHoldShield;
+                @HoldShield.performed += instance.OnHoldShield;
+                @HoldShield.canceled += instance.OnHoldShield;
             }
         }
     }
@@ -282,5 +340,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         void OnCameraMovement(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
+        void OnHoldShield(InputAction.CallbackContext context);
     }
 }

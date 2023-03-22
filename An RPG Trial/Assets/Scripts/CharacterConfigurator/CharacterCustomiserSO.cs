@@ -44,6 +44,6 @@ public class CharacterCustomiserSO : ScriptableObject
     public GameObject[] HairList;
     public Material[] HairColor;
 
-
+    public GameObject[] Weapons;
 
 }

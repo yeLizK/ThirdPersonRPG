@@ -20,10 +20,13 @@ public class GameData
     public SerializableDictionary<string, int> inventory;
 
     //Character Config
-    public int gender, skinColor, clotheIndex, clotheColorIndex, hairIndex, hairColourIndex; 
+    public int gender, skinColor, clotheIndex, clotheColorIndex, hairIndex, hairColourIndex, weaponIndex;
+    public bool isCharHoldingSword;
+    public bool isCharHoldingShield;
 
     public GameData()
     {
+        isNewGame = true;
         this.isTutorialCompleted = false;
         this.isTutorialWPressed = false;
         this.isTutorialAPressed = false;
@@ -31,8 +34,9 @@ public class GameData
         this.isTutorialSPressed = false;
         this.activeTutorialQuest = null;
         this.isQuestCompleted = false;
+        mainQuest = null;
         this.questOwner = "";
-        this.playerTransform = new Vector3(-50f, 0f , -9f);
+        this.playerTransform = new Vector3(0f, 0f , 0f);
         inventory = new SerializableDictionary<string, int>();
 
         gender = 0;
@@ -41,6 +45,8 @@ public class GameData
         clotheColorIndex = 0;
         hairIndex = 0;
         hairColourIndex=0;
-
+        weaponIndex = 0;
+        isCharHoldingSword = false;
+        isCharHoldingShield = false;
     }
 }

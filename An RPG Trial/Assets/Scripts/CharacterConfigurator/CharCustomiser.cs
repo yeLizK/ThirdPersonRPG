@@ -10,9 +10,7 @@ public class CharCustomiser : MonoBehaviour, IDataPersistence
     private int gender; //0-female 0-male
     private int skinColor; // 0-black, 1-brown, 2-white
 
-    [HideInInspector]public int clotheIndex, hairIndex, clotheColourIndex, hairColourIndex;
-    private int weaponIndex;
-    
+    [HideInInspector]public int clotheIndex, hairIndex, clotheColourIndex, hairColourIndex, weaponIndex;    
 
     [SerializeField] private CharacterCustomiserSO CharSO;
 
@@ -36,6 +34,7 @@ public class CharCustomiser : MonoBehaviour, IDataPersistence
         this.clotheColourIndex = data.clotheColorIndex;
         this.hairIndex = data.hairIndex;
         this.hairColourIndex = data.hairColourIndex;
+        this.weaponIndex = data.weaponIndex;
         UpdateCharacterAppereance();
     }
 
@@ -47,6 +46,7 @@ public class CharCustomiser : MonoBehaviour, IDataPersistence
         data.clotheColorIndex = this.clotheColourIndex;
         data.hairIndex = this.hairIndex;
         data.hairColourIndex = this.hairColourIndex;
+        data.weaponIndex = this.weaponIndex;
     }
 
     public void UpdateCharacterAppereance()
@@ -509,5 +509,23 @@ public class CharCustomiser : MonoBehaviour, IDataPersistence
 
         InstantiateHair(hairIndex);
         ChangeHairColour(hairColourIndex);
+    }
+
+    public void EquipSword()
+    {
+        if(CharacterManager.Instance.isCharHoldingSword)
+        {
+            GameObject tempSword;
+            if (RightArmHolder.transform.childCount > 0)
+            {
+                foreach (Transform child in RightArmHolder.GetComponentsInChildren<Transform>())
+                {
+                    if (child.gameObject != RightArmHolder) Destroy(child.gameObject);
+                }
+            }
+            tempSword = Instantiate(CharSO.Weapons[weaponIndex], RightArmHolder.transform);
+            tempSword.transform.parent = RightArmHolder.transform;
+        }
+        CharacterMovement.Instance.ChangeAnimToHoldingSword();
     }
 }

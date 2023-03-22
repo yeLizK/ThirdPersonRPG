@@ -12,6 +12,9 @@ public class CharacterMovement : MonoBehaviour , IDataPersistence
 
     private Vector2 inputVector;
     private Vector3 movementVector;
+    private float jumpHeight = 1.0f;
+    private float gravityValue = -30f;
+    private bool isPlayerGrounded;
 
     private Vector3 startingRotation;
 
@@ -24,7 +27,7 @@ public class CharacterMovement : MonoBehaviour , IDataPersistence
 
     private CharacterController charController;
 
-    [HideInInspector] public bool isCharWalking;
+    [HideInInspector] public bool isCharWalking, isCharJumping;
 
     [SerializeField] public Animator charAnim;
 
@@ -60,31 +63,50 @@ public class CharacterMovement : MonoBehaviour , IDataPersistence
     {
         if(DialogueManager.Instance.isDialoguePlaying)
         { return; }
+        isPlayerGrounded = charController.isGrounded;
+        Debug.Log(isPlayerGrounded +","+ isCharJumping);
         inputVector = InputManager.Instance.GetPlayerInputs();
         movementVector = new Vector3(inputVector.y, 0, -inputVector.x);
         movementVector = transform.forward * movementVector.x + -transform.right * movementVector.z;
         movementVector.y = 0f;
-        if (movementVector.magnitude > 0)
+
+        if (isCharJumping && isPlayerGrounded)
         {
-            isCharWalking = true;
+            movementVector.y = Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            charAnim.SetBool("isCharJumping", true);
             charAnim.SetBool("isCharIdle", false);
-            charAnim.SetBool("isRunning", true);
-        }
-        else
-        {
-            isCharWalking = false;
-            charAnim.SetBool("isCharIdle", true);
             charAnim.SetBool("isRunning", false);
 
         }
+        else if (movementVector.magnitude > 0 && isPlayerGrounded)
+        {
+            isCharWalking = true;
+            isCharJumping = false;
+            charAnim.SetBool("isCharIdle", false);
+            charAnim.SetBool("isRunning", true);
+            charAnim.SetBool("isCharJumping", false);
 
+        }
+
+        else if(movementVector.magnitude <=0 && isPlayerGrounded)
+        {
+            isCharWalking = false;
+            isCharJumping = false;
+            charAnim.SetBool("isCharIdle", true);
+            charAnim.SetBool("isRunning", false);
+            charAnim.SetBool("isCharJumping", false);
+
+        }
+
+        isCharJumping = false;
+
+        movementVector.y += gravityValue * Time.deltaTime;
         Vector2 deltaInput = InputManager.Instance.GetMouseDelta();
         startingRotation.x += deltaInput.x * Time.deltaTime;
         startingRotation.y += deltaInput.y * Time.deltaTime;
         startingRotation.y = Mathf.Clamp(startingRotation.y, -clampAngle, clampAngle);
         transform.rotation = Quaternion.Euler(0f, startingRotation.x*MouseXSpeed, 0f);
         charController.Move(movementVector * Time.deltaTime * speedMultiplier);
-
     }
 
     public void ReassingPlayerTransform()

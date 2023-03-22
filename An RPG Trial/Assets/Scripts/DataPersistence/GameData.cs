@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
+    public bool isNewGame;
+
     public bool isTutorialCompleted;
     public bool isTutorialWPressed;
     public bool isTutorialAPressed;

@@ -14,12 +14,17 @@ public class Quest
 
     public QuestType questType;
     public GameObject questObject;
-    public Item reward;
-    public bool isRewardTaken;
 
     [Header("Gathering Quest")]
     public int goalCount;
     public Item.ItemType itemType;
+
+    [Header("Dialog")]
+    public Dialogue questDialogue;
+
+    [Header("Reward")]
+    public Item reward;
+    public bool isRewardTaken;
 
     public void SetQuestActive()
     {

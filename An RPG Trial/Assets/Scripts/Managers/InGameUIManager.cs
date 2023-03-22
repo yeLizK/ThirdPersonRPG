@@ -33,16 +33,16 @@ public class InGameUIManager : MonoBehaviour
     public void RefreshQuest()
     {
         EmptyQuestList();
-        if(TutorialManager.Instance.IsTutorialActive())
-        {
-            questName.text = TutorialManager.Instance.activeQuest.Name;
-            questDescription.text = TutorialManager.Instance.activeQuest.Description;
-            questHolder.GetComponent<Image>().enabled = true;
-        }
-        else
+        if(QuestManager.Instance.activeQuest != null)
         {
             questName.text = QuestManager.Instance.activeQuest.Name;
             questDescription.text = QuestManager.Instance.activeQuest.Description;
+            questHolder.GetComponent<Image>().enabled = true;
+        }
+        else if(TutorialManager.Instance.IsTutorialActive())
+        {
+            questName.text = TutorialManager.Instance.activeQuest.Name;
+            questDescription.text = TutorialManager.Instance.activeQuest.Description;
             questHolder.GetComponent<Image>().enabled = true;
         }
     }

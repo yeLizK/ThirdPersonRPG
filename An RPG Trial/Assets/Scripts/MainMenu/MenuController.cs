@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine.UI;
 using System.IO;
 
-public class MenuController : MonoBehaviour 
+public class MenuController : MonoBehaviour, IDataPersistence
 {
     private static MenuController _instance;
     public static MenuController Instance { get { return _instance; } }
@@ -20,6 +20,7 @@ public class MenuController : MonoBehaviour
 
     private CharCustomiser charCustomiser;
 
+    private bool isNewGame;
 
     private void Awake()
     {
@@ -54,14 +55,14 @@ public class MenuController : MonoBehaviour
 
     public void StartNewGame()
     {
-        GameSpecifics.Instance.isNewGame = true;
+        isNewGame = true;
         DataPersistenceManager.Instance.SaveGame();
         SceneManager.LoadScene("TutorialScene 1");
     }
 
     public void LoadGame()
     {
-        GameSpecifics.Instance.isNewGame = false;
+        isNewGame = false;
         SceneManager.LoadScene("TutorialScene 1");
     }
 
@@ -91,4 +92,12 @@ public class MenuController : MonoBehaviour
         Application.Quit();
     }
 
+    public void LoadData(GameData data)
+    {
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.isNewGame = isNewGame;
+    }
 }

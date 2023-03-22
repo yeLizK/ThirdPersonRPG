@@ -41,15 +41,15 @@ public class QuestManager : MonoBehaviour, IDataPersistence
         if (temp == null)
         { return; }
         this.questOwner = temp;
-        temp.GetComponent<NPCQuest>().AssignQuestToNPC(activeQuest);
-        
+        temp.GetComponent<NPCQuest>().AssignQuestToNPC(activeQuest);  
     }
 
     public void SaveData(ref GameData data)
     {
         data.mainQuest = this.activeQuest;
         data.isQuestCompleted = this.anyActiveQuest;
-        data.questOwner = this.questOwner.name;
+        if(questOwner != null) data.questOwner = this.questOwner.name;
+
     }
 
 
@@ -87,7 +87,12 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     public void CompleteQuest()
     {
+        activeQuest.isRewardTaken = true;
+        activeQuest.isQuestAvailable = false;
+        activeQuest.isQuestActive = false;
+        activeQuest.Completed = true;
         activeQuest = null;
+        DataPersistenceManager.Instance.SaveGame();
         if (activeQuest == null)
         {
             InGameUIManager.Instance.EmptyQuestList();

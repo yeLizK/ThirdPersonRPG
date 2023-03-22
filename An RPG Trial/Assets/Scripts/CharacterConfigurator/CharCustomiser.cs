@@ -36,9 +36,6 @@ public class CharCustomiser : MonoBehaviour, IDataPersistence
         this.clotheColourIndex = data.clotheColorIndex;
         this.hairIndex = data.hairIndex;
         this.hairColourIndex = data.hairColourIndex;
-        BaseHolder = transform.Find("/Character/Base").gameObject;
-        HairHolder = transform.Find("/Character/RigPelvis/RigSpine1/RigRibcage/RigNeck/Dummy Prop Head/Hair").gameObject;
-        HairHolder = transform.Find("/Character/RigPelvis/RigSpine1/RigRibcage/RigArm1/RigArm2/RigArmpPalm/DummyPropRight").gameObject;
         UpdateCharacterAppereance();
     }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameSpecifics : MonoBehaviour
+public class GameSpecifics : MonoBehaviour,IDataPersistence
 {
     private static GameSpecifics _instance;
     public static GameSpecifics Instance { get { return _instance; } }
@@ -20,7 +20,10 @@ public class GameSpecifics : MonoBehaviour
         {
             _instance = this;
         }
+    }
 
+    private void Start()
+    {
         if (SceneManager.GetActiveScene().name.Equals("TutorialScene 1"))
         {
             if (isNewGame == true)
@@ -32,5 +35,15 @@ public class GameSpecifics : MonoBehaviour
                 DataPersistenceManager.Instance.LoadGame();
             }
         }
+    }
+
+    public void LoadData(GameData data)
+    {
+        isNewGame = data.isNewGame;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        throw new System.NotImplementedException();
     }
 }

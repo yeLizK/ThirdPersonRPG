@@ -22,6 +22,7 @@ public class InputManager : MonoBehaviour
         Cursor.visible = false;
         playerInputs.CharacterControl.Movement.performed += ctx => CheckKeyPress();
         playerInputs.CharacterControl.Interact.performed += interactCtx => Interact();
+        playerInputs.CharacterControl.Jump.performed += jumpCtx => CheckIfPlayerJumped();
     }
 
     private void OnEnable()
@@ -68,9 +69,15 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    public void CheckIfPlayerJumped()
+    {
+        CharacterMovement.Instance.isCharJumping = true;
+    }    
+
     public void UnbindKeyboardEvent()
     {
         playerInputs.CharacterControl.Movement.performed -= cnt => CheckKeyPress();
+        playerInputs.CharacterControl.Jump.performed -= jumpCtx => CheckIfPlayerJumped();
     }
 
     private void UnbindCollectEvent()

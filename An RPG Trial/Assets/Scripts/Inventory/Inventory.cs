@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory //: IDataPersistence
+public class Inventory : IDataPersistence
 {
     private static Inventory _instance = null;
 
@@ -24,6 +24,25 @@ public class Inventory //: IDataPersistence
         itemList = new List<Item>();
     }
 
+    public void LoadData(GameData data)
+    {
+        Item temp = null;
+        foreach (var item in data.inventory)
+        {
+            temp.itemType = (Item.ItemType)System.Enum.Parse(typeof(Item.ItemType), item.Key);
+            temp.amount = item.Value;
+            AddItem(temp);
+        }
+        UI_Inventory.Instance.RefreshInventoryItems();
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        foreach (Item item in itemList)
+        {
+            data.inventory.Add(item.itemType.ToString(), item.amount);
+        }
+    }
     public void AddItem(Item item)
     {
         foreach(Item listItem in itemList)
@@ -77,22 +96,5 @@ public class Inventory //: IDataPersistence
         return 0;
     }
     
-    public void LoadData(GameData data)
-    {
-        Item temp = null;
-        foreach(var item in data.inventory)
-        {
-            temp.itemType = (Item.ItemType)System.Enum.Parse(typeof(Item.ItemType), item.Key);
-            temp.amount = item.Value;
-            AddItem(temp);
-        }
-    }
 
-    public void SaveData(ref GameData data)
-    {
-        foreach(Item item in itemList)
-        {
-            data.inventory.Add(item.itemType.ToString(), item.amount);
-        }
-    }
 }

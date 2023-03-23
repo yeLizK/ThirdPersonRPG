@@ -53,7 +53,13 @@ public class CharacterManager : MonoBehaviour, IDataPersistence
         {
             charCustomiser.EquipSword();
         }
-
+        Item temp =null;
+        for (int i = 0; i < data.inventory.Count; i++)
+        {
+            temp = data.inventory[i];
+            Inventory.Instance.AddItem(temp);
+        }
+        UI_Inventory.Instance.RefreshInventoryItems();
     }
 
     public void SaveData(ref GameData data)
@@ -66,6 +72,10 @@ public class CharacterManager : MonoBehaviour, IDataPersistence
         data.hairColourIndex = this.hairColourIndex;
         data.weaponIndex = this.weaponIndex;
         data.isCharHoldingSword = this.isCharHoldingSword;
+        for (int i = 0; i < Inventory.Instance.itemList.Count; i++)
+        {
+            data.inventory.Add(Inventory.Instance.itemList[i]);
+        }
     }
 
 

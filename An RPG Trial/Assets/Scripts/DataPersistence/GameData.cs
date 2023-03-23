@@ -17,7 +17,7 @@ public class GameData
     public Quest mainQuest;
     public string questOwner;
     public Vector3 playerTransform;
-    public SerializableDictionary<string, int> inventory;
+    public List<Item> inventory;
 
     //Character Config
     public int gender, skinColor, clotheIndex, clotheColorIndex, hairIndex, hairColourIndex, weaponIndex;
@@ -37,7 +37,7 @@ public class GameData
         mainQuest = null;
         this.questOwner = "";
         this.playerTransform = new Vector3(0f, 0f , 0f);
-        inventory = new SerializableDictionary<string, int>();
+        inventory = new List<Item>();
 
         gender = 0;
         skinColor = 0;

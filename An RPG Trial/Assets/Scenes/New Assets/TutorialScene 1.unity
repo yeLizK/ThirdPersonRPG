@@ -6051,6 +6051,7 @@ Transform:
   - {fileID: 1020513070}
   - {fileID: 893034094}
   - {fileID: 579613493}
+  - {fileID: 1571690189}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13859,6 +13860,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1545734882}
   m_CullTransparentMesh: 1
+--- !u!1 &1571690188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1571690189}
+  m_Layer: 0
+  m_Name: Inventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1571690189
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571690188}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 663376301}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1576317169
 GameObject:
   m_ObjectHideFlags: 0
@@ -20308,9 +20340,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6910cc7bfb44a534388dbd10b9a6c84e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueList:
-  - isDialogueFinished: 0
-    inkJSON: {fileID: 4900000, guid: e763f4f11f03f094a984d11db118fa1d, type: 3}
   questList: {fileID: 11400000, guid: c9d4175079d563346be32edf7a7c07ff, type: 2}
   isNPCQuestActive: 0
   activeQuest:
@@ -23887,9 +23916,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6910cc7bfb44a534388dbd10b9a6c84e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueList:
-  - isDialogueFinished: 0
-    inkJSON: {fileID: 4900000, guid: 7c5db0cf74d0a834db760a2036bfa530, type: 3}
   questList: {fileID: 11400000, guid: fd04c6d38692adc4d992e00e2ec59dc1, type: 2}
   isNPCQuestActive: 0
   activeQuest:

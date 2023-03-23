@@ -16,7 +16,7 @@ MonoBehaviour:
   - Name: Healing Potion
     Description: Pick 3 Red Flowers
     Completed: 0
-    isQuestActive: 0
+    isQuestActive: 1
     isQuestAvailable: 0
     questType: 0
     questObject: {fileID: 6328813435736325868, guid: 8b11f0d8ce171b5409d57fc70b963a56, type: 3}

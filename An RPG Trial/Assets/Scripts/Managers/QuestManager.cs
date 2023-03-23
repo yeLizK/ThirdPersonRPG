@@ -105,6 +105,7 @@ public class QuestManager : MonoBehaviour, IDataPersistence
                     if (!NPCQuest.Completed || !NPCQuest.isRewardTaken)
                     {
                         NPC.activeQuest = NPCQuest;
+                        break;
                     }
                 }
             }

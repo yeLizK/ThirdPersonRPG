@@ -31,7 +31,7 @@ public class CinemachineCameraManager : MonoBehaviour
     {
         mainFPCamera.gameObject.SetActive(false);
         NPCFocusCam.gameObject.SetActive(true);
-        yield return new WaitForSeconds(4.0f);
+        yield return new WaitForSeconds(1.0f);
         mainFPCamera.gameObject.SetActive(true);
         NPCFocusCam.gameObject.SetActive(false);
 

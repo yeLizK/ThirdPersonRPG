@@ -8,7 +8,7 @@ public class NPCQuest : MonoBehaviour
     public QuestSO questList;
     [SerializeField] private bool isNPCQuestActive;
     public Quest activeQuest;
-
+    [SerializeField] private float newQuestWaitTime = 10f;
 
     private void Start()
     {
@@ -44,7 +44,15 @@ public class NPCQuest : MonoBehaviour
             activeQuest = null;
             isNPCQuestActive = false;
             QuestManager.Instance.CompleteQuest();
+            StartCoroutine(AssignNewQuest());
         }
+
+    }
+
+    public IEnumerator AssignNewQuest()
+    {
+        yield return new WaitForSeconds(10.0f);
+        QuestManager.Instance.AssignQuestToNPCs();
 
     }
 

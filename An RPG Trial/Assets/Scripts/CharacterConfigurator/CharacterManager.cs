@@ -72,6 +72,7 @@ public class CharacterManager : MonoBehaviour, IDataPersistence
         data.hairColourIndex = this.hairColourIndex;
         data.weaponIndex = this.weaponIndex;
         data.isCharHoldingSword = this.isCharHoldingSword;
+        data.inventory =new List<Item>();
         for (int i = 0; i < Inventory.Instance.itemList.Count; i++)
         {
             data.inventory.Add(Inventory.Instance.itemList[i]);

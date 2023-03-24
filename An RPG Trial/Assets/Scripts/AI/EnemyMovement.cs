@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public List<Transform> enemyPatrolPoints;
+    public List<Transform> TargetPoints;
+    private float speed;
+    private int targetPointIndex;
+    private float distance;
+
+    private bool isMoving;
 
     public bool isPlayerDetected;
 
@@ -21,8 +26,48 @@ public class EnemyMovement : MonoBehaviour
     {
         playerRef = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(FOVRoutine());
+
+        targetPointIndex = 0;
+        transform.LookAt(TargetPoints[targetPointIndex].position);
+        speed = 1f;
+        isMoving = true;
     }
 
+    private void Update()
+    {
+        distance = Vector3.Distance(transform.position, TargetPoints[targetPointIndex].position);
+        if(isMoving)
+        {
+            if (distance < 1f)
+            {
+                StartCoroutine(IncreaseTargetPointIndex());
+
+            }
+            else
+            {
+                Patrol();
+            }
+        }
+    }
+
+    private void Patrol()
+    {
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+    }
+
+    private IEnumerator IncreaseTargetPointIndex()
+    {
+        isMoving = false;
+        yield return new WaitForSeconds(2f);
+        targetPointIndex++;
+        if (targetPointIndex >= TargetPoints.Count)
+        {
+            targetPointIndex = 0;
+        }
+        transform.LookAt(TargetPoints[targetPointIndex].position);
+        isMoving = true;
+
+    }
     private IEnumerator FOVRoutine()
     {
         WaitForSeconds wait = new WaitForSeconds(0.2f);

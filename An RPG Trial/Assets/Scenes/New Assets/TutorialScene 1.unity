@@ -538,7 +538,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 40790668}
-  - component: {fileID: 40790669}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -563,32 +562,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &40790669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 40790667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dae4e640366e9f7418096394a327b469, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyPatrolPoints:
-  - {fileID: 1670683398}
-  - {fileID: 867643969}
-  - {fileID: 1625280720}
-  isPlayerDetected: 0
-  FOVRadius: 7
-  FOVAngle: 180
-  playerRef: {fileID: 0}
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 8
-  obstructionMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1 &58056913
 GameObject:
   m_ObjectHideFlags: 0
@@ -12387,7 +12360,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 867643968}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.6, y: 0, z: 10.97}
+  m_LocalPosition: {x: -12.43, y: 0, z: 7.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -33324,7 +33297,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4668151572470574977}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.91, y: 0, z: 7.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -33352,12 +33325,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4668151572470574977}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dae4e640366e9f7418096394a327b469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPatrolPoints: []
+  TargetPoints:
+  - {fileID: 1670683398}
+  - {fileID: 867643969}
+  - {fileID: 1625280720}
   isPlayerDetected: 0
   FOVRadius: 7
   FOVAngle: 180

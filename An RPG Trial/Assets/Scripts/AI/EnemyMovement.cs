@@ -9,9 +9,7 @@ public class EnemyMovement : MonoBehaviour
     private int targetPointIndex;
     private float distance;
 
-    private bool isMoving;
-
-    public bool isPlayerDetected;
+    private bool isPatrolling, isPlayerDetected, isAttacking,isAlive, isPlayerInMeleeRange;
 
     public float FOVRadius;
     [Range(0,360)]
@@ -22,42 +20,100 @@ public class EnemyMovement : MonoBehaviour
     public LayerMask targetMask;
     public LayerMask obstructionMask;
 
+    private Animator AIAnim;
+
     private void Start()
     {
         playerRef = GameObject.FindGameObjectWithTag("Player");
+        AIAnim = GetComponent<Animator>();
         StartCoroutine(FOVRoutine());
 
         targetPointIndex = 0;
         transform.LookAt(TargetPoints[targetPointIndex].position);
         speed = 1f;
-        isMoving = true;
+        isPatrolling = true;
+        isAttacking = false;
+        isAlive = true;
     }
 
     private void Update()
-    {
-        distance = Vector3.Distance(transform.position, TargetPoints[targetPointIndex].position);
-        if(isMoving)
+    { 
+        if(isAlive)
         {
-            if (distance < 1f)
+            if (isPlayerDetected)
             {
-                StartCoroutine(IncreaseTargetPointIndex());
-
+                AIAnim.SetBool("isOnWatch", false);
+                if (Vector3.Distance(transform.position, playerRef.transform.position) < 1.8f)
+                {
+                    AIAnim.SetBool("isWalking", false);
+                    if (!isAttacking)
+                    {
+                        StartCoroutine(Attack());
+                    }
+                }
+                else
+                {
+                    Chase();
+                }
             }
-            else
+            else if (isPatrolling)
             {
-                Patrol();
+                distance = Vector3.Distance(transform.position, TargetPoints[targetPointIndex].position);
+                if (distance < 1f)
+                {
+                    StartCoroutine(IncreaseTargetPointIndex());
+                }
+                else
+                {
+                    Patrol();
+                }
             }
         }
+
+    }
+    public IEnumerator Die()
+    {
+        AIAnim.SetBool("isAttacking", false);
+        AIAnim.SetBool("isWalking", false);
+        AIAnim.SetBool("isOnWatch", false);
+        AIAnim.SetBool("Die", true);
+        yield return new WaitForSeconds(5f);
+        isAlive = false;
+        gameObject.SetActive(false);
+
+    }
+    private void Chase()
+    {
+        AIAnim.SetBool("isWalking", true);
+        transform.LookAt(playerRef.transform);
+        transform.Translate(Vector3.forward * speed * 1.5f * Time.deltaTime);
+    }
+    private IEnumerator Attack()
+    {
+        isAttacking = true;
+        AIAnim.SetBool("isAttacking",true);
+        if(isPlayerInMeleeRange)
+        {
+            CharacterManager.Instance.TakeDamage(gameObject.GetComponent<EnemyStats>().ReturnDamageAmount());
+        }
+        yield return new WaitForSeconds(3f);
+        AIAnim.SetBool("isAttacking", false);
+        AIAnim.SetBool("isOnWatch",true);
+        isAttacking = false;
     }
 
     private void Patrol()
     {
+        AIAnim.SetBool("isWalking", true);
+        transform.LookAt(TargetPoints[targetPointIndex].position);
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
     private IEnumerator IncreaseTargetPointIndex()
     {
-        isMoving = false;
+        isPatrolling = false;
+        AIAnim.SetBool("isWalking", false);
+        AIAnim.SetBool("isOnWatch", true);
         yield return new WaitForSeconds(2f);
         targetPointIndex++;
         if (targetPointIndex >= TargetPoints.Count)
@@ -65,8 +121,8 @@ public class EnemyMovement : MonoBehaviour
             targetPointIndex = 0;
         }
         transform.LookAt(TargetPoints[targetPointIndex].position);
-        isMoving = true;
-
+        AIAnim.SetBool("isOnWatch", false);
+        isPatrolling = true;
     }
     private IEnumerator FOVRoutine()
     {
@@ -77,7 +133,6 @@ public class EnemyMovement : MonoBehaviour
             FieldOfViewCheck();
         }
     }
-
     private void FieldOfViewCheck()
     {
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, FOVRadius, targetMask);
@@ -99,5 +154,20 @@ public class EnemyMovement : MonoBehaviour
             else { isPlayerDetected = false; }
         }
         else if (isPlayerDetected) isPlayerDetected = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag.Equals("Player"))
+        {
+            isPlayerInMeleeRange = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag.Equals("Player"))
+        {
+            isPlayerInMeleeRange = false;
+        }
     }
 }

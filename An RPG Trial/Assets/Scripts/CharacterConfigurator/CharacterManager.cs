@@ -17,6 +17,8 @@ public class CharacterManager : MonoBehaviour, IDataPersistence
 
     [HideInInspector] public bool isCharHoldingSword;
 
+    private int playerHealth= 100;
+
 
     private void Awake()
     {
@@ -37,6 +39,8 @@ public class CharacterManager : MonoBehaviour, IDataPersistence
         charCustomiser = GetComponent<CharCustomiser>();
         DataPersistenceManager.Instance.dataPersistenceObjects = DataPersistenceManager.Instance.FindAllDataPersistenceObjects();
         DataPersistenceManager.Instance.LoadGame();
+
+        playerHealth = 100;
     }
     public void LoadData(GameData data)
     {
@@ -60,6 +64,7 @@ public class CharacterManager : MonoBehaviour, IDataPersistence
             Inventory.Instance.AddItem(temp);
         }
         UI_Inventory.Instance.RefreshInventoryItems();
+
     }
 
     public void SaveData(ref GameData data)
@@ -86,4 +91,9 @@ public class CharacterManager : MonoBehaviour, IDataPersistence
         charCustomiser.UpdateCharacterWithValues(gender, skinColor, clotheIndex, clotheColourIndex, hairIndex, hairColourIndex);
     }
 
+    public void TakeDamage(int damage) 
+    {
+        playerHealth -= damage;
+        Debug.Log(playerHealth);
+    }
 }

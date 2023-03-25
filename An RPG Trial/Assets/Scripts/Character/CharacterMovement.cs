@@ -139,4 +139,5 @@ public class CharacterMovement : MonoBehaviour , IDataPersistence
     {
         charAnim.runtimeAnimatorController = (RuntimeAnimatorController)Resources.Load("CharacterSwordAC");
     }
+
 }

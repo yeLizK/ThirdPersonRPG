@@ -33,7 +33,7 @@ public class InGameUIManager : MonoBehaviour
     public void RefreshQuest()
     {
         EmptyQuestList();
-        if(QuestManager.Instance.activeQuest != null)
+        if(QuestManager.Instance.activeQuest != null && !QuestManager.Instance.activeQuest.Name.Equals(""))
         {
             questName.text = QuestManager.Instance.activeQuest.Name;
             questDescription.text = QuestManager.Instance.activeQuest.Description;

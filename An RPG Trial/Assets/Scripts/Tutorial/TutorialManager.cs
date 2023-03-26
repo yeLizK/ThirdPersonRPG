@@ -8,7 +8,7 @@ public class TutorialManager : TutorialSubject , IDataPersistence
     private static TutorialManager _instance;
     public  static TutorialManager Instance { get { return _instance; } }
 
-    private bool isWPressed, isAPressed, isSPressed, isDPressed;
+    [HideInInspector]public bool isWPressed, isAPressed, isSPressed, isDPressed;
 
     private InputManager inputManager;
 
@@ -42,15 +42,7 @@ public class TutorialManager : TutorialSubject , IDataPersistence
 
     public void LoadData(GameData data)
     {
-        this.isTutorialCompleted = data.isTutorialCompleted;
-        this.isWPressed = data.isTutorialWPressed;
-        this.isAPressed = data.isTutorialAPressed;
-        this.isDPressed = data.isTutorialDPressed;
-        this.isSPressed = data.isTutorialSPressed;
-        this.activeQuest = data.activeTutorialQuest;
-        if(activeQuest == null || activeQuest.Name.Equals("")) { return; }
-        InGameUIManager.Instance.RefreshQuest();
-
+        //All Loads are handled in GameSpecifics.cs
     }
     public void SaveData(ref GameData data)
     {
@@ -75,7 +67,7 @@ public class TutorialManager : TutorialSubject , IDataPersistence
         }
 
     }
-    private void AssignTutorialQuest()
+    public void AssignTutorialQuest()
     {
         if(IsTutorialActive())
         {

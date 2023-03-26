@@ -7,8 +7,10 @@ public class CharCustomiser : MonoBehaviour, IDataPersistence
     private static CharCustomiser _instance;
     public static CharCustomiser Instance { get { return _instance; } }
     
-    private int gender; //0-female 0-male
-    private int skinColor; // 0-black, 1-brown, 2-white
+    [HideInInspector]
+    public int gender; //0-female 0-male
+    [HideInInspector]
+    public int skinColor; // 0-black, 1-brown, 2-white
 
     [HideInInspector]public int clotheIndex, hairIndex, clotheColourIndex, hairColourIndex, weaponIndex;    
 
@@ -28,13 +30,13 @@ public class CharCustomiser : MonoBehaviour, IDataPersistence
     
     public void LoadData(GameData data)
     {
-        this.gender = data.gender;
-        this.skinColor = data.skinColor;
-        this.clotheIndex = data.clotheIndex;
-        this.clotheColourIndex = data.clotheColorIndex;
-        this.hairIndex = data.hairIndex;
-        this.hairColourIndex = data.hairColourIndex;
-        this.weaponIndex = data.weaponIndex;
+        gender = data.gender;
+        skinColor = data.skinColor;
+        clotheIndex = data.clotheIndex;
+        clotheColourIndex = data.clotheColorIndex;
+        hairIndex = data.hairIndex;
+        hairColourIndex = data.hairColourIndex;
+        weaponIndex = data.weaponIndex;
         UpdateCharacterAppereance();
     }
 

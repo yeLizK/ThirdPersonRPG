@@ -30,13 +30,12 @@ public class CharacterManager : MonoBehaviour, IDataPersistence
         {
             _instance = this;
         }
-
+        charCustomiser = GetComponent<CharCustomiser>();
     }
     private void Start()
     {
         inventory = new Inventory();
         uiInventory.RefreshInventoryItems();
-        charCustomiser = GetComponent<CharCustomiser>();
         DataPersistenceManager.Instance.dataPersistenceObjects = DataPersistenceManager.Instance.FindAllDataPersistenceObjects();
         DataPersistenceManager.Instance.LoadGame();
 
@@ -44,27 +43,7 @@ public class CharacterManager : MonoBehaviour, IDataPersistence
     }
     public void LoadData(GameData data)
     {
-        this.gender = data.gender;
-        this.skinColor = data.skinColor;
-        this.clotheIndex = data.clotheIndex;
-        this.clotheColourIndex = data.clotheColorIndex;
-        this.hairIndex = data.hairIndex;
-        this.hairColourIndex = data.hairColourIndex;
-        this.weaponIndex = data.weaponIndex;
-        this.isCharHoldingSword = data.isCharHoldingSword;
-        UpdateCharacterAppereance();
-        if(isCharHoldingSword)
-        {
-            charCustomiser.EquipSword();
-        }
-        Item temp =null;
-        for (int i = 0; i < data.inventory.Count; i++)
-        {
-            temp = data.inventory[i];
-            Inventory.Instance.AddItem(temp);
-        }
-        UI_Inventory.Instance.RefreshInventoryItems();
-
+        //All Loads are handled in GameSpecifics.cs
     }
 
     public void SaveData(ref GameData data)

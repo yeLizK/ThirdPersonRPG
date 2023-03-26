@@ -23,58 +23,60 @@ public class PlayerInteraction : MonoBehaviour
     }
     public void CollectObject()
     {
-        interactedObject.GetComponent<Collectable>().CollectObject();
-        
-        if (QuestManager.Instance.activeQuest != null)
+        if(interactedObject.tag.Equals("Collectable"))
         {
-            QuestManager.Instance.activeQuest.EvaluateQuest(interactedObject);
+            interactedObject.GetComponent<Collectable>().CollectObject();
+
+            if (QuestManager.Instance.activeQuest != null)
+            {
+                QuestManager.Instance.activeQuest.EvaluateQuest(interactedObject);
+            }
         }
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "NPC")
+        if (other.gameObject.tag.Equals ("NPC"))
         {
             InGameUIManager.Instance.OpenClickToTalkText();
             isCharInNPCRange = true;
             interactedObject = other.gameObject;
         }
-        else if (other.gameObject.tag == "Collectable")
+        else if (other.gameObject.tag.Equals( "Collectable"))
         {
             InGameUIManager.Instance.OpenClicktoCollectText();
             isCharInCollectableRange = true;
             interactedObject = other.gameObject;
-
         }
-        interactedObject = other.gameObject;
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "NPC")
+        if (other.gameObject.tag.Equals("NPC"))
         {
             InGameUIManager.Instance.OpenClickToTalkText();
             isCharInNPCRange = true;
+            interactedObject = other.gameObject;
         }
-        else if (other.gameObject.tag == "Collectable")
+        else if (other.gameObject.tag.Equals("Collectable"))
         {
             InGameUIManager.Instance.OpenClicktoCollectText();
             isCharInCollectableRange = true;
             interactedObject = other.gameObject;
 
         }
-        interactedObject = other.gameObject;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "NPC")
+        if (other.gameObject.tag.Equals("NPC"))
         {
             InGameUIManager.Instance.CloseInteractionText();
             CinemachineCameraManager.Instance.ExitDialogueMode();
             isCharInNPCRange = false;
 
         }
-        else if (other.gameObject.tag == "Collectable")
+        else if (other.gameObject.tag.Equals("Collectable"))
         {
             isCharInCollectableRange = false;
 

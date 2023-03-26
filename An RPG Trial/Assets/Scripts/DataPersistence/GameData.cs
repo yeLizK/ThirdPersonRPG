@@ -36,7 +36,7 @@ public class GameData
         this.isQuestCompleted = false;
         mainQuest = null;
         this.questOwner = "";
-        this.playerTransform = new Vector3(0f, 0f , 0f);
+        this.playerTransform = new Vector3(2.64f, 0f , -24.24f);
         inventory = new List<Item>();
 
         gender = 0;

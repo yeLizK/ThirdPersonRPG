@@ -51,7 +51,7 @@ public class CharacterMovement : MonoBehaviour , IDataPersistence
 
     public void LoadData(GameData data)
     {
-        this.transform.position = new Vector3(data.playerTransform.x,0f,data.playerTransform.z);
+        //All Loads are handled in GameSpecifics.cs
     }
     public void SaveData(ref GameData data)
     {

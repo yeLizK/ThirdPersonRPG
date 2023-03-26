@@ -14720,6 +14720,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95a5b31f3d42d69479153bffbe088239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gender: 0
+  skinColor: 0
   clotheIndex: 0
   hairIndex: 0
   clotheColourIndex: 0
@@ -34854,6 +34856,7 @@ Transform:
   - {fileID: 893034094}
   - {fileID: 579613493}
   - {fileID: 1571690189}
+  - {fileID: 1982356507}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -63506,6 +63509,18 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 45b03726-87c1-4455-9891-d510989d8156
     m_ActionName: CharacterControl/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e1fc7614-a2cd-42e1-ae59-1fc193b37ab9
+    m_ActionName: CharacterControl/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 13c1a095-84ed-4c41-9504-b72ec86e8e0c
+    m_ActionName: CharacterControl/Attack[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4e2f7d0a-5f11-4be8-9e5d-e6c0982d13a4
+    m_ActionName: CharacterControl/HoldShield[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: CharacterControl
@@ -68198,6 +68213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questList: {fileID: 11400000, guid: c9d4175079d563346be32edf7a7c07ff, type: 2}
+  anyActiveQuest: 0
   activeQuest:
     Name: 
     Description: 
@@ -68215,6 +68231,7 @@ MonoBehaviour:
       itemType: 0
       amount: 0
     isRewardTaken: 0
+  questOwner: {fileID: 0}
   NPCList:
   - {fileID: 5866109970563776015}
   - {fileID: 9178775377846939407}
@@ -68245,6 +68262,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771b533af8d46714b87d46affe7b84d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isWPressed: 0
+  isAPressed: 0
+  isSPressed: 0
+  isDPressed: 0
   tutorialSO: {fileID: 11400000, guid: bd267c8b2d3ca3c42a00cf13cfbd9fce, type: 2}
   activeQuest:
     Name: 
@@ -109789,6 +109810,51 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1978943054}
   m_Mesh: {fileID: 4300000, guid: bd173fa504295db4f99d8e0d36e458d8, type: 3}
+--- !u!1 &1982356506
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1982356507}
+  - component: {fileID: 1982356508}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1982356507
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982356506}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 663376301}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1982356508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982356506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c77f6eb216cc2d449509137c66b9ba5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isNewGame: 0
 --- !u!1 &1984534004
 GameObject:
   m_ObjectHideFlags: 0

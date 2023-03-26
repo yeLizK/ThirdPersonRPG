@@ -11,11 +11,11 @@ public class QuestManager : MonoBehaviour, IDataPersistence
     [SerializeField]
     private QuestSO questList;
 
-    private bool anyActiveQuest; //returns true if there is an active quest
+    public bool anyActiveQuest; //returns true if there is an active quest
 
     public Quest activeQuest;
 
-    private GameObject questOwner;
+    [HideInInspector]public GameObject questOwner;
 
     public List<NPCQuest> NPCList;
 
@@ -34,15 +34,8 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        this.activeQuest = data.mainQuest;
-        if (activeQuest == null || activeQuest.Name.Equals("")) anyActiveQuest = false;
-        else anyActiveQuest = true;
-        InGameUIManager.Instance.RefreshQuest();
-        GameObject temp = GameObject.Find(data.questOwner);
-        if (temp == null)
-        { return; }
-        this.questOwner = temp;
-        temp.GetComponent<NPCQuest>().AssignQuestToNPC(activeQuest);  
+        //All Loads are handled in GameSpecifics.cs
+
     }
 
     public void SaveData(ref GameData data)

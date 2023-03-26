@@ -200,9 +200,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 6a8d0000
+      m_SelectedIDs: 2ecc0000
       m_LastClickedID: 0
-      m_ExpandedIDs: 6271ffff5278ffffdc9dffff0ea3ffff8aa5fffff2a5ffff38aaffff16acffffbcb9ffff8adfffff56e4ffffc4e5fffff4e6ffff96e7ffff32e8ffff9ce9ffffcceaffff16fbffffd26c0000626f0000f87400007e7a0000d2830000988400002a8b0100a4ce010010790500f2ba0500f2760800887c0800
+      m_ExpandedIDs: ac52ffffde68ffff4c6cffff6271ffff5278ffffdc9dffff0ea3ffff8aa5fffff2a5ffff38aaffff16acffffbcb9ffff8adfffff56e4ffffc4e5fffff4e6ffff96e7ffff32e8ffff9ce9ffffcceaffff16fbffffd26c0000626f0000f87400007e7a0000d2830000988400002a8b0100a4ce010010790500f2ba0500f2760800887c0800
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -513,9 +513,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -156.08603, y: -196.25311, z: -11.887637}
+    m_Target: {x: -5.2150884, y: 1.1591789, z: -5.3552017}
     speed: 2
-    m_Value: {x: -156.08603, y: -196.25311, z: -11.887637}
+    m_Value: {x: -5.2150884, y: 1.1591789, z: -5.3552017}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -562,13 +562,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.28016418, y: 0.65713465, z: -0.34303117, w: -0.61033934}
+    m_Target: {x: -0.13762353, y: 0.83084357, z: -0.32280505, w: -0.43251166}
     speed: 2
-    m_Value: {x: -0.28009382, y: 0.65696967, z: -0.34294504, w: -0.6101861}
+    m_Value: {x: -0.1375884, y: 0.8306315, z: -0.32272264, w: -0.43240124}
   m_Size:
-    m_Target: 126.38445
+    m_Target: 2.528636
     speed: 2
-    m_Value: 126.38445
+    m_Value: 2.528636
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -980,21 +980,21 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/ScriptableObjects
+    - Assets/Scenes/New Assets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 96
   m_LastFolders:
-  - Assets/ScriptableObjects
+  - Assets/Scenes/New Assets
   m_LastFoldersGridSize: 96
   m_LastProjectPath: C:\Users\y_bac\Documents\GitHub\rpg\An RPG Trial
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 239}
-    m_SelectedIDs: 12cc0000
-    m_LastClickedID: 52242
+    scrollPos: {x: 0, y: 139}
+    m_SelectedIDs: 10cc0000
+    m_LastClickedID: 52240
     m_ExpandedIDs: 00000000989d00009a9d00009c9d00009e9d0000a09d0000a29d0000a49d0000a69d0000a89d0000aa9d0000ac9d0000ae9d0000b09d0000b29d0000b49d0000b69d0000b89d0000ba9d0000bc9d0000c09d0000c29d0000c49d0000c69d0000c89d0000ca9d0000cc9d0000ce9d0000d09d000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1048,8 +1048,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 6a8d0000
-    m_LastClickedInstanceID: 36202
+    m_SelectedInstanceIDs: 2ecc0000
+    m_LastClickedInstanceID: 52270
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300007a730000806300005663000062600000e28c0200e6960200c28d020078300300b61b03008af60200b08f0000a28e00001ec10100
     m_RenameOverlay:
@@ -1137,7 +1137,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 556470
+  m_LastSelectedObjectID: 590092
 --- !u!114 &16
 MonoBehaviour:
   m_ObjectHideFlags: 52

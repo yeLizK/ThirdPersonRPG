@@ -61,7 +61,12 @@ public class CharacterMovement : MonoBehaviour , IDataPersistence
     private void Update()
     {
         if(DialogueManager.Instance.isDialoguePlaying)
-        { return; }
+        {
+            this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            return; 
+        }
+        this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+
         isPlayerGrounded = charController.isGrounded;
         inputVector = InputManager.Instance.GetPlayerInputs();
         movementVector = new Vector3(inputVector.y, 0, -inputVector.x);
@@ -83,8 +88,6 @@ public class CharacterMovement : MonoBehaviour , IDataPersistence
             charAnim.SetBool("isCharIdle", false);
             charAnim.SetBool("isRunning", false);
             charAnim.SetBool("isCharAttacking", false);
-
-
         }
         if (isCharAttacking && isPlayerGrounded)
         {
@@ -102,8 +105,6 @@ public class CharacterMovement : MonoBehaviour , IDataPersistence
             charAnim.SetBool("isRunning", true);
             charAnim.SetBool("isCharJumping", false);
             charAnim.SetBool("isCharAttacking", false);
-
-
         }
 
         else if(movementVector.magnitude <=0 && isPlayerGrounded)
@@ -114,8 +115,6 @@ public class CharacterMovement : MonoBehaviour , IDataPersistence
             charAnim.SetBool("isRunning", false);
             charAnim.SetBool("isCharJumping", false);
             charAnim.SetBool("isCharAttacking", false);
-
-
         }
 
         isCharJumping = false;

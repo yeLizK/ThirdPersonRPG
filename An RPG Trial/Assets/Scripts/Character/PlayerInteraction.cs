@@ -72,7 +72,6 @@ public class PlayerInteraction : MonoBehaviour
         if (other.gameObject.tag.Equals("NPC"))
         {
             InGameUIManager.Instance.CloseInteractionText();
-            CinemachineCameraManager.Instance.ExitDialogueMode();
             isCharInNPCRange = false;
 
         }

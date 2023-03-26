@@ -75,7 +75,8 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator ExitDialogueMode()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
+        CinemachineCameraManager.Instance.ExitDialogueMode();
         isDialoguePlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = "";

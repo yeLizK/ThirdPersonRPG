@@ -22,14 +22,6 @@ public class GameSpecifics : MonoBehaviour,IDataPersistence
         }
     }
 
-    private void Start()
-    {
-        if (SceneManager.GetActiveScene().name.Equals("TutorialScene 1"))
-        {
-            DataPersistenceManager.Instance.LoadGame();
-        }
-    }
-
     public void LoadData(GameData data)
     {
         isNewGame = data.isNewGame;

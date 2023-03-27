@@ -24,7 +24,7 @@ public class Collectable : MonoBehaviour
         Item item = new Item { itemType = itemType, amount = 1 };
         isCollected = true;
         Destroy(gameObject.GetComponent<BoxCollider>());
-        Inventory.Instance.AddItem(item);
+        CharacterManager.Instance.Inventory.AddItem(item);
         uiInventory.RefreshInventoryItems();
         objectBeforeCollection.SetActive(false);
         objectAfterCollection.SetActive(true);

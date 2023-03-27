@@ -8,6 +8,7 @@ TagManager:
   - CloseGate
   - NPC
   - Enemy
+  - Sword
   layers:
   - Default
   - TransparentFX

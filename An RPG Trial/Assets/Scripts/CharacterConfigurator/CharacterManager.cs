@@ -13,7 +13,7 @@ public class CharacterManager : MonoBehaviour, IDataPersistence
     [HideInInspector] public CharCustomiser charCustomiser;
     [SerializeField] private UI_Inventory uiInventory;
 
-    private Inventory inventory;
+    [HideInInspector]public Inventory Inventory;
 
     [HideInInspector] public bool isCharHoldingSword;
 
@@ -34,7 +34,7 @@ public class CharacterManager : MonoBehaviour, IDataPersistence
     }
     private void Start()
     {
-        inventory = new Inventory();
+        Inventory = new Inventory();
         uiInventory.RefreshInventoryItems();
         DataPersistenceManager.Instance.dataPersistenceObjects = DataPersistenceManager.Instance.FindAllDataPersistenceObjects();
         DataPersistenceManager.Instance.LoadGame();
@@ -56,7 +56,7 @@ public class CharacterManager : MonoBehaviour, IDataPersistence
         data.hairColourIndex = this.hairColourIndex;
         data.weaponIndex = this.weaponIndex;
         data.isCharHoldingSword = this.isCharHoldingSword;
-        data.inventory =new List<Item>();
+        data.inventory = new List<Item>();
         for (int i = 0; i < Inventory.Instance.itemList.Count; i++)
         {
             data.inventory.Add(Inventory.Instance.itemList[i]);

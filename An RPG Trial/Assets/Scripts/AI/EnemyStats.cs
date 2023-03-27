@@ -5,33 +5,41 @@ using UnityEngine.UI;
 
 public class EnemyStats : MonoBehaviour
 {
-    public Image healthBar;
+    private Image healthBar;
     private int healthAmount;
     private int damage;
 
     public bool isEnemyAlive;
 
-
     private void Start()
     {
-        healthAmount = 30;
-        damage = 5;
+        healthAmount = 100;
+        damage = 15;
+        isEnemyAlive = true;
+        healthBar = gameObject.GetComponentInChildren<Image>();
     }
-    public void TakeDamage(int damage)
+    public IEnumerator TakeDamage(int damage)
     {
         if(isEnemyAlive)
         {
             if (damage < healthAmount)
             {
                 healthAmount -= damage;
+                healthBar.fillAmount = (float)healthAmount/100;
             }
             else
             {
                 healthAmount = 0;
+                
+            }
+            if(healthAmount == 0)
+            {
+                healthBar.fillAmount = 0f;
                 Die();
             }
         }
-        
+        yield return new WaitForSeconds(2f);
+
     }
     public void Die()
     {

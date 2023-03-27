@@ -65,6 +65,7 @@ public class MenuController : MonoBehaviour, IDataPersistence
     public void LoadGame()
     {
         isNewGame = false;
+        DataPersistenceManager.Instance.SaveGame();
         SceneManager.LoadScene("TutorialScene 1");
     }
 

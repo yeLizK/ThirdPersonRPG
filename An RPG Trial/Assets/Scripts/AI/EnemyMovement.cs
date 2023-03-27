@@ -21,10 +21,12 @@ public class EnemyMovement : MonoBehaviour
     public LayerMask obstructionMask;
 
     private Animator AIAnim;
+    private EnemyStats stats;
 
     private void Start()
     {
         playerRef = GameObject.FindGameObjectWithTag("Player");
+        stats = gameObject.GetComponent<EnemyStats>();
         AIAnim = GetComponent<Animator>();
         StartCoroutine(FOVRoutine());
 
@@ -43,7 +45,7 @@ public class EnemyMovement : MonoBehaviour
             if (isPlayerDetected)
             {
                 AIAnim.SetBool("isOnWatch", false);
-                if (Vector3.Distance(transform.position, playerRef.transform.position) < 1.8f)
+                if (Vector3.Distance(transform.position, playerRef.transform.position) < 1.5f)
                 {
                     AIAnim.SetBool("isWalking", false);
                     if (!isAttacking)
@@ -69,24 +71,22 @@ public class EnemyMovement : MonoBehaviour
                 }
             }
         }
-
     }
     public IEnumerator Die()
     {
+        isAlive = false;
         AIAnim.SetBool("isAttacking", false);
         AIAnim.SetBool("isWalking", false);
         AIAnim.SetBool("isOnWatch", false);
         AIAnim.SetBool("Die", true);
         yield return new WaitForSeconds(5f);
-        isAlive = false;
         gameObject.SetActive(false);
-
     }
     private void Chase()
     {
         AIAnim.SetBool("isWalking", true);
         transform.LookAt(playerRef.transform);
-        transform.Translate(Vector3.forward * speed * 1.5f * Time.deltaTime);
+        transform.Translate(Vector3.forward * speed * 2f * Time.deltaTime);
     }
     private IEnumerator Attack()
     {
@@ -161,6 +161,10 @@ public class EnemyMovement : MonoBehaviour
         if(other.gameObject.tag.Equals("Player"))
         {
             isPlayerInMeleeRange = true;
+        }
+        if(other.gameObject.tag.Equals("Sword"))
+        {
+            StartCoroutine(stats.TakeDamage(other.gameObject.GetComponent<Weapon>().damage));
         }
     }
     private void OnTriggerExit(Collider other)

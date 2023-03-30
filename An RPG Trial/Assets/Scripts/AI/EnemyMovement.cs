@@ -45,7 +45,7 @@ public class EnemyMovement : MonoBehaviour
             if (isPlayerDetected)
             {
                 AIAnim.SetBool("isOnWatch", false);
-                if (Vector3.Distance(transform.position, playerRef.transform.position) < 1.5f)
+                if (Vector3.Distance(transform.position, playerRef.transform.position) < 1.8f)
                 {
                     AIAnim.SetBool("isWalking", false);
                     if (!isAttacking)
@@ -164,7 +164,13 @@ public class EnemyMovement : MonoBehaviour
         }
         if(other.gameObject.tag.Equals("Sword"))
         {
-            StartCoroutine(stats.TakeDamage(other.gameObject.GetComponent<Weapon>().damage));
+            if(CharacterMovement.Instance.isCharAttacking)
+            {
+                isPlayerDetected = true;
+                AIAnim.SetBool("isWalking", false);
+                Chase();
+                StartCoroutine(stats.TakeDamage(other.gameObject.GetComponent<Weapon>().damage));
+            }
         }
     }
     private void OnTriggerExit(Collider other)

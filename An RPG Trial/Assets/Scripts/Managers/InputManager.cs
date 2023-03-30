@@ -79,7 +79,7 @@ public class InputManager : MonoBehaviour
 
     public void ClickLeftMouse()
     {
-        CharacterMovement.Instance.isCharAttacking =true;
+        StartCoroutine(CharacterMovement.Instance.Attack());
     }
     public void ClickRightMouse()
     {

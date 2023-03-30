@@ -35,7 +35,7 @@ public class Quest
     {
         if (objectToEvaluate.GetComponent<Collectable>().itemType == itemType && this.isQuestActive)
         {
-            if (Inventory.Instance.ReturnItemAmount(itemType) >= goalCount)
+            if (CharacterManager.Instance.Inventory.ReturnItemAmount(itemType) >= goalCount)
             {
                 Complete();
                 return true;

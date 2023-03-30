@@ -37,8 +37,8 @@ public class NPCQuest : MonoBehaviour
     {
         if (quest.Name.Equals(activeQuest.Name))
         {
-            Inventory.Instance.RemoveItem(activeQuest.itemType, activeQuest.goalCount);
-            Inventory.Instance.AddItem(activeQuest.reward);
+            CharacterManager.Instance.Inventory.RemoveItem(activeQuest.itemType, activeQuest.goalCount);
+            CharacterManager.Instance.Inventory.AddItem(activeQuest.reward);
             activeQuest.isRewardTaken = true;
             activeQuest.questDialogue.isDialogueFinished = true;
             activeQuest = null;

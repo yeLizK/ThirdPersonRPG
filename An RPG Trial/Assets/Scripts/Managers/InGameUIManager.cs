@@ -10,6 +10,7 @@ public class InGameUIManager : MonoBehaviour
     public static InGameUIManager Instance { get { return _instance; } }
     [SerializeField]
     private TMP_Text interactionText,questName, questDescription;
+    [SerializeField] private Image healthImage;
 
     [SerializeField]
     private GameObject questHolder;
@@ -68,5 +69,10 @@ public class InGameUIManager : MonoBehaviour
     public void CloseInteractionText()
     {
         interactionText.text = "";
+    }
+
+    public void UpdatePlayerHealth(int healthAmount)
+    {
+        healthImage.fillAmount = (float)healthAmount / 100f;
     }
 }

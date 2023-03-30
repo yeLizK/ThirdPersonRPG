@@ -42,7 +42,7 @@ public class UI_Inventory : MonoBehaviour
     {
         EmptyInventory();
         GameObject itemSlot;
-        foreach(Item item in Inventory.Instance.GetItemList())
+        foreach(Item item in CharacterManager.Instance.Inventory.GetItemList())
         {
             itemSlot = ReturnEmptyItemSlot();
             if(itemSlot !=null)

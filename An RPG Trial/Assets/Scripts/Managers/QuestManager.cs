@@ -55,9 +55,13 @@ public class QuestManager : MonoBehaviour, IDataPersistence
         if (anyActiveQuest == false)
         {
             activeQuest = PlayerInteraction.Instance.interactedObject.GetComponent<NPCQuest>().activeQuest;
-            PlayerInteraction.Instance.interactedObject.GetComponent<NPCQuest>().AssignQuestToNPC(activeQuest);
-            questOwner = PlayerInteraction.Instance.interactedObject;
-            InGameUIManager.Instance.RefreshQuest();
+            if (activeQuest != null)
+            {
+                PlayerInteraction.Instance.interactedObject.GetComponent<NPCQuest>().AssignQuestToNPC(activeQuest);
+                questOwner = PlayerInteraction.Instance.interactedObject;
+                InGameUIManager.Instance.RefreshQuest();
+            }
+
         }
     }
 

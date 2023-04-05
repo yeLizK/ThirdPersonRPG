@@ -96,14 +96,6 @@ public class TutorialManager : TutorialSubject , IDataPersistence
     private void EndTutorial()
     {
         isTutorialCompleted = true;
-        NotifyTutorialObservers("OpenGate");
-    }
-
-    public void CloseTutorialGate()
-    {
-        NotifyTutorialObservers("CloseGate");
-        StartCoroutine(CinemachineCameraManager.Instance.EndTutorial());
-
     }
 
     public void PressW()

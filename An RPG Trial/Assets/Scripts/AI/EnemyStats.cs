@@ -9,18 +9,18 @@ public class EnemyStats : MonoBehaviour
     private int healthAmount;
     private int damage;
 
-    public bool isEnemyAlive;
+    public bool isAlive;
 
     private void Start()
     {
         healthAmount = 100;
         damage = 15;
-        isEnemyAlive = true;
+        isAlive = true;
         healthBar = gameObject.GetComponentInChildren<Image>();
     }
     public IEnumerator TakeDamage(int damage)
     {
-        if(isEnemyAlive)
+        if(isAlive)
         {
             if (damage < healthAmount)
             {
@@ -43,7 +43,7 @@ public class EnemyStats : MonoBehaviour
     }
     public void Die()
     {
-        isEnemyAlive = false;
+        isAlive = false;
         StartCoroutine(gameObject.GetComponent<EnemyMovement>().Die());
     }
 

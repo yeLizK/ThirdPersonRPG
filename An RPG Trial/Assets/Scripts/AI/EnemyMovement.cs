@@ -4,45 +4,40 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+    public FOVDetection FOVDetection;
+    public EnemyStats enemyStats;
+    public GameObject playerRef;
     public List<Transform> TargetPoints;
     private float speed;
     private int targetPointIndex;
     private float distance;
-
-    private bool isPatrolling, isPlayerDetected, isAttacking,isAlive, isPlayerInMeleeRange;
-
-    public float FOVRadius;
-    [Range(0,360)]
-    public float FOVAngle;
-
-    public GameObject playerRef;
-
-    public LayerMask targetMask;
-    public LayerMask obstructionMask;
+    private bool isPatrolling, isAttacking, isPlayerInMeleeRange;
 
     private Animator AIAnim;
-    private EnemyStats stats;
+    private Transform initialPosition;
 
     private void Start()
     {
-        playerRef = GameObject.FindGameObjectWithTag("Player");
-        stats = gameObject.GetComponent<EnemyStats>();
+        initialPosition = GetComponentInParent<Transform>();
         AIAnim = GetComponent<Animator>();
-        StartCoroutine(FOVRoutine());
 
         targetPointIndex = 0;
-        transform.LookAt(TargetPoints[targetPointIndex].position);
+        if (TargetPoints.Count > 0)
+        {
+            transform.LookAt(TargetPoints[targetPointIndex].position);
+            isPatrolling = true;
+        }
+        else isPatrolling = false;
         speed = 1f;
-        isPatrolling = true;
         isAttacking = false;
-        isAlive = true;
+        enemyStats.isAlive = true;
     }
 
     private void Update()
     { 
-        if(isAlive)
+        if(enemyStats.isAlive)
         {
-            if (isPlayerDetected)
+            if (FOVDetection.isPlayerDetected)
             {
                 AIAnim.SetBool("isOnWatch", false);
                 if (Vector3.Distance(transform.position, playerRef.transform.position) < 1.8f)
@@ -70,11 +65,24 @@ public class EnemyMovement : MonoBehaviour
                     Patrol();
                 }
             }
+            else
+            {
+                distance = Vector3.Distance(GetComponentInParent<Transform>().position, initialPosition.position);
+                if(distance<0.5f)
+                {
+                    AIAnim.SetBool("isWalking", false);
+                    AIAnim.SetBool("isOnWatch", true);
+                    GetComponentInParent<Transform>().forward = initialPosition.forward;
+                    return;
+                }
+                    transform.LookAt(initialPosition);
+                    transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            }
         }
     }
     public IEnumerator Die()
     {
-        isAlive = false;
+        enemyStats.isAlive = false;
         AIAnim.SetBool("isAttacking", false);
         AIAnim.SetBool("isWalking", false);
         AIAnim.SetBool("isOnWatch", false);
@@ -108,7 +116,7 @@ public class EnemyMovement : MonoBehaviour
         transform.LookAt(TargetPoints[targetPointIndex].position);
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
-
+ 
     private IEnumerator IncreaseTargetPointIndex()
     {
         isPatrolling = false;
@@ -124,37 +132,6 @@ public class EnemyMovement : MonoBehaviour
         AIAnim.SetBool("isOnWatch", false);
         isPatrolling = true;
     }
-    private IEnumerator FOVRoutine()
-    {
-        WaitForSeconds wait = new WaitForSeconds(0.2f);
-        while (true)
-        {
-            yield return wait;
-            FieldOfViewCheck();
-        }
-    }
-    private void FieldOfViewCheck()
-    {
-        Collider[] rangeChecks = Physics.OverlapSphere(transform.position, FOVRadius, targetMask);
-
-        if (rangeChecks.Length != 0)
-        {
-            Transform target = rangeChecks[0].transform;
-            Vector3 directionToTarget = (target.position - transform.position).normalized;
-
-            if (Vector3.Angle(transform.forward, directionToTarget) < FOVAngle / 2)
-            {
-                float distanceToTarget = Vector3.Distance(transform.position, target.position);
-                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
-                {
-                    isPlayerDetected = true;
-                }
-                else isPlayerDetected = false;
-            }
-            else { isPlayerDetected = false; }
-        }
-        else if (isPlayerDetected) isPlayerDetected = false;
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -166,10 +143,10 @@ public class EnemyMovement : MonoBehaviour
         {
             if(CharacterMovement.Instance.isCharAttacking)
             {
-                isPlayerDetected = true;
+                FOVDetection.isPlayerDetected = true;
                 AIAnim.SetBool("isWalking", false);
                 Chase();
-                StartCoroutine(stats.TakeDamage(other.gameObject.GetComponent<Weapon>().damage));
+                StartCoroutine(enemyStats.TakeDamage(other.gameObject.GetComponent<Weapon>().damage));
             }
         }
     }

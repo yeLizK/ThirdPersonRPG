@@ -122,6 +122,7 @@ public class CharacterMovement : MonoBehaviour , IDataPersistence
             playerAnim.SetBool("isRunning", false);
             playerAnim.SetBool("isCharAttacking", true);
         }
+        
         yield return new WaitForSeconds(1.5f);
         isCharAttacking = false;
     }

@@ -15,7 +15,7 @@ MonoBehaviour:
   quests:
   - Name: Iron Sword
     Description: Pick 4 iron ore
-    Completed: 0
+    Completed: 1
     isQuestActive: 0
     isQuestAvailable: 0
     questType: 0

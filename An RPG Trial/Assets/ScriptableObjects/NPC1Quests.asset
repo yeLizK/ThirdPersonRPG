@@ -15,7 +15,7 @@ MonoBehaviour:
   quests:
   - Name: Healing Potion
     Description: Pick 3 Red Flowers
-    Completed: 0
+    Completed: 1
     isQuestActive: 0
     isQuestAvailable: 0
     questType: 0
@@ -23,12 +23,12 @@ MonoBehaviour:
     goalCount: 3
     itemType: 0
     questDialogue:
-      isDialogueFinished: 0
+      isDialogueFinished: 1
       inkJSON: {fileID: 4900000, guid: e763f4f11f03f094a984d11db118fa1d, type: 3}
     reward:
       itemType: 1
       amount: 1
-    isRewardTaken: 0
+    isRewardTaken: 1
   - Name: Healing Potion
     Description: Pick 1 Red Flowers
     Completed: 0

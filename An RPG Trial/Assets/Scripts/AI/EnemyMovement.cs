@@ -31,7 +31,7 @@ public class EnemyMovement : MonoBehaviour
             if (FOVDetection.isPlayerDetected)
             {
                 AIAnim.SetBool("isOnWatch", false);
-                if (Vector3.Distance(transform.position, playerRef.transform.position) < 1.5f)
+                if (Vector3.Distance(transform.position, playerRef.transform.position) < 1.4f)
                 {
                     AIAnim.SetBool("isWalking", false);
                     if (!isAttacking)
@@ -88,16 +88,20 @@ public class EnemyMovement : MonoBehaviour
     }
     private IEnumerator Attack()
     {
-        isAttacking = true;
-        AIAnim.SetBool("isAttacking",true);
-        if(isPlayerInMeleeRange)
+        if(!isAttacking)
         {
-            CharacterManager.Instance.TakeDamage(gameObject.GetComponent<EnemyStats>().ReturnDamageAmount());
+            isAttacking = true;
+            AIAnim.SetBool("isAttacking", true);
+            if (isPlayerInMeleeRange)
+            {
+                CharacterManager.Instance.TakeDamage(gameObject.GetComponent<EnemyStats>().ReturnDamageAmount());
+            }
         }
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         AIAnim.SetBool("isAttacking", false);
-        AIAnim.SetBool("isOnWatch",true);
+        AIAnim.SetBool("isOnWatch", true);
         isAttacking = false;
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -112,7 +116,6 @@ public class EnemyMovement : MonoBehaviour
             {
                 FOVDetection.isPlayerDetected = true;
                 AIAnim.SetBool("isWalking", false);
-                Chase();
                 StartCoroutine(enemyStats.TakeDamage(other.gameObject.GetComponent<Weapon>().damage));
             }
         }

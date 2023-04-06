@@ -83,12 +83,13 @@ public class QuestManager : MonoBehaviour, IDataPersistence
         activeQuest.isQuestActive = false;
         activeQuest.Completed = true;
         activeQuest = null;
-        DataPersistenceManager.Instance.SaveGame();
         if (activeQuest == null)
         {
             InGameUIManager.Instance.EmptyQuestList();
         }
         else InGameUIManager.Instance.RefreshQuest();
+        DataPersistenceManager.Instance.SaveGame();
+
     }
 
     public void AssignQuestToNPCs()

@@ -4,9 +4,18 @@ using UnityEngine;
 using TMPro;
 using Ink.Runtime;
 using UnityEngine.EventSystems;
-
+using Cinemachine;
 public class DialogueManager : MonoBehaviour
 {
+    private static DialogueManager _instance;
+    public static DialogueManager Instance { get { return _instance; } }
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this) Destroy(_instance);
+        else _instance = this;
+    }
+
     [Header("Dialog UI")]
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TextMeshProUGUI dialogueText;
@@ -20,14 +29,8 @@ public class DialogueManager : MonoBehaviour
 
     [HideInInspector]public bool isDialoguePlaying { get; private set; }
 
-    private static DialogueManager _instance;
-    public static DialogueManager Instance { get { return _instance; } }
+    private CinemachineVirtualCamera NPCFocusCam;
 
-    private void Awake()
-    {
-        if (_instance != null && _instance != this) Destroy(_instance);
-        else _instance = this;
-    }
     private void Start()
     {
         isDialoguePlaying = false;
@@ -46,26 +49,28 @@ public class DialogueManager : MonoBehaviour
     {
         if(hitObject.GetComponent<NPCQuest>().activeQuest !=null)
         {
-            if(hitObject.GetComponent<NPCQuest>().activeQuest.Completed && !hitObject.GetComponent<NPCQuest>().activeQuest.isRewardTaken)
+            NPCFocusCam = hitObject.GetComponent<NPCQuest>().NPCFocusCam;
+            if (hitObject.GetComponent<NPCQuest>().activeQuest.Completed && !hitObject.GetComponent<NPCQuest>().activeQuest.isRewardTaken)
             {
-                EnterDialogueMode(GivingReward);
+                EnterDialogueMode(GivingReward,hitObject.GetComponent<NPCQuest>().NPCFocusCam);
                 hitObject.GetComponent<NPCQuest>().CompleteNPCQuest(hitObject.GetComponent<NPCQuest>().activeQuest);
                 QuestManager.Instance.EvaluateQuest();
             }
             else if (hitObject.GetComponent<NPCQuest>().activeQuest == QuestManager.Instance.activeQuest)
             {
-                EnterDialogueMode(QuestNotCompleted);
+                EnterDialogueMode(QuestNotCompleted, hitObject.GetComponent<NPCQuest>().NPCFocusCam);
             }
             else if (hitObject.GetComponent<NPCQuest>().activeQuest != QuestManager.Instance.activeQuest)
             {
-                EnterDialogueMode(PlayerHasActiveQuest);
+                EnterDialogueMode(PlayerHasActiveQuest, hitObject.GetComponent<NPCQuest>().NPCFocusCam);
             }
         }
     }
 
-    public void EnterDialogueMode(TextAsset inkJSON)
+    public void EnterDialogueMode(TextAsset inkJSON, CinemachineVirtualCamera NPCFocusCam)
     {
-        CinemachineCameraManager.Instance.EnterDialogueMode();
+        this.NPCFocusCam = NPCFocusCam;
+        CinemachineCameraManager.Instance.EnterDialogueMode(NPCFocusCam);
         currentStory = new Story(inkJSON.text);
         isDialoguePlaying = true;
         dialoguePanel.SetActive(true);
@@ -76,9 +81,10 @@ public class DialogueManager : MonoBehaviour
     private IEnumerator ExitDialogueMode()
     {
         yield return new WaitForSeconds(0.1f);
-        CinemachineCameraManager.Instance.ExitDialogueMode();
+        CinemachineCameraManager.Instance.ExitDialogueMode(NPCFocusCam);
         isDialoguePlaying = false;
         dialoguePanel.SetActive(false);
+        NPCFocusCam = null;
         dialogueText.text = "";
     }
 

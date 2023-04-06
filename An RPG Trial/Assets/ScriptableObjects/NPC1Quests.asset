@@ -29,7 +29,7 @@ MonoBehaviour:
       itemType: 1
       amount: 1
     isRewardTaken: 0
-  - Name: Healing Potion2
+  - Name: Healing Potion
     Description: Pick 1 Red Flowers
     Completed: 0
     isQuestActive: 0

@@ -8,7 +8,7 @@ public class CinemachineCameraManager : MonoBehaviour
     private static CinemachineCameraManager _instance;
     public static CinemachineCameraManager Instance { get { return _instance; } }
 
-    [SerializeField] private CinemachineVirtualCamera mainFPCamera, NPCFocusCam;
+    [SerializeField] private CinemachineVirtualCamera mainFPCamera;
 
     private void Awake()
     {
@@ -25,22 +25,13 @@ public class CinemachineCameraManager : MonoBehaviour
         mainFPCamera.gameObject.SetActive(true);
 
     }
-    public IEnumerator EndTutorial()
-    {
-        mainFPCamera.gameObject.SetActive(false);
-        NPCFocusCam.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1.0f);
-        NPCFocusCam.gameObject.SetActive(false);
-        mainFPCamera.gameObject.SetActive(true);
-    }
-
-    public void EnterDialogueMode()
+    public void EnterDialogueMode(CinemachineVirtualCamera NPCFocusCam)
     {
         mainFPCamera.gameObject.SetActive(false);
         NPCFocusCam.gameObject.SetActive(true);
     }
 
-    public void ExitDialogueMode()
+    public void ExitDialogueMode(CinemachineVirtualCamera NPCFocusCam)
     {
         NPCFocusCam.gameObject.SetActive(false);
         mainFPCamera.gameObject.SetActive(true);

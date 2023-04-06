@@ -5,19 +5,9 @@ using UnityEngine;
 public class Collectable : MonoBehaviour
 {
     public Item.ItemType itemType;
-    [SerializeField] private UI_Inventory uiInventory;
-
-    [SerializeField] private string id;
-
-    private bool isCollected;
+    public bool isCollected;
 
     [SerializeField] private GameObject objectBeforeCollection, objectAfterCollection;
-
-    [ContextMenu("Generate guid for id")]
-    private void GenerateGuid()
-    {
-        id = System.Guid.NewGuid().ToString();
-    }
 
     public void CollectObject()
     {
@@ -25,9 +15,12 @@ public class Collectable : MonoBehaviour
         isCollected = true;
         Destroy(gameObject.GetComponent<BoxCollider>());
         CharacterManager.Instance.Inventory.AddItem(item);
-        uiInventory.RefreshInventoryItems();
+        UI_Inventory.Instance.RefreshInventoryItems();
         objectBeforeCollection.SetActive(false);
-        objectAfterCollection.SetActive(true);
+        if(objectAfterCollection !=null)
+        {
+            objectAfterCollection.SetActive(true);
+        }
         PlayerInteraction.Instance.isCharInCollectableRange = false;
         InGameUIManager.Instance.CloseInteractionText();
     }

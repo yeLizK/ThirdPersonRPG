@@ -20,9 +20,8 @@ public class InputManager : MonoBehaviour
         }
         playerInputs = new PlayerInputs();
         Cursor.visible = false;
-        playerInputs.CharacterControl.Movement.performed += MovementCtx => CheckKeyPress();
+        playerInputs.CharacterControl.Move.performed += MovementCtx => CheckKeyPress();
         playerInputs.CharacterControl.Interact.performed += interactCtx => Interact();
-        playerInputs.CharacterControl.Jump.performed += jumpCtx => CheckIfPlayerJumped();
         playerInputs.CharacterControl.Attack.performed += AttackCtx => ClickLeftMouse();
         playerInputs.CharacterControl.Attack.performed += ShieldCtx => ClickRightMouse();
 
@@ -42,39 +41,34 @@ public class InputManager : MonoBehaviour
 
     public Vector2 GetPlayerInputs()
     {
-        return playerInputs.CharacterControl.Movement.ReadValue<Vector2>();
+        return playerInputs.CharacterControl.Move.ReadValue<Vector2>();
     }
 
     public Vector2 GetMouseDelta()
     {
-        return playerInputs.CharacterControl.CameraMovement.ReadValue<Vector2>();
+        return playerInputs.CharacterControl.Look.ReadValue<Vector2>();
     }
     public void CheckKeyPress()
     {
         if(TutorialManager.Instance.IsTutorialActive())
         {
-            if (playerInputs.CharacterControl.Movement.ReadValue<Vector2>().y > 0.0f)
+            if (playerInputs.CharacterControl.Move.ReadValue<Vector2>().y > 0.0f)
             {
                 TutorialManager.Instance.PressW();
             }
-            if (playerInputs.CharacterControl.Movement.ReadValue<Vector2>().y < 0.0f)
+            if (playerInputs.CharacterControl.Move.ReadValue<Vector2>().y < 0.0f)
             {
                 TutorialManager.Instance.PressS();
             }
-            if (playerInputs.CharacterControl.Movement.ReadValue<Vector2>().x > 0.0f)
+            if (playerInputs.CharacterControl.Move.ReadValue<Vector2>().x > 0.0f)
             {
                 TutorialManager.Instance.PressD();
             }
-            if (playerInputs.CharacterControl.Movement.ReadValue<Vector2>().x < 0.0f)
+            if (playerInputs.CharacterControl.Move.ReadValue<Vector2>().x < 0.0f)
             {
                 TutorialManager.Instance.PressA();
             }
         }
-    }
-
-    public void CheckIfPlayerJumped()
-    {
-        CharacterMovement.Instance.isCharJumping = true;
     }
 
     public void ClickLeftMouse()
@@ -88,8 +82,7 @@ public class InputManager : MonoBehaviour
 
     public void UnbindKeyboardEvent()
     {
-        playerInputs.CharacterControl.Movement.performed -= cnt => CheckKeyPress();
-        playerInputs.CharacterControl.Jump.performed -= jumpCtx => CheckIfPlayerJumped();
+        playerInputs.CharacterControl.Move.performed -= cnt => CheckKeyPress();
         playerInputs.CharacterControl.Attack.performed -= AttackCtx => ClickLeftMouse();
         playerInputs.CharacterControl.Attack.performed -= ShieldCtx => ClickRightMouse();
     }
@@ -104,7 +97,7 @@ public class InputManager : MonoBehaviour
     {
         if (!DialogueManager.Instance.isDialoguePlaying)
         {
-            CinemachineCameraManager.Instance.ExitDialogueMode();
+            //CinemachineCameraManager.Instance.ExitDialogueMode();
             if (PlayerInteraction.Instance.isCharInCollectableRange)
             {
                 PlayerInteraction.Instance.CollectObject();
@@ -115,7 +108,7 @@ public class InputManager : MonoBehaviour
                 {
                     if (QuestManager.Instance.activeQuest == null || QuestManager.Instance.activeQuest.Name.Equals(""))
                     {
-                        DialogueManager.Instance.EnterDialogueMode(PlayerInteraction.Instance.interactedObject.GetComponent<NPCQuest>().GetNPCDialog());
+                        DialogueManager.Instance.EnterDialogueMode(PlayerInteraction.Instance.interactedObject.GetComponent<NPCQuest>().GetNPCDialog(), PlayerInteraction.Instance.interactedObject.GetComponent<NPCQuest>().NPCFocusCam);
                     }
                     else
                     {
@@ -128,7 +121,7 @@ public class InputManager : MonoBehaviour
         else
         {
             DialogueManager.Instance.ContinueStory();
-            CinemachineCameraManager.Instance.EnterDialogueMode();
+            //CinemachineCameraManager.Instance.EnterDialogueMode();
         }
 
     }

@@ -11,8 +11,8 @@ public class BasicAIMovement : MonoBehaviour
     private Animator AIAnim;
     public Vector3 destination;
     public float waitTime;
-    public float speed;
-    private bool isWalking;
+    public bool isPatrolling;
+    private bool isWaiting;
     private int nextTargetIndex;
 
     private void Start()
@@ -20,36 +20,43 @@ public class BasicAIMovement : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         AIAnim = GetComponent<Animator>();
         nextTargetIndex = 0;
-        destination = TargetPoints[nextTargetIndex].position;
-        isWalking = true;
+        AIAnim.SetBool("isWalking",false);
+        if(TargetPoints.Count>0)
+        {
+            destination = TargetPoints[nextTargetIndex].position;
+            isPatrolling = true;
+        }
+
     }
     private void Update()
     {
-        navMeshAgent.speed = speed;
-        AIAnim.SetBool("isWalking", isWalking);
-        destination = TargetPoints[nextTargetIndex].position;
-        if (isWalking)
+        if (isPatrolling && !isWaiting)
         {
-            if (Vector3.Distance(transform.position, destination) < 1f)
+            destination = TargetPoints[nextTargetIndex].position;
+            navMeshAgent.destination = destination;
+            AIAnim.SetBool("isWalking", true);
+            AIAnim.SetBool("isOnWatch", false);
+
+            if (Vector3.Distance(transform.position, destination) < 1.5f)
             {
                 StartCoroutine(AssignNewTarget());
             }
         }
-
-        navMeshAgent.destination = destination;
-
     }
 
     private IEnumerator AssignNewTarget()
     {
-        isWalking = false;
+        isWaiting = true;
+        AIAnim.SetBool("isWalking", false);
+        AIAnim.SetBool("isOnWatch", true);
+
         yield return new WaitForSeconds(waitTime);
         nextTargetIndex++;
         if (nextTargetIndex >= TargetPoints.Count)
         {
             nextTargetIndex = 0;
         }
-        isWalking = true;
+        isWaiting = false;
 
     }
 }

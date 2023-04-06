@@ -1,46 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class EnemyMovement : MonoBehaviour
 {
     public FOVDetection FOVDetection;
     public EnemyStats enemyStats;
     public GameObject playerRef;
-    public List<Transform> TargetPoints;
-    private float speed;
-    private int targetPointIndex;
-    private float distance;
-    private bool isPatrolling, isAttacking, isPlayerInMeleeRange;
-
+    public BasicAIMovement BasicAIMovement;
+    private NavMeshAgent navMeshAgent;
     private Animator AIAnim;
-    private Transform initialPosition;
+    private Vector3 initialPosition;
+
+    private float distance;
+    private bool isAttacking, isPlayerInMeleeRange;
+
 
     private void Start()
     {
-        initialPosition = GetComponentInParent<Transform>();
+        initialPosition = this.transform.position;
         AIAnim = GetComponent<Animator>();
-
-        targetPointIndex = 0;
-        if (TargetPoints.Count > 0)
-        {
-            transform.LookAt(TargetPoints[targetPointIndex].position);
-            isPatrolling = true;
-        }
-        else isPatrolling = false;
-        speed = 1f;
+        navMeshAgent = GetComponent<NavMeshAgent>();
         isAttacking = false;
-        enemyStats.isAlive = true;
     }
 
     private void Update()
-    { 
-        if(enemyStats.isAlive)
+    {
+        if (enemyStats.isAlive)
         {
             if (FOVDetection.isPlayerDetected)
             {
                 AIAnim.SetBool("isOnWatch", false);
-                if (Vector3.Distance(transform.position, playerRef.transform.position) < 1.8f)
+                if (Vector3.Distance(transform.position, playerRef.transform.position) < 1.5f)
                 {
                     AIAnim.SetBool("isWalking", false);
                     if (!isAttacking)
@@ -53,48 +44,47 @@ public class EnemyMovement : MonoBehaviour
                     Chase();
                 }
             }
-            else if (isPatrolling)
+            else if(!BasicAIMovement.isPatrolling)
             {
-                distance = Vector3.Distance(transform.position, TargetPoints[targetPointIndex].position);
-                if (distance < 1f)
-                {
-                    StartCoroutine(IncreaseTargetPointIndex());
-                }
-                else
-                {
-                    Patrol();
-                }
-            }
-            else
-            {
-                distance = Vector3.Distance(GetComponentInParent<Transform>().position, initialPosition.position);
+                navMeshAgent.destination = initialPosition;
+                distance = Vector3.Distance(transform.position, initialPosition);
                 if(distance<0.5f)
                 {
                     AIAnim.SetBool("isWalking", false);
                     AIAnim.SetBool("isOnWatch", true);
-                    GetComponentInParent<Transform>().forward = initialPosition.forward;
+                    transform.LookAt(Vector3.left);
                     return;
                 }
-                    transform.LookAt(initialPosition);
-                    transform.Translate(Vector3.forward * speed * Time.deltaTime);
+                else
+                {
+                    transform.LookAt(navMeshAgent.destination);
+
+                }
             }
         }
+        else
+        {
+            navMeshAgent.isStopped = true;
+        }
+
     }
     public IEnumerator Die()
     {
-        enemyStats.isAlive = false;
         AIAnim.SetBool("isAttacking", false);
         AIAnim.SetBool("isWalking", false);
         AIAnim.SetBool("isOnWatch", false);
         AIAnim.SetBool("Die", true);
+        navMeshAgent.destination = transform.position;
         yield return new WaitForSeconds(5f);
         gameObject.SetActive(false);
     }
     private void Chase()
     {
-        AIAnim.SetBool("isWalking", true);
-        transform.LookAt(playerRef.transform);
-        transform.Translate(Vector3.forward * speed * 2f * Time.deltaTime);
+        if(enemyStats.isAlive)
+        {
+            AIAnim.SetBool("isWalking", true);
+            navMeshAgent.destination = playerRef.transform.position;
+        }
     }
     private IEnumerator Attack()
     {
@@ -108,29 +98,6 @@ public class EnemyMovement : MonoBehaviour
         AIAnim.SetBool("isAttacking", false);
         AIAnim.SetBool("isOnWatch",true);
         isAttacking = false;
-    }
-
-    private void Patrol()
-    {
-        AIAnim.SetBool("isWalking", true);
-        transform.LookAt(TargetPoints[targetPointIndex].position);
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
-    }
- 
-    private IEnumerator IncreaseTargetPointIndex()
-    {
-        isPatrolling = false;
-        AIAnim.SetBool("isWalking", false);
-        AIAnim.SetBool("isOnWatch", true);
-        yield return new WaitForSeconds(2f);
-        targetPointIndex++;
-        if (targetPointIndex >= TargetPoints.Count)
-        {
-            targetPointIndex = 0;
-        }
-        transform.LookAt(TargetPoints[targetPointIndex].position);
-        AIAnim.SetBool("isOnWatch", false);
-        isPatrolling = true;
     }
 
     private void OnTriggerEnter(Collider other)

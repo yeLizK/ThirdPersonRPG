@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class NPCQuest : MonoBehaviour
 {
@@ -10,11 +11,23 @@ public class NPCQuest : MonoBehaviour
     public Quest activeQuest;
     [SerializeField] private float newQuestWaitTime = 10f;
 
+    public CinemachineVirtualCamera NPCFocusCam;
+    public GameObject QuestIndicator;
+
     private void Start()
     {
         isNPCQuestActive = false;
     }
 
+    private void Update()
+    {
+        if(!isNPCQuestActive && activeQuest !=null && !activeQuest.Name.Equals(""))
+        {
+            QuestIndicator.SetActive(true);
+        }
+        else QuestIndicator.SetActive(false);
+
+    }
     public TextAsset GetNPCDialog()
     {
         if(!activeQuest.questDialogue.isDialogueFinished)
@@ -32,6 +45,11 @@ public class NPCQuest : MonoBehaviour
         this.activeQuest = quest;
         quest.isQuestActive = true;
         isNPCQuestActive = true;
+        if(CharacterManager.Instance.Inventory.itemList.Count>0 && quest.questObject !=null)
+        {
+            QuestManager.Instance.activeQuest.EvaluateQuest(quest.questObject);
+
+        }
     }
     public void CompleteNPCQuest(Quest quest)
     {

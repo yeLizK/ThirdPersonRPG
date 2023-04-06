@@ -34,7 +34,7 @@ public class CharacterManager : MonoBehaviour, IDataPersistence
     }
     private void Start()
     {
-        Inventory = new Inventory();
+        Inventory = Inventory.Instance;
         uiInventory.RefreshInventoryItems();
         DataPersistenceManager.Instance.dataPersistenceObjects = DataPersistenceManager.Instance.FindAllDataPersistenceObjects();
         DataPersistenceManager.Instance.LoadGame();

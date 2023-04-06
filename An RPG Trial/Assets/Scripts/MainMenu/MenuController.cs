@@ -59,14 +59,14 @@ public class MenuController : MonoBehaviour, IDataPersistence
         DataPersistenceManager.Instance.NewGame();
         isNewGame = true;
         DataPersistenceManager.Instance.SaveGame();
-        SceneManager.LoadScene("TutorialScene 1");
+        SceneManager.LoadScene("DemoScene");
     }
 
     public void LoadGame()
     {
         isNewGame = false;
         DataPersistenceManager.Instance.SaveGame();
-        SceneManager.LoadScene("TutorialScene 1");
+        SceneManager.LoadScene("DemoScene");
     }
 
     public void HideMainMenu()

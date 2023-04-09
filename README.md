@@ -1,4 +1,4 @@
-# rpg
+# Third Person RPG
 This demo game includes the following features.
 
 Character Configurator:

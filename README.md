@@ -2,10 +2,10 @@
 This demo game includes the following features.
 
 Character Configurator:
-● Player can choose a gender.
-● Player can choose 3 skin types.
-● Player can change characters hair type and  its color.
-● Player can change characters outfit and its color.
+- Player can choose a gender.
+- Player can choose 3 skin types.
+- Player can change characters hair type and  its color.
+- Player can change characters outfit and its color.
 
 Movement:
 ● WASD Movement

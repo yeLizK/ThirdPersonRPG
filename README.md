@@ -1,5 +1,5 @@
 # Third Person RPG
-This demo game includes the following features.
+This third person RPG game demo includes the following systems. The development journey can be reached from https://sites.google.com/view/yelizkurt/mastered .
 
 Character Configurator:
 - Player can choose a gender.
